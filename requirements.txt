@@ -1,0 +1,13 @@
+# Core dependencies for the AI Level Design Triage Agent.
+# Regenerate from the working environment before submission with:
+#   pip freeze > requirements.txt
+pydantic-ai
+pydantic
+pydantic-evals
+numpy
+pandas
+matplotlib
+jupyter
+pytest
+python-dotenv
+nest-asyncio
