@@ -203,7 +203,12 @@ def estimate_difficulty(level_text: str) -> DifficultyResult:
 
 
 def tile_similarity(level_a: str, level_b: str) -> float:
-    """Return the fraction of matching cells between two levels (0 to 1)."""
+    """Return the content similarity of two levels (0 to 1).
+
+    Positions where both levels are empty air are skipped, so a shared blank
+    background does not inflate the score. Two levels are compared on the cells
+    where at least one places a tile.
+    """
     ga, gb = parse_level(level_a), parse_level(level_b)
     rows = max(len(ga), len(gb))
     matches = total = 0
@@ -211,12 +216,14 @@ def tile_similarity(level_a: str, level_b: str) -> float:
         ra = ga[r] if r < len(ga) else []
         rb = gb[r] if r < len(gb) else []
         for c in range(max(len(ra), len(rb))):
-            ca = ra[c] if c < len(ra) else None
-            cb = rb[c] if c < len(rb) else None
+            ca = ra[c] if c < len(ra) else EMPTY
+            cb = rb[c] if c < len(rb) else EMPTY
+            if ca == EMPTY and cb == EMPTY:
+                continue
             total += 1
-            if ca is not None and ca == cb:
+            if ca == cb:
                 matches += 1
-    return matches / total if total else 0.0
+    return matches / total if total else 1.0
 
 
 def measure_novelty(level_text: str, reference_levels: list[str]) -> NoveltyResult:

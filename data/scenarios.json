@@ -1,0 +1,58 @@
+[
+  {
+    "scenario_id": "S1",
+    "name": "Beginner excitement tradeoff",
+    "brief_text": "I want a beginner friendly first level that still feels a little exciting. Keep the opening approachable for brand new players.",
+    "candidate_file": "candidate_s1_beginner_excitement.txt",
+    "expected_action": "recommend_revision",
+    "notes": "Globally easy, but an enemy sits at the very start with no safe opening for a beginner."
+  },
+  {
+    "scenario_id": "S2",
+    "name": "Style consistency vs originality",
+    "brief_text": "Make this level feel consistent with my existing platformer levels. I want it to match my established style.",
+    "candidate_file": "candidate_s2_style_consistency.txt",
+    "expected_action": "flag_as_derivative_draft",
+    "notes": "Very high similarity to a known reference level; consistent with the brief but derivative."
+  },
+  {
+    "scenario_id": "S3",
+    "name": "Conflicting brief",
+    "brief_text": "I want this to be easy and welcoming for brand new players, but also pack in lots of enemies and big gaps so it feels intense and hardcore.",
+    "candidate_file": "candidate_s3_conflicting_brief.txt",
+    "expected_action": "request_clarification",
+    "notes": "The brief itself conflicts: accessible for beginners versus intense and hardcore."
+  },
+  {
+    "scenario_id": "S4",
+    "name": "Playtest readiness",
+    "brief_text": "Is this beginner level ready for a first playtest? The target difficulty is easy.",
+    "candidate_file": "candidate_s4_playtest_ready.txt",
+    "expected_action": "accept_for_playtest",
+    "notes": "Valid, on target, and sound; should be accepted for playtest with targeted questions."
+  },
+  {
+    "scenario_id": "S5",
+    "name": "Structural defect",
+    "brief_text": "Get this segment ready for playtest as a normal early level.",
+    "candidate_file": "candidate_s5_broken_pipe.txt",
+    "expected_action": "reject_structural",
+    "notes": "Contains a broken pipe (a pipe top with no body); structurally invalid."
+  },
+  {
+    "scenario_id": "S6",
+    "name": "Preserve layout, reduce frustration",
+    "brief_text": "Reduce the frustration in this level but preserve the core layout. Do not redesign it.",
+    "candidate_file": "candidate_s6_preserve_layout.txt",
+    "expected_action": "recommend_revision",
+    "notes": "An enemy lands right after a gap; a minimal revision should respect the preserve layout constraint."
+  },
+  {
+    "scenario_id": "S7",
+    "name": "Ambiguous brief",
+    "brief_text": "Make this good. I am not totally sure what I want yet, just see what you think.",
+    "candidate_file": "candidate_s7_ambiguous_brief.txt",
+    "expected_action": "request_clarification",
+    "notes": "The brief is too vague to act on confidently; the agent should ask for clarification."
+  }
+]
