@@ -10,6 +10,8 @@ facts and escalation. State and the tool call log are recorded for transparency.
 from __future__ import annotations
 
 import csv
+import json
+from datetime import datetime, timezone
 from pathlib import Path
 
 from pydantic_ai.exceptions import UsageLimitExceeded
@@ -24,10 +26,10 @@ from src.models import (
     TriageRequest,
     TriageSession,
 )
-from src.report import generate_report, save_report
+from src.report import generate_report, save_report, save_transcript
 from src.safety import MAX_ROUNDS, apply_safety_floor
 from src.scenarios import acceptable_actions, build_triage_request
-from src.tools import ToolLog, gather_facts
+from src.tools import ToolLog, Transcript, gather_facts
 
 
 _DEFAULT_MODEL_SETTINGS = {"temperature": 0.0}
@@ -68,12 +70,19 @@ def triage_candidate(
     """
     state = TriageSession(brief_text=request.brief_text, candidate_level=request.candidate_level)
     log = ToolLog()
+    transcript = Transcript()
     usage = RunUsage()
     limits = UsageLimits(request_limit=PER_RUN_REQUEST_LIMIT)
 
     # Authoritative facts (deterministic, no API), for the critic and the safety floor.
     facts = gather_facts(request.candidate_level, reference_levels)
     state.facts = facts
+    transcript.add_event(
+        "workflow",
+        f"Gathered deterministic facts: valid={facts.validation.is_valid}, "
+        f"difficulty={facts.difficulty.difficulty_label}, novelty={facts.novelty.novelty_label}, "
+        f"safe_zone={facts.safe_zone.has_opening_safe_zone}, spike={facts.spike.has_spike}.",
+    )
 
     try:
         # Agent 1: interpret the brief into structured intent.
@@ -83,6 +92,14 @@ def triage_candidate(
             model_settings=model_settings,
             usage=usage,
             usage_limits=limits,
+            transcript=transcript,
+        )
+        transcript.add_event(
+            "intent_interpreter",
+            f"Interpreted intent: audience={state.intent.target_audience}, "
+            f"difficulty_target={state.intent.difficulty_target}, "
+            f"detected_conflicts={state.intent.detected_conflicts}.",
+            role="assistant",
         )
 
         # Evaluator-optimizer loop: Director proposes, Critic evaluates, up to the cap.
@@ -98,8 +115,18 @@ def triage_candidate(
                 model_settings=model_settings,
                 usage=usage,
                 usage_limits=limits,
+                transcript=transcript,
+                round_num=round_num,
             )
             state.recommendation = recommendation
+            transcript.add_event(
+                "triage_director",
+                f"Proposed {recommendation.action} "
+                f"(readiness={recommendation.playtest_readiness}, confidence={recommendation.confidence}). "
+                f"{recommendation.diagnosis}",
+                role="assistant",
+                round=round_num,
+            )
 
             critique = run_critic(
                 state.intent,
@@ -110,8 +137,16 @@ def triage_candidate(
                 model_settings=model_settings,
                 usage=usage,
                 usage_limits=limits,
+                transcript=transcript,
+                round_num=round_num,
             )
             state.critique = critique
+            transcript.add_event(
+                "critic",
+                f"Verdict {critique.verdict}. {critique.assessment}",
+                role="assistant",
+                round=round_num,
+            )
 
             if critique.verdict in ("approve", "escalate"):
                 break
@@ -132,7 +167,13 @@ def triage_candidate(
             state.recommendation.playtest_readiness = "not_ready"
         state.decision = "request_human_review"
         log.record("request_budget_exceeded", {"limit": PER_RUN_REQUEST_LIMIT}, {"requests": usage.requests})
+        transcript.add_event(
+            "workflow",
+            f"A model round exceeded the per-run request budget ({PER_RUN_REQUEST_LIMIT}). "
+            "Escalating to human review. Final decision: request_human_review.",
+        )
         state.tool_call_log = log.entries
+        state.transcript = transcript.entries
         state.token_usage = _token_usage(usage)
         return state
 
@@ -146,8 +187,12 @@ def triage_candidate(
             {"round_count": state.round_count},
             {"final_action": outcome.action, "interventions": outcome.interventions},
         )
+        transcript.add_event("safety_floor", "; ".join(outcome.interventions))
+
+    transcript.add_event("workflow", f"Final decision: {state.decision}.")
 
     state.tool_call_log = log.entries
+    state.transcript = transcript.entries
     state.token_usage = _token_usage(usage)
     return state
 
@@ -157,6 +202,34 @@ def save_audit_log(session: TriageSession, path: str | Path) -> None:
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(session.model_dump_json(indent=2), encoding="utf-8")
+
+
+RUNS_LOG_PATH = "outputs/logs/triage_runs.jsonl"
+
+
+def append_run_log(session: TriageSession, path: str | Path = RUNS_LOG_PATH) -> None:
+    """Append a one line summary of the session to the running agent log.
+
+    The running log is a projection of the session state: one JSON record per
+    triage pass, appended across every run, so the system keeps a cumulative
+    trace of agent activity independent of how the workflow was invoked.
+    """
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    rec = session.recommendation
+    record = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "brief": session.brief_text[:200],
+        "decision": session.decision,
+        "readiness": rec.playtest_readiness if rec else None,
+        "confidence": rec.confidence if rec else None,
+        "rounds": session.round_count,
+        "detected_conflicts": session.intent.detected_conflicts if session.intent else [],
+        "tool_calls": [entry.tool_name for entry in session.tool_call_log],
+        "tokens": session.token_usage.model_dump() if session.token_usage else None,
+    }
+    with target.open("a", encoding="utf-8") as handle:
+        handle.write(json.dumps(record) + "\n")
 
 
 _CSV_FIELDS = [
@@ -197,6 +270,7 @@ def run_scenario_suite(
     reports_dir: str | Path = "outputs/reports",
     logs_dir: str | Path = "outputs/logs",
     csv_path: str | Path = "outputs/scenario_results.csv",
+    runs_log_path: str | Path = RUNS_LOG_PATH,
     model: str | None = None,
     model_settings: dict | None = _DEFAULT_MODEL_SETTINGS,
 ) -> list[ScenarioResult]:
@@ -211,6 +285,8 @@ def run_scenario_suite(
         )
         save_report(generate_report(session), Path(reports_dir) / f"{scenario.scenario_id}.md")
         save_audit_log(session, Path(logs_dir) / f"{scenario.scenario_id}.json")
+        save_transcript(session, Path(logs_dir) / f"{scenario.scenario_id}_transcript.md")
+        append_run_log(session, runs_log_path)
         rec = session.recommendation
         results.append(
             ScenarioResult(

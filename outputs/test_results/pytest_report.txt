@@ -1,9 +1,9 @@
-Run: 2026-06-09 14:54:18 UTC
+Run: 2026-06-09 16:16:07 UTC
 Command: C:\Python313\python.exe -m pytest -q --junitxml=C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\outputs\test_results\pytest_results.xml
 Exit code: 0
 ======================================================================
-........................................................................ [ 86%]
-...........                                                              [100%]
+........................................................................ [ 83%]
+..............                                                           [100%]
 ============================== warnings summary ===============================
 tests/test_agents.py::test_intent_interpreter_returns_profile
   C:\Users\bjm20\AppData\Roaming\Python\Python313\site-packages\pydantic_ai\_utils.py:970: DeprecationWarning: There is no current event loop

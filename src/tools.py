@@ -10,6 +10,16 @@ from __future__ import annotations
 
 from typing import Any
 
+from pydantic_ai.messages import (
+    RetryPromptPart,
+    SystemPromptPart,
+    TextPart,
+    ThinkingPart,
+    ToolCallPart,
+    ToolReturnPart,
+    UserPromptPart,
+)
+
 from src.analysis_tools import (
     analyze_pacing,
     detect_difficulty_spike,
@@ -21,6 +31,7 @@ from src.analysis_tools import (
 from src.models import (
     DifficultyResult,
     LevelFacts,
+    MessageEntry,
     NoveltyResult,
     PacingResult,
     SafeZoneResult,
@@ -28,6 +39,8 @@ from src.models import (
     ToolCallLogEntry,
     ValidationResult,
 )
+
+_MAX_CONTENT = 4000
 
 
 def validate_candidate_level(level_text: str) -> ValidationResult:
@@ -100,3 +113,74 @@ class ToolLog:
         self.entries.append(
             ToolCallLogEntry(tool_name=tool_name, inputs=inputs, outputs=outputs)
         )
+
+
+def _as_text(content: Any) -> str:
+    """Coerce any message content to a readable, length capped string."""
+    text = content if isinstance(content, str) else str(content)
+    return text if len(text) <= _MAX_CONTENT else text[:_MAX_CONTENT] + " ...[truncated]"
+
+
+def _tool_args(part: ToolCallPart) -> dict[str, Any]:
+    """Best effort extraction of a tool call's arguments as a dict."""
+    try:
+        return part.args_as_dict()
+    except Exception:
+        return {"raw": _as_text(part.args)}
+
+
+class Transcript:
+    """Accumulates the full chat style transcript of one triage pass.
+
+    It normalizes the Pydantic AI message history from each agent run into chat
+    style entries (system, user, assistant, tool) and interleaves deterministic
+    workflow events, so the session carries a complete record of what happened.
+    """
+
+    def __init__(self) -> None:
+        """Start an empty transcript."""
+        self.entries: list[MessageEntry] = []
+        self._system_recorded: set[str] = set()
+
+    def _add(self, agent: str, role: str, **fields: Any) -> None:
+        """Append one entry with the next step number."""
+        self.entries.append(MessageEntry(step=len(self.entries) + 1, agent=agent, role=role, **fields))
+
+    def add_event(self, agent: str, content: str, role: str = "system", round: int | None = None) -> None:
+        """Record a deterministic workflow event (facts, decision, safety floor)."""
+        self._add(agent, role, round=round, content=content)
+
+    def add_messages(self, messages: list[Any], agent: str, round: int | None = None) -> None:
+        """Normalize Pydantic AI model messages into transcript entries.
+
+        Each agent's static system prompt is recorded only once per pass to keep
+        the log focused on the dynamic activity across rounds.
+        """
+        for message in messages:
+            for part in getattr(message, "parts", []):
+                if isinstance(part, SystemPromptPart):
+                    if agent not in self._system_recorded:
+                        self._system_recorded.add(agent)
+                        self._add(agent, "system", round=round, content=_as_text(part.content))
+                elif isinstance(part, UserPromptPart):
+                    self._add(agent, "user", round=round, content=_as_text(part.content))
+                elif isinstance(part, (ToolReturnPart, RetryPromptPart)):
+                    self._add(
+                        agent, "tool", round=round,
+                        content=_as_text(part.content),
+                        tool_name=part.tool_name,
+                        tool_call_id=part.tool_call_id,
+                    )
+                elif isinstance(part, ThinkingPart):
+                    if part.content and part.content.strip():
+                        self._add(agent, "assistant", round=round, content="[thinking] " + _as_text(part.content))
+                elif isinstance(part, TextPart):
+                    if part.content and part.content.strip():
+                        self._add(agent, "assistant", round=round, content=_as_text(part.content))
+                elif isinstance(part, ToolCallPart):
+                    self._add(
+                        agent, "assistant", round=round,
+                        tool_name=part.tool_name,
+                        tool_args=_tool_args(part),
+                        tool_call_id=part.tool_call_id,
+                    )

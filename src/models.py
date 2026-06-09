@@ -223,6 +223,24 @@ class ToolCallLogEntry(BaseModel):
     outputs: dict[str, Any] = Field(default_factory=dict, description="Outputs returned by the tool.")
 
 
+class MessageEntry(BaseModel):
+    """One step in the full system transcript, in chat message form.
+
+    The transcript is the running record of everything that happened in a pass:
+    each agent's prompt, its reasoning text, every tool call with its arguments,
+    every tool result, and the deterministic workflow events and final decision.
+    """
+
+    step: int = Field(description="Ordinal position of this entry in the pass.")
+    agent: str = Field(description="Which agent or stage produced this entry.")
+    role: str = Field(description="Chat role: system, user, assistant, or tool.")
+    round: int | None = Field(default=None, description="Evaluator-optimizer round, when applicable.")
+    content: str | None = Field(default=None, description="Message text, reasoning, or tool result.")
+    tool_name: str | None = Field(default=None, description="Tool name for a tool call or its result.")
+    tool_args: dict[str, Any] | None = Field(default=None, description="Arguments for a tool call.")
+    tool_call_id: str | None = Field(default=None, description="Correlates a tool call with its result.")
+
+
 class TokenUsage(BaseModel):
     """Token usage accumulated across every agent call in one triage pass."""
 
@@ -256,6 +274,10 @@ class TriageSession(BaseModel):
         description="The final action after the safety floor.",
     )
     tool_call_log: list[ToolCallLogEntry] = Field(default_factory=list)
+    transcript: list[MessageEntry] = Field(
+        default_factory=list,
+        description="Full chat style transcript of every agent message, tool call, and decision.",
+    )
     token_usage: TokenUsage | None = Field(
         default=None,
         description="Token usage accumulated across the pass, for cost tracking.",

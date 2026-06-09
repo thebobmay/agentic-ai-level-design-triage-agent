@@ -135,3 +135,25 @@ def save_report(report_text: str, path: str | Path) -> None:
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(report_text, encoding="utf-8")
+
+
+def format_transcript(session: TriageSession) -> str:
+    """Render the full session transcript as a readable chat style log."""
+    lines: list[str] = ["# Triage Transcript", "", f"Brief: {session.brief_text}", ""]
+    for entry in session.transcript:
+        tag = entry.agent if entry.round is None else f"{entry.agent} r{entry.round}"
+        header = f"## [{entry.step}] {entry.role} ({tag})"
+        if entry.tool_name and entry.tool_args is not None:
+            lines += [header, f"tool call: {entry.tool_name}({entry.tool_args})", ""]
+        elif entry.tool_name:
+            lines += [header, f"tool result: {entry.tool_name}", "```text", entry.content or "", "```", ""]
+        else:
+            lines += [header, entry.content or "", ""]
+    return "\n".join(lines)
+
+
+def save_transcript(session: TriageSession, path: str | Path) -> None:
+    """Write the readable session transcript to a file."""
+    target = Path(path)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(format_transcript(session), encoding="utf-8")

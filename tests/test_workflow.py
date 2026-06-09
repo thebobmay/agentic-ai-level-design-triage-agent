@@ -12,7 +12,7 @@ from pydantic_ai.models.test import TestModel
 from src.agents import critic_agent, intent_interpreter, triage_director
 from src.safety import MAX_ROUNDS
 from src.scenarios import build_triage_request, load_scenarios
-from src.workflow import run_scenario_suite, save_audit_log, triage_candidate
+from src.workflow import append_run_log, run_scenario_suite, save_audit_log, triage_candidate
 
 BY_ID = {s.scenario_id: s for s in load_scenarios()}
 
@@ -104,6 +104,51 @@ def test_save_audit_log_writes_json(tmp_path):
     assert "brief_text" in path.read_text(encoding="utf-8")
 
 
+def test_transcript_records_full_pass():
+    state = run("S4")
+    t = state.transcript
+    assert t  # the transcript is populated
+    assert [e.step for e in t] == list(range(1, len(t) + 1))  # sequential steps
+
+    agents = {e.agent for e in t}
+    assert {"workflow", "intent_interpreter", "triage_director", "critic"} <= agents
+
+    # The director's tool calls (with arguments) and their results are captured.
+    assert any(e.agent == "triage_director" and e.role == "assistant" and e.tool_name for e in t)
+    assert any(e.role == "tool" for e in t)
+    # User prompts and the final decision event are present.
+    assert any(e.role == "user" for e in t)
+    assert any(e.agent == "workflow" and (e.content or "").startswith("Final decision") for e in t)
+
+
+def test_transcript_renders_to_markdown(tmp_path):
+    from src.report import format_transcript, save_transcript
+
+    state = run("S4")
+    text = format_transcript(state)
+    assert "# Triage Transcript" in text and "tool call:" in text
+    path = tmp_path / "t.md"
+    save_transcript(state, path)
+    assert path.exists()
+
+
+def test_append_run_log_projects_session_to_jsonl(tmp_path):
+    import json
+
+    state = run("S4")
+    path = tmp_path / "triage_runs.jsonl"
+    append_run_log(state, path)
+    append_run_log(state, path)  # appends, never overwrites
+
+    lines = path.read_text(encoding="utf-8").splitlines()
+    assert len(lines) == 2
+    record = json.loads(lines[0])
+    assert record["decision"] == state.decision
+    assert record["rounds"] == state.round_count
+    assert record["tool_calls"]  # tool names projected from the session
+    assert record["tokens"] is not None and "timestamp" in record
+
+
 def test_scenario_suite_runs_all_and_writes_artifacts(tmp_path):
     scenarios = load_scenarios()
     with controlled():
@@ -113,9 +158,11 @@ def test_scenario_suite_runs_all_and_writes_artifacts(tmp_path):
             reports_dir=tmp_path / "reports",
             logs_dir=tmp_path / "logs",
             csv_path=tmp_path / "results.csv",
+            runs_log_path=tmp_path / "triage_runs.jsonl",
         )
     assert len(results) == len(scenarios)
     assert (tmp_path / "results.csv").exists()
     for scenario in scenarios:
         assert (tmp_path / "reports" / f"{scenario.scenario_id}.md").exists()
         assert (tmp_path / "logs" / f"{scenario.scenario_id}.json").exists()
+        assert (tmp_path / "logs" / f"{scenario.scenario_id}_transcript.md").exists()

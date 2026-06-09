@@ -39,6 +39,7 @@ from src.models import (
 )
 from src.tools import (
     ToolLog,
+    Transcript,
     analyze_candidate_pacing,
     detect_candidate_safe_zone,
     detect_candidate_spike,
@@ -67,6 +68,7 @@ def run_intent_interpreter(
     model_settings: dict | None = None,
     usage: RunUsage | None = None,
     usage_limits: UsageLimits | None = None,
+    transcript: Transcript | None = None,
 ) -> DesignIntentProfile:
     """Interpret a design brief into a structured intent profile."""
     prompt = f"Design brief:\n{brief_text}\n\nInterpret this brief into a design intent profile."
@@ -75,6 +77,8 @@ def run_intent_interpreter(
     )
     if usage is not None:
         usage.incr(result.usage)
+    if transcript is not None:
+        transcript.add_messages(result.all_messages(), agent="intent_interpreter")
     return result.output
 
 
@@ -157,6 +161,8 @@ def run_triage_director(
     model_settings: dict | None = None,
     usage: RunUsage | None = None,
     usage_limits: UsageLimits | None = None,
+    transcript: Transcript | None = None,
+    round_num: int | None = None,
 ) -> TriageRecommendation:
     """Run the Triage Director over the candidate, optionally with prior critic feedback."""
     deps = DirectorDeps(
@@ -187,6 +193,8 @@ def run_triage_director(
     )
     if usage is not None:
         usage.incr(result.usage)
+    if transcript is not None:
+        transcript.add_messages(result.all_messages(), agent="triage_director", round=round_num)
     return result.output
 
 
@@ -210,6 +218,8 @@ def run_critic(
     model_settings: dict | None = None,
     usage: RunUsage | None = None,
     usage_limits: UsageLimits | None = None,
+    transcript: Transcript | None = None,
+    round_num: int | None = None,
 ) -> Critique:
     """Run the Critic to independently evaluate the Director's recommendation."""
     lines = [
@@ -235,4 +245,6 @@ def run_critic(
     )
     if usage is not None:
         usage.incr(result.usage)
+    if transcript is not None:
+        transcript.add_messages(result.all_messages(), agent="critic", round=round_num)
     return result.output
