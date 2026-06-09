@@ -9,6 +9,6 @@
 --------------------------------
 --------------------------------
 --------------------------------
-------------E-------------------
-XXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXX
-XXXXXXXXXX-XXXXXXXXXXXXXXXXXXXXX
+------o------E------------------
+XXXXXXXXXX--XXXXXXXXXXXXXXXXXXXX
+XXXXXXXXXX--XXXXXXXXXXXXXXXXXXXX

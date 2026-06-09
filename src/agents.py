@@ -46,7 +46,7 @@ from src.tools import (
     validate_candidate_level,
 )
 
-DEFAULT_MODEL = os.environ.get("TRIAGE_MODEL", "openai-chat:gpt-4o-mini")
+DEFAULT_MODEL = os.environ.get("TRIAGE_MODEL", "openai-chat:gpt-4.1")
 
 
 # Intent Interpreter -----------------------------------------------------------
@@ -58,11 +58,17 @@ intent_interpreter = Agent(
         "You interpret a designer's natural language brief for a 2D platformer level segment "
         "into a structured design intent. Infer the target audience, the desired feel, the "
         "difficulty target, the novelty preference, the hard constraints (non negotiable, such as "
-        "preserve the core layout), and the soft preferences. Critically, detect conflicts within "
-        "the brief itself, such as asking for beginner accessibility and intense hardcore challenge "
-        "at once, and list them in detected_conflicts. If the brief is too vague to infer a target, "
-        "choose a reasonable default and record the ambiguity in detected_conflicts. You only "
-        "interpret the brief; you do not analyze the level."
+        "preserve the core layout), and the soft preferences. Surface problems with the brief rather "
+        "than papering over them. If the brief asks for incompatible qualities at once, record each "
+        "as a conflict in detected_conflicts; examples are beginner accessibility together with "
+        "intense hardcore challenge, an easy target together with lots of enemies and big gaps, or "
+        "preserve the layout together with a major redesign. If the brief is vague or the designer is "
+        "unsure what they want, do not fabricate a difficulty target or audience: choose neutral "
+        "defaults and record the vagueness in detected_conflicts so the team can ask for "
+        "clarification. Set novelty_preference to low only when the brief explicitly asks for "
+        "consistency with an existing style, and to high only when it explicitly asks for "
+        "originality; otherwise default to medium. Do not invent hard constraints the brief does not "
+        "state. You only interpret the brief; you do not analyze the level."
     ),
     output_retries=2,
     defer_model_check=True,
@@ -82,7 +88,7 @@ def run_intent_interpreter(
         prompt, model=model, model_settings=model_settings, usage_limits=usage_limits
     )
     if usage is not None:
-        usage.incr(result.usage())
+        usage.incr(result.usage)
     return result.output
 
 
@@ -103,18 +109,23 @@ triage_director = Agent(
     output_type=TriageRecommendation,
     instructions=(
         "You are the Triage Director for 2D platformer level segments. You advise a human designer "
-        "and you never edit the level. Work through your tools to gather facts (validity, difficulty, "
-        "novelty, pacing, safe zone, difficulty spike); never guess these. Reason about how the "
-        "candidate serves the interpreted intent, weighing tradeoffs in context. Choose exactly one "
+        "and you never edit the level. Your first step is to check the interpreted intent's "
+        "detected_conflicts. If it is non-empty, the brief is conflicting or ambiguous and you "
+        "cannot reliably infer the designer's goal: choose request_clarification and stop. Do not "
+        "recommend a revision or accept based on a guessed target, and do not let problems you notice "
+        "in the candidate override this; a conflicting or ambiguous brief must be clarified before "
+        "the candidate can be judged. Only when detected_conflicts is empty do you assess the "
+        "candidate. Work through your tools to gather facts (validity, difficulty, novelty, pacing, "
+        "safe zone, difficulty spike); never guess these. Reason about how the candidate serves the "
+        "interpreted intent, weighing tradeoffs in context. Then choose exactly one "
         "action: accept_for_playtest when it is sound and on target (include playtest questions); "
         "recommend_revision when a diagnosed problem conflicts with the intent (provide a revision "
         "prescription of ordered, reasoned suggested edits that respect the hard constraints, plus a "
-        "playtest question); request_clarification when the brief is too ambiguous or self "
-        "conflicting to act on; flag_as_derivative_draft when novelty is low and the candidate may be "
-        "derivative (usable as a draft, not final); reject_structural when the candidate is "
-        "structurally invalid; request_human_review when signals conflict and need designer judgment. "
-        "Only recommend revision to fix a real problem; accept a clean, on target level. Difficulty "
-        "is heuristic, not player validated.\n\n" + get_design_guidance()
+        "playtest question); flag_as_derivative_draft only when the measured novelty fact is low, "
+        "meaning high similarity to a known level (usable as a draft, not final); reject_structural "
+        "when the candidate is structurally invalid; request_human_review when signals conflict and "
+        "need designer judgment. Only recommend revision to fix a real problem; accept a clean, on "
+        "target level. Difficulty is heuristic, not player validated.\n\n" + get_design_guidance()
     ),
     output_retries=2,
     defer_model_check=True,
@@ -208,7 +219,7 @@ def run_triage_director(
         usage_limits=usage_limits,
     )
     if usage is not None:
-        usage.incr(result.usage())
+        usage.incr(result.usage)
     return result.output
 
 
@@ -266,5 +277,5 @@ def run_critic(
         usage_limits=usage_limits,
     )
     if usage is not None:
-        usage.incr(result.usage())
+        usage.incr(result.usage)
     return result.output
