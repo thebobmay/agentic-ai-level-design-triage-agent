@@ -93,6 +93,7 @@ def test_session_records_intent_facts_and_tool_log():
     assert state.intent is not None
     assert state.facts is not None and state.facts.validation.is_valid
     assert state.tool_call_log  # the director's tool calls were logged
+    assert state.token_usage is not None  # token usage is tracked for cost
 
 
 def test_save_audit_log_writes_json(tmp_path):

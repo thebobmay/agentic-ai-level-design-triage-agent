@@ -12,17 +12,23 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
+from pydantic_ai.usage import RunUsage
+
 from src.agents import run_critic, run_intent_interpreter, run_triage_director
 from src.models import (
     ScenarioDefinition,
     ScenarioResult,
+    TokenUsage,
     TriageRequest,
     TriageSession,
 )
 from src.report import generate_report, save_report
 from src.safety import MAX_ROUNDS, apply_safety_floor
-from src.scenarios import build_triage_request
+from src.scenarios import acceptable_actions, build_triage_request
 from src.tools import ToolLog, gather_facts
+
+
+_DEFAULT_MODEL_SETTINGS = {"temperature": 0.0}
 
 
 def _critic_feedback(critique) -> list[str]:
@@ -34,13 +40,23 @@ def triage_candidate(
     request: TriageRequest,
     reference_levels: list[str],
     max_rounds: int = MAX_ROUNDS,
+    model: str | None = None,
+    model_settings: dict | None = _DEFAULT_MODEL_SETTINGS,
 ) -> TriageSession:
-    """Run the bounded triage pass and return the full session state."""
+    """Run the bounded triage pass and return the full session state.
+
+    `model` and `model_settings` override the agents per run, so the model
+    selection experiment can run the same pass under different models (chat models
+    pass a temperature; reasoning models pass model_settings=None).
+    """
     state = TriageSession(brief_text=request.brief_text, candidate_level=request.candidate_level)
     log = ToolLog()
+    usage = RunUsage()
 
     # Agent 1: interpret the brief into structured intent.
-    state.intent = run_intent_interpreter(request.brief_text)
+    state.intent = run_intent_interpreter(
+        request.brief_text, model=model, model_settings=model_settings, usage=usage
+    )
 
     # Authoritative facts, independent of the Director's own tool calls, for the
     # critic and the safety floor.
@@ -56,10 +72,21 @@ def triage_candidate(
             reference_levels,
             log,
             prior_feedback=state.critic_feedback_history or None,
+            model=model,
+            model_settings=model_settings,
+            usage=usage,
         )
         state.recommendation = recommendation
 
-        critique = run_critic(state.intent, request.candidate_level, facts, recommendation)
+        critique = run_critic(
+            state.intent,
+            request.candidate_level,
+            facts,
+            recommendation,
+            model=model,
+            model_settings=model_settings,
+            usage=usage,
+        )
         state.critique = critique
 
         if critique.verdict in ("approve", "escalate"):
@@ -80,6 +107,12 @@ def triage_candidate(
         )
 
     state.tool_call_log = log.entries
+    state.token_usage = TokenUsage(
+        input_tokens=usage.input_tokens,
+        output_tokens=usage.output_tokens,
+        total_tokens=usage.total_tokens,
+        requests=usage.requests,
+    )
     return state
 
 
@@ -128,11 +161,18 @@ def run_scenario_suite(
     reports_dir: str | Path = "outputs/reports",
     logs_dir: str | Path = "outputs/logs",
     csv_path: str | Path = "outputs/scenario_results.csv",
+    model: str | None = None,
+    model_settings: dict | None = _DEFAULT_MODEL_SETTINGS,
 ) -> list[ScenarioResult]:
     """Run every scenario through the workflow, save reports, logs, and a results CSV."""
     results: list[ScenarioResult] = []
     for scenario in scenarios:
-        session = triage_candidate(build_triage_request(scenario), reference_levels)
+        session = triage_candidate(
+            build_triage_request(scenario),
+            reference_levels,
+            model=model,
+            model_settings=model_settings,
+        )
         save_report(generate_report(session), Path(reports_dir) / f"{scenario.scenario_id}.md")
         save_audit_log(session, Path(logs_dir) / f"{scenario.scenario_id}.json")
         rec = session.recommendation
@@ -143,7 +183,7 @@ def run_scenario_suite(
                 expected_action=scenario.expected_action,
                 actual_action=session.decision or "request_human_review",
                 readiness=rec.playtest_readiness if rec else "not_ready",
-                match_expected=(session.decision == scenario.expected_action),
+                match_expected=(session.decision in acceptable_actions(scenario)),
                 rounds=session.round_count,
                 key_reason=_key_reason(session),
             )

@@ -36,3 +36,8 @@ def build_triage_request(
         brief_text=scenario.brief_text,
         candidate_level=load_candidate(scenario, candidate_dir),
     )
+
+
+def acceptable_actions(scenario: ScenarioDefinition) -> set[str]:
+    """Return the defensible actions for a scenario (the expected action if none given)."""
+    return set(scenario.acceptable_actions) if scenario.acceptable_actions else {scenario.expected_action}

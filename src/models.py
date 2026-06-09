@@ -223,6 +223,15 @@ class ToolCallLogEntry(BaseModel):
     outputs: dict[str, Any] = Field(default_factory=dict, description="Outputs returned by the tool.")
 
 
+class TokenUsage(BaseModel):
+    """Token usage accumulated across every agent call in one triage pass."""
+
+    input_tokens: int = Field(default=0, description="Total input (prompt) tokens.")
+    output_tokens: int = Field(default=0, description="Total output tokens, including reasoning tokens.")
+    total_tokens: int = Field(default=0, description="Total tokens.")
+    requests: int = Field(default=0, description="Number of model requests made.")
+
+
 class TriageSession(BaseModel):
     """Working memory that persists through one triage pass.
 
@@ -247,6 +256,10 @@ class TriageSession(BaseModel):
         description="The final action after the safety floor.",
     )
     tool_call_log: list[ToolCallLogEntry] = Field(default_factory=list)
+    token_usage: TokenUsage | None = Field(
+        default=None,
+        description="Token usage accumulated across the pass, for cost tracking.",
+    )
 
 
 class ScenarioDefinition(BaseModel):
@@ -257,6 +270,10 @@ class ScenarioDefinition(BaseModel):
     brief_text: str = Field(description="The natural language design brief.")
     candidate_file: str = Field(description="Candidate level filename under data/candidate_levels.")
     expected_action: TriageAction = Field(description="The action the scenario is expected to yield.")
+    acceptable_actions: list[TriageAction] = Field(
+        default_factory=list,
+        description="Defensible actions for fair scoring; empty means only the expected action counts.",
+    )
     notes: str = Field(default="", description="What the scenario is meant to exercise.")
 
 

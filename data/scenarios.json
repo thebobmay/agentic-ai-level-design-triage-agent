@@ -5,6 +5,7 @@
     "brief_text": "I want a beginner friendly first level that still feels a little exciting. Keep the opening approachable for brand new players.",
     "candidate_file": "candidate_s1_beginner_excitement.txt",
     "expected_action": "recommend_revision",
+    "acceptable_actions": ["recommend_revision"],
     "notes": "Globally easy, but an enemy sits at the very start with no safe opening for a beginner."
   },
   {
@@ -13,6 +14,7 @@
     "brief_text": "Make this level feel consistent with my existing platformer levels. I want it to match my established style.",
     "candidate_file": "candidate_s2_style_consistency.txt",
     "expected_action": "flag_as_derivative_draft",
+    "acceptable_actions": ["flag_as_derivative_draft", "recommend_revision"],
     "notes": "Very high similarity to a known reference level; consistent with the brief but derivative."
   },
   {
@@ -21,6 +23,7 @@
     "brief_text": "I want this to be easy and welcoming for brand new players, but also pack in lots of enemies and big gaps so it feels intense and hardcore.",
     "candidate_file": "candidate_s3_conflicting_brief.txt",
     "expected_action": "request_clarification",
+    "acceptable_actions": ["request_clarification", "request_human_review"],
     "notes": "The brief itself conflicts: accessible for beginners versus intense and hardcore."
   },
   {
@@ -29,6 +32,7 @@
     "brief_text": "Is this beginner level ready for a first playtest? The target difficulty is easy.",
     "candidate_file": "candidate_s4_playtest_ready.txt",
     "expected_action": "accept_for_playtest",
+    "acceptable_actions": ["accept_for_playtest"],
     "notes": "Valid, on target, and sound; should be accepted for playtest with targeted questions."
   },
   {
@@ -37,6 +41,7 @@
     "brief_text": "Get this segment ready for playtest as a normal early level.",
     "candidate_file": "candidate_s5_broken_pipe.txt",
     "expected_action": "reject_structural",
+    "acceptable_actions": ["reject_structural"],
     "notes": "Contains a broken pipe (a pipe top with no body); structurally invalid."
   },
   {
@@ -45,6 +50,7 @@
     "brief_text": "Reduce the frustration in this level but preserve the core layout. Do not redesign it.",
     "candidate_file": "candidate_s6_preserve_layout.txt",
     "expected_action": "recommend_revision",
+    "acceptable_actions": ["recommend_revision"],
     "notes": "An enemy lands right after a gap; a minimal revision should respect the preserve layout constraint."
   },
   {
@@ -53,6 +59,7 @@
     "brief_text": "Make this good. I am not totally sure what I want yet, just see what you think.",
     "candidate_file": "candidate_s7_ambiguous_brief.txt",
     "expected_action": "request_clarification",
+    "acceptable_actions": ["request_clarification", "request_human_review"],
     "notes": "The brief is too vague to act on confidently; the agent should ask for clarification."
   }
 ]

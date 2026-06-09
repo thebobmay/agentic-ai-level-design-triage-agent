@@ -21,6 +21,7 @@ import os
 from dataclasses import dataclass
 
 from pydantic_ai import Agent, RunContext
+from pydantic_ai.usage import RunUsage
 
 from src.design_knowledge import get_design_guidance
 from src.models import (
@@ -63,16 +64,22 @@ intent_interpreter = Agent(
         "choose a reasonable default and record the ambiguity in detected_conflicts. You only "
         "interpret the brief; you do not analyze the level."
     ),
-    model_settings={"temperature": 0.0},
     output_retries=2,
     defer_model_check=True,
 )
 
 
-def run_intent_interpreter(brief_text: str) -> DesignIntentProfile:
+def run_intent_interpreter(
+    brief_text: str,
+    model: str | None = None,
+    model_settings: dict | None = None,
+    usage: RunUsage | None = None,
+) -> DesignIntentProfile:
     """Interpret a design brief into a structured intent profile."""
     prompt = f"Design brief:\n{brief_text}\n\nInterpret this brief into a design intent profile."
-    return intent_interpreter.run_sync(prompt).output
+    return intent_interpreter.run_sync(
+        prompt, model=model, model_settings=model_settings, usage=usage
+    ).output
 
 
 # Triage Director (optimizer) --------------------------------------------------
@@ -105,7 +112,6 @@ triage_director = Agent(
         "Only recommend revision to fix a real problem; accept a clean, on target level. Difficulty "
         "is heuristic, not player validated.\n\n" + get_design_guidance()
     ),
-    model_settings={"temperature": 0.0},
     output_retries=2,
     defer_model_check=True,
 )
@@ -165,6 +171,9 @@ def run_triage_director(
     reference_levels: list[str],
     tool_log: ToolLog,
     prior_feedback: list[str] | None = None,
+    model: str | None = None,
+    model_settings: dict | None = None,
+    usage: RunUsage | None = None,
 ) -> TriageRecommendation:
     """Run the Triage Director over the candidate, optionally with prior critic feedback."""
     deps = DirectorDeps(
@@ -186,7 +195,9 @@ def run_triage_director(
             *[f"- {item}" for item in prior_feedback],
         ]
     lines += ["", "Gather facts with your tools, then choose one action and explain it."]
-    return triage_director.run_sync("\n".join(lines), deps=deps).output
+    return triage_director.run_sync(
+        "\n".join(lines), deps=deps, model=model, model_settings=model_settings, usage=usage
+    ).output
 
 
 # Critic (evaluator) -----------------------------------------------------------
@@ -205,7 +216,6 @@ critic_agent = Agent(
         "the signals genuinely conflict. You never edit the level and never judge whether it is "
         "fun.\n\n" + get_design_guidance()
     ),
-    model_settings={"temperature": 0.0},
     output_retries=2,
     defer_model_check=True,
 )
@@ -216,6 +226,9 @@ def run_critic(
     candidate_level: str,
     facts: LevelFacts,
     recommendation: TriageRecommendation,
+    model: str | None = None,
+    model_settings: dict | None = None,
+    usage: RunUsage | None = None,
 ) -> Critique:
     """Run the Critic to independently evaluate the Director's recommendation."""
     lines = [
@@ -233,4 +246,6 @@ def run_critic(
         "",
         "Evaluate the recommendation and return your verdict.",
     ]
-    return critic_agent.run_sync("\n".join(lines)).output
+    return critic_agent.run_sync(
+        "\n".join(lines), model=model, model_settings=model_settings, usage=usage
+    ).output

@@ -4,7 +4,7 @@ from src.analysis_tools import estimate_difficulty, measure_novelty, validate_le
 from src.level_io import get_level_dimensions
 from src.models import ScenarioDefinition, TriageRequest
 from src.reference_library import load_reference_levels
-from src.scenarios import build_triage_request, load_candidate, load_scenarios
+from src.scenarios import acceptable_actions, build_triage_request, load_candidate, load_scenarios
 
 SCENARIOS = load_scenarios()
 BY_ID = {s.scenario_id: s for s in SCENARIOS}
@@ -60,3 +60,8 @@ def test_s2_candidate_is_derivative_against_the_reference_library():
 
 def test_s3_candidate_is_medium_difficulty():
     assert estimate_difficulty(load_candidate(BY_ID["S3"])).difficulty_label == "medium"
+
+
+def test_acceptable_actions_includes_alternatives_and_falls_back():
+    assert acceptable_actions(BY_ID["S3"]) == {"request_clarification", "request_human_review"}
+    assert acceptable_actions(BY_ID["S4"]) == {"accept_for_playtest"}
