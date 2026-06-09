@@ -1,0 +1,174 @@
+{
+  "brief_text": "Reduce the frustration in this level but preserve the core layout. Do not redesign it.",
+  "candidate_level": "--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------o------E------------------\nXXXXXXXXXX--XXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXX--XXXXXXXXXXXXXXXXXXXX",
+  "intent": {
+    "target_audience": "general",
+    "desired_feel": [
+      "less frustrating"
+    ],
+    "difficulty_target": "medium",
+    "novelty_preference": "medium",
+    "hard_constraints": [
+      "preserve the core layout",
+      "do not redesign the level"
+    ],
+    "soft_preferences": [
+      "reduce frustration"
+    ],
+    "detected_conflicts": []
+  },
+  "facts": {
+    "validation": {
+      "is_valid": true,
+      "warnings": [],
+      "fatal_errors": []
+    },
+    "difficulty": {
+      "difficulty_label": "medium",
+      "difficulty_score": 10.223,
+      "enemy_density": 0.0022,
+      "hazard_density": 0.0,
+      "longest_gap": 2,
+      "solid_ratio": 0.1339,
+      "collectible_density": 0.0022
+    },
+    "novelty": {
+      "nearest_neighbor_similarity": 0.8485,
+      "novelty_label": "high",
+      "warning": null
+    },
+    "pacing": {
+      "flag": "balanced",
+      "opening_intensity": 0,
+      "middle_intensity": 3,
+      "final_intensity": 0,
+      "detail": "intensity opening 0, middle 3, final 0"
+    },
+    "safe_zone": {
+      "has_opening_safe_zone": true,
+      "first_challenge_column": 10,
+      "detail": "first challenge at column 10"
+    },
+    "spike": {
+      "has_spike": true,
+      "location_column": 9,
+      "detail": "gap of 2 combined with an enemy or cannon near column 9"
+    }
+  },
+  "recommendation": {
+    "action": "recommend_revision",
+    "diagnosis": "The candidate is structurally valid and matches the medium difficulty target, with high novelty and a balanced pacing profile. However, there is a localized difficulty spike at column 9 where a gap is combined with an enemy, which can create a moment of frustration. This conflicts with the intent to reduce frustration for a general audience, even at medium difficulty.",
+    "tradeoff_reasoning": [
+      "The level is structurally sound and does not need redesign, preserving the core layout as required.",
+      "The overall difficulty and pacing are appropriate for a medium segment, with a safe opening and a balanced challenge profile.",
+      "However, the detected spike (gap plus enemy) introduces a low-leniency moment that can frustrate players, which is at odds with the explicit intent to reduce frustration.",
+      "Addressing this spike will better align the level with the desired feel without altering the core layout."
+    ],
+    "prescription": {
+      "suggested_edits": [
+        {
+          "description": "Separate the enemy from the gap at column 9 by moving the enemy at least 2 columns away from the gap, or reposition the gap so it does not coincide with the enemy.",
+          "reason": "This edit reduces the low-leniency spike, making the segment less frustrating while preserving the core layout and overall challenge."
+        },
+        {
+          "description": "Optionally, add a coin or visual cue before the gap to guide the player and further reduce frustration.",
+          "reason": "Guidance helps players anticipate the challenge, supporting the intent to make the level less frustrating."
+        }
+      ],
+      "playtest_question": "After revision, does the moment at column 9 still feel frustrating or unfair to playtesters?"
+    },
+    "playtest_readiness": "revise_before_playtest",
+    "playtest_questions": [],
+    "confidence": "high"
+  },
+  "critique": {
+    "verdict": "approve",
+    "remaining_issues": [],
+    "constraint_violations": [],
+    "assessment": "The Director's recommendation is sound. The diagnosis correctly identifies a localized low-leniency spike (gap plus enemy at column 9) that could frustrate players, which is inconsistent with the explicit intent to reduce frustration for a general audience. The prescribed edits are targeted, respect the hard constraint to preserve the core layout, and do not overreach. The rest of the level is structurally valid, matches the medium difficulty target, and has appropriate pacing and novelty. The recommendation does not invent unnecessary work and is well-justified.",
+    "confidence": "high"
+  },
+  "round_count": 1,
+  "critic_feedback_history": [],
+  "decision": "recommend_revision",
+  "tool_call_log": [
+    {
+      "tool_name": "validate_candidate_level",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "is_valid": true,
+        "warnings": [],
+        "fatal_errors": []
+      }
+    },
+    {
+      "tool_name": "estimate_candidate_difficulty",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "difficulty_label": "medium",
+        "difficulty_score": 10.223,
+        "enemy_density": 0.0022,
+        "hazard_density": 0.0,
+        "longest_gap": 2,
+        "solid_ratio": 0.1339,
+        "collectible_density": 0.0022
+      }
+    },
+    {
+      "tool_name": "measure_candidate_novelty",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "nearest_neighbor_similarity": 0.8485,
+        "novelty_label": "high",
+        "warning": null
+      }
+    },
+    {
+      "tool_name": "analyze_candidate_pacing",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "flag": "balanced",
+        "opening_intensity": 0,
+        "middle_intensity": 3,
+        "final_intensity": 0,
+        "detail": "intensity opening 0, middle 3, final 0"
+      }
+    },
+    {
+      "tool_name": "detect_candidate_safe_zone",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "has_opening_safe_zone": true,
+        "first_challenge_column": 10,
+        "detail": "first challenge at column 10"
+      }
+    },
+    {
+      "tool_name": "detect_candidate_spike",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "has_spike": true,
+        "location_column": 9,
+        "detail": "gap of 2 combined with an enemy or cannon near column 9"
+      }
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 5481,
+    "output_tokens": 626,
+    "total_tokens": 6107,
+    "requests": 4
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "brief_text": "Get this segment ready for playtest as a normal early level.",
+  "candidate_level": "--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------<>----------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "intent": {
+    "target_audience": "general",
+    "desired_feel": [],
+    "difficulty_target": "medium",
+    "novelty_preference": "medium",
+    "hard_constraints": [],
+    "soft_preferences": [
+      "suitable for early level",
+      "ready for playtest"
+    ],
+    "detected_conflicts": [
+      "Brief is vague: target audience, desired feel, and specific difficulty are not clearly stated."
+    ]
+  },
+  "facts": {
+    "validation": {
+      "is_valid": false,
+      "warnings": [],
+      "fatal_errors": [
+        "pipe top without a body or ground support"
+      ]
+    },
+    "difficulty": {
+      "difficulty_label": "easy",
+      "difficulty_score": 0.0,
+      "enemy_density": 0.0,
+      "hazard_density": 0.0,
+      "longest_gap": 0,
+      "solid_ratio": 0.1429,
+      "collectible_density": 0.0
+    },
+    "novelty": {
+      "nearest_neighbor_similarity": 0.9014,
+      "novelty_label": "medium",
+      "warning": null
+    },
+    "pacing": {
+      "flag": "flat",
+      "opening_intensity": 0,
+      "middle_intensity": 0,
+      "final_intensity": 0,
+      "detail": "intensity opening 0, middle 0, final 0"
+    },
+    "safe_zone": {
+      "has_opening_safe_zone": true,
+      "first_challenge_column": 32,
+      "detail": "no challenge found in the segment"
+    },
+    "spike": {
+      "has_spike": false,
+      "location_column": null,
+      "detail": "no local difficulty spike found"
+    }
+  },
+  "recommendation": {
+    "action": "reject_structural",
+    "diagnosis": "The candidate level contains a structural error: a pipe top is present without a corresponding pipe body or ground support. This is a fatal integrity issue that prevents the level from being playtested.",
+    "tradeoff_reasoning": [
+      "Structural integrity is a hard requirement for playtest readiness. A broken pipe structure cannot be interpreted as a design choice and must be corrected before any further evaluation."
+    ],
+    "prescription": null,
+    "playtest_readiness": "not_ready",
+    "playtest_questions": [],
+    "confidence": "high"
+  },
+  "critique": {
+    "verdict": "approve",
+    "remaining_issues": [],
+    "constraint_violations": [],
+    "assessment": "The Director correctly identified a fatal structural integrity issue: a pipe top without a body or ground support. This violates a hard constraint and must be fixed before playtesting. The recommendation to reject for structural reasons is sound and does not overreach or underreach. No further evaluation of design elements is warranted until the defect is corrected.",
+    "confidence": "high"
+  },
+  "round_count": 1,
+  "critic_feedback_history": [],
+  "decision": "reject_structural",
+  "tool_call_log": [
+    {
+      "tool_name": "validate_candidate_level",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "is_valid": false,
+        "warnings": [],
+        "fatal_errors": [
+          "pipe top without a body or ground support"
+        ]
+      }
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 4929,
+    "output_tokens": 275,
+    "total_tokens": 5204,
+    "requests": 4
+  }
+}

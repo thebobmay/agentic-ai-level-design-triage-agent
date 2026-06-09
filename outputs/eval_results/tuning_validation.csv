@@ -3,6 +3,6 @@ S1,recommend_revision,recommend_revision,True,1
 S2,flag_as_derivative_draft,flag_as_derivative_draft,True,1
 S3,request_clarification,request_clarification,True,1
 S4,accept_for_playtest,accept_for_playtest,True,1
-S5,reject_structural,reject_structural,True,2
+S5,reject_structural,reject_structural,True,1
 S6,recommend_revision,recommend_revision,True,1
 S7,request_clarification,request_clarification,True,1

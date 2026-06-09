@@ -60,6 +60,20 @@ def test_invalid_candidate_is_never_ready_even_for_other_actions():
     assert out.readiness == "not_ready"
 
 
+def test_invalid_candidate_forces_reject_regardless_of_action():
+    # Even request_clarification on an invalid candidate becomes reject_structural.
+    out = apply_safety_floor(
+        rec("request_clarification", readiness="revise_before_playtest"), INVALID_FACTS, critique("approve"), 1
+    )
+    assert out.action == "reject_structural"
+    assert out.readiness == "not_ready"
+
+
+def test_invalid_candidate_reject_beats_critic_escalation():
+    out = apply_safety_floor(rec("recommend_revision"), INVALID_FACTS, critique("escalate"), 1)
+    assert out.action == "reject_structural"
+
+
 def test_critic_escalation_forces_human_review():
     out = apply_safety_floor(rec("accept_for_playtest"), VALID_FACTS, critique("escalate"), 1)
     assert out.action == "request_human_review"

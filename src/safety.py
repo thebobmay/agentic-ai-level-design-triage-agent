@@ -42,14 +42,17 @@ def apply_safety_floor(
     readiness: ReadinessLevel = recommendation.playtest_readiness
     interventions: list[str] = []
 
-    # Rule 1: a structurally invalid candidate is never accepted or called ready.
+    # Rule 1: a structurally invalid candidate cannot go to playtest regardless of the
+    # brief or the agents' choice. Reject for structural reasons and stop, so this is
+    # not overridden by the escalation rules below.
     if not facts.validation.is_valid:
-        if action == "accept_for_playtest":
+        if action != "reject_structural":
+            interventions.append(f"overrode {action}: candidate is structurally invalid")
             action = "reject_structural"
-            interventions.append("overrode accept_for_playtest: candidate is structurally invalid")
-        if readiness == "ready_for_playtest":
-            readiness = "not_ready"
+        if readiness != "not_ready":
             interventions.append("forced not_ready: candidate is structurally invalid")
+            readiness = "not_ready"
+        return SafetyOutcome(action=action, readiness=readiness, interventions=interventions)
 
     # Rule 2: an explicit critic escalation forces human review.
     if critique is not None and critique.verdict == "escalate" and action != "request_human_review":

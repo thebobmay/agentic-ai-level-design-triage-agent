@@ -1,0 +1,160 @@
+{
+  "brief_text": "Make this level feel consistent with my existing platformer levels. I want it to match my established style.",
+  "candidate_level": "--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------------------\n----------------------<>--------\n----------------E-----[]--------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+  "intent": {
+    "target_audience": "general",
+    "desired_feel": [],
+    "difficulty_target": "medium",
+    "novelty_preference": "low",
+    "hard_constraints": [],
+    "soft_preferences": [
+      "match established style"
+    ],
+    "detected_conflicts": []
+  },
+  "facts": {
+    "validation": {
+      "is_valid": true,
+      "warnings": [],
+      "fatal_errors": []
+    },
+    "difficulty": {
+      "difficulty_label": "easy",
+      "difficulty_score": 0.223,
+      "enemy_density": 0.0022,
+      "hazard_density": 0.0,
+      "longest_gap": 0,
+      "solid_ratio": 0.1429,
+      "collectible_density": 0.0067
+    },
+    "novelty": {
+      "nearest_neighbor_similarity": 0.9861,
+      "novelty_label": "low",
+      "warning": "high similarity (0.986) to a known level; the candidate may be derivative"
+    },
+    "pacing": {
+      "flag": "balanced",
+      "opening_intensity": 0,
+      "middle_intensity": 1,
+      "final_intensity": 0,
+      "detail": "intensity opening 0, middle 1, final 0"
+    },
+    "safe_zone": {
+      "has_opening_safe_zone": true,
+      "first_challenge_column": 16,
+      "detail": "first challenge at column 16"
+    },
+    "spike": {
+      "has_spike": false,
+      "location_column": null,
+      "detail": "no local difficulty spike found"
+    }
+  },
+  "recommendation": {
+    "action": "flag_as_derivative_draft",
+    "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style, but it is highly derivative (novelty similarity 0.9861 to a known level). The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.",
+    "tradeoff_reasoning": [
+      "The candidate is valid and structurally sound, so it is playable.",
+      "The brief requests low novelty and style consistency, so high similarity is not a defect for a draft, but it is too derivative for final content.",
+      "Difficulty is easier than the medium target, but this may be acceptable for a style-matching draft and can be tuned in further iterations.",
+      "Pacing and safe zone are appropriate, with no spikes or abrupt challenges."
+    ],
+    "prescription": null,
+    "playtest_readiness": "ready_for_playtest",
+    "playtest_questions": [
+      "Does the segment feel too familiar or repetitive compared to existing levels?",
+      "Is the challenge level appropriate for a medium segment, or does it need tuning?"
+    ],
+    "confidence": "high"
+  },
+  "critique": {
+    "verdict": "approve",
+    "remaining_issues": [],
+    "constraint_violations": [],
+    "assessment": "The Director's recommendation is sound. The candidate is structurally valid, matches the intent for low novelty and established style, and has no hard constraints on difficulty. While the difficulty is easier than the medium target, this is not a blocking issue for a draft, especially given the brief's emphasis on style consistency. The high similarity to a known level is appropriately flagged as a concern for final content, but not for a draft. Pacing and safe zone are appropriate, and there are no structural or design defects. The recommendation to flag as a derivative draft and proceed to playtest is justified.",
+    "confidence": "high"
+  },
+  "round_count": 1,
+  "critic_feedback_history": [],
+  "decision": "flag_as_derivative_draft",
+  "tool_call_log": [
+    {
+      "tool_name": "validate_candidate_level",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "is_valid": true,
+        "warnings": [],
+        "fatal_errors": []
+      }
+    },
+    {
+      "tool_name": "estimate_candidate_difficulty",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "difficulty_label": "easy",
+        "difficulty_score": 0.223,
+        "enemy_density": 0.0022,
+        "hazard_density": 0.0,
+        "longest_gap": 0,
+        "solid_ratio": 0.1429,
+        "collectible_density": 0.0067
+      }
+    },
+    {
+      "tool_name": "measure_candidate_novelty",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "nearest_neighbor_similarity": 0.9861,
+        "novelty_label": "low",
+        "warning": "high similarity (0.986) to a known level; the candidate may be derivative"
+      }
+    },
+    {
+      "tool_name": "analyze_candidate_pacing",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "flag": "balanced",
+        "opening_intensity": 0,
+        "middle_intensity": 1,
+        "final_intensity": 0,
+        "detail": "intensity opening 0, middle 1, final 0"
+      }
+    },
+    {
+      "tool_name": "detect_candidate_safe_zone",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "has_opening_safe_zone": true,
+        "first_challenge_column": 16,
+        "detail": "first challenge at column 16"
+      }
+    },
+    {
+      "tool_name": "detect_candidate_spike",
+      "inputs": {
+        "level": "candidate"
+      },
+      "outputs": {
+        "has_spike": false,
+        "location_column": null,
+        "detail": "no local difficulty spike found"
+      }
+    }
+  ],
+  "token_usage": {
+    "input_tokens": 5307,
+    "output_tokens": 539,
+    "total_tokens": 5846,
+    "requests": 4
+  }
+}
