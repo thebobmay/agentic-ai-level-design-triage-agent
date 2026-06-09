@@ -36,6 +36,9 @@ ALLOWED_ACTIONS = {
 }
 ALLOWED_READINESS = {"ready_for_playtest", "revise_before_playtest", "not_ready"}
 _ESCALATIONS = {"reject_structural", "request_human_review", "request_clarification"}
+# Actions that green light playtest. A derivative draft is structurally valid and
+# playable; the flag is a novelty concern, not a playtest blocker, so it may be ready.
+_PLAYTEST_READY_ACTIONS = {"accept_for_playtest", "flag_as_derivative_draft"}
 
 
 def _is_valid(session: TriageSession) -> bool:
@@ -56,7 +59,7 @@ class ActionAndReadinessValid(Evaluator):
         }
         if rec is not None:
             if rec.playtest_readiness == "ready_for_playtest":
-                checks["ready_only_when_accepted"] = session.decision == "accept_for_playtest"
+                checks["ready_only_when_playtestable"] = session.decision in _PLAYTEST_READY_ACTIONS
             if session.decision in _ESCALATIONS:
                 checks["escalation_not_ready"] = rec.playtest_readiness != "ready_for_playtest"
         return checks

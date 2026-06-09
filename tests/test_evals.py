@@ -77,3 +77,35 @@ def test_expected_action_match_is_recorded_as_a_score():
     with controlled():
         report = run_eval_suite(REFS)
     assert "ExpectedActionMatch" in report.averages().scores
+
+
+def test_derivative_draft_may_be_ready_for_playtest():
+    # A flag_as_derivative_draft proposal that is ready_for_playtest must satisfy the
+    # invariants: the draft is playable, so readiness is not coupled to accept only.
+    interp = TestModel(custom_output_args=INTENT_ARGS)
+    director = TestModel(
+        custom_output_args={
+            "action": "flag_as_derivative_draft",
+            "diagnosis": "diagnosis",
+            "tradeoff_reasoning": ["reason"],
+            "prescription": None,
+            "playtest_readiness": "ready_for_playtest",
+            "playtest_questions": ["q"],
+            "confidence": "moderate",
+        }
+    )
+    critic = TestModel(
+        custom_output_args={
+            "verdict": "approve",
+            "remaining_issues": [],
+            "constraint_violations": [],
+            "assessment": "assessment",
+            "confidence": "moderate",
+        }
+    )
+    with ExitStack() as stack:
+        stack.enter_context(intent_interpreter.override(model=interp))
+        stack.enter_context(triage_director.override(model=director))
+        stack.enter_context(critic_agent.override(model=critic))
+        report = run_eval_suite(REFS)
+    assert report.averages().assertions == 1.0

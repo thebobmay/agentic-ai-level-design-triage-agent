@@ -52,18 +52,17 @@
   },
   "recommendation": {
     "action": "flag_as_derivative_draft",
-    "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style, but it is highly derivative (novelty similarity 0.9861 to a known level). The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.",
+    "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style, but it is highly derivative (similarity 0.9861 to a known level). The difficulty is easier than the medium target, and the pacing is flat with only a brief mid-segment challenge. There are no structural or safety issues, but the segment is not suitable as a final due to its lack of originality.",
     "tradeoff_reasoning": [
-      "The candidate is valid and structurally sound, so it is playable.",
-      "The brief requests low novelty and style consistency, so high similarity is not a defect for a draft, but it is too derivative for final content.",
-      "Difficulty is easier than the medium target, but this may be acceptable for a style-matching draft and can be tuned in further iterations.",
-      "Pacing and safe zone are appropriate, with no spikes or abrupt challenges."
+      "The candidate is valid and safe, with no structural or pacing defects.",
+      "The brief requests low novelty and style consistency, so high similarity is not a disqualifier, but it does mean the segment should not ship as a final version.",
+      "Difficulty is below the medium target, but the main concern is its derivative nature."
     ],
     "prescription": null,
     "playtest_readiness": "ready_for_playtest",
     "playtest_questions": [
-      "Does the segment feel too familiar or repetitive compared to existing levels?",
-      "Is the challenge level appropriate for a medium segment, or does it need tuning?"
+      "Does the segment feel too familiar or repetitive compared to established levels?",
+      "Is the brief mid-segment challenge sufficient for a medium difficulty target, or does the segment feel too easy overall?"
     ],
     "confidence": "high"
   },
@@ -71,7 +70,7 @@
     "verdict": "approve",
     "remaining_issues": [],
     "constraint_violations": [],
-    "assessment": "The Director's recommendation is sound. The candidate is structurally valid, matches the intent for low novelty and established style, and has no hard constraints on difficulty. While the difficulty is easier than the medium target, this is not a blocking issue for a draft, especially given the brief's emphasis on style consistency. The high similarity to a known level is appropriately flagged as a concern for final content, but not for a draft. Pacing and safe zone are appropriate, and there are no structural or design defects. The recommendation to flag as a derivative draft and proceed to playtest is justified.",
+    "assessment": "The Director's recommendation is sound. The candidate is structurally valid, matches the intent for low novelty and established style, and contains no structural or pacing defects. The high similarity to a known level is not a disqualifier given the brief's preference for low novelty, but it is correctly flagged as a reason not to ship as a final. The difficulty is below the medium target, but this is noted for playtest feedback rather than as a hard constraint violation. The recommendation to flag as a derivative draft and proceed to playtest is appropriate.",
     "confidence": "high"
   },
   "round_count": 1,
@@ -151,10 +150,300 @@
       }
     }
   ],
+  "transcript": [
+    {
+      "step": 1,
+      "agent": "workflow",
+      "role": "system",
+      "round": null,
+      "content": "Gathered deterministic facts: valid=True, difficulty=easy, novelty=low, safe_zone=True, spike=False.",
+      "tool_name": null,
+      "tool_args": null,
+      "tool_call_id": null
+    },
+    {
+      "step": 2,
+      "agent": "intent_interpreter",
+      "role": "user",
+      "round": null,
+      "content": "Design brief:\nMake this level feel consistent with my existing platformer levels. I want it to match my established style.\n\nInterpret this brief into a design intent profile.",
+      "tool_name": null,
+      "tool_args": null,
+      "tool_call_id": null
+    },
+    {
+      "step": 3,
+      "agent": "intent_interpreter",
+      "role": "assistant",
+      "round": null,
+      "content": null,
+      "tool_name": "final_result",
+      "tool_args": {
+        "target_audience": "general",
+        "desired_feel": [],
+        "difficulty_target": "medium",
+        "novelty_preference": "low",
+        "hard_constraints": [],
+        "soft_preferences": [
+          "match established style"
+        ],
+        "detected_conflicts": []
+      },
+      "tool_call_id": "call_Wbt4ZGg6lPraU3cm7Z70diT7"
+    },
+    {
+      "step": 4,
+      "agent": "intent_interpreter",
+      "role": "tool",
+      "round": null,
+      "content": "Final result processed.",
+      "tool_name": "final_result",
+      "tool_args": null,
+      "tool_call_id": "call_Wbt4ZGg6lPraU3cm7Z70diT7"
+    },
+    {
+      "step": 5,
+      "agent": "intent_interpreter",
+      "role": "assistant",
+      "round": null,
+      "content": "Interpreted intent: audience=general, difficulty_target=medium, detected_conflicts=[].",
+      "tool_name": null,
+      "tool_args": null,
+      "tool_call_id": null
+    },
+    {
+      "step": 6,
+      "agent": "triage_director",
+      "role": "user",
+      "round": 1,
+      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"general\",\n  \"desired_feel\": [],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"low\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"match established style\"\n  ],\n  \"detected_conflicts\": []\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------------------\n----------------------<>--------\n----------------E-----[]--------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nGather facts with your tools, then choose one action and explain it.",
+      "tool_name": null,
+      "tool_args": null,
+      "tool_call_id": null
+    },
+    {
+      "step": 7,
+      "agent": "triage_director",
+      "role": "assistant",
+      "round": 1,
+      "content": null,
+      "tool_name": "check_validity",
+      "tool_args": {},
+      "tool_call_id": "call_wcU4iiK3nUjojFZM541Yu6yp"
+    },
+    {
+      "step": 8,
+      "agent": "triage_director",
+      "role": "assistant",
+      "round": 1,
+      "content": null,
+      "tool_name": "check_difficulty",
+      "tool_args": {},
+      "tool_call_id": "call_p2dKD0ZQIW8kyD7yK77dWGKM"
+    },
+    {
+      "step": 9,
+      "agent": "triage_director",
+      "role": "assistant",
+      "round": 1,
+      "content": null,
+      "tool_name": "check_novelty",
+      "tool_args": {},
+      "tool_call_id": "call_lr6t16FUlUXHDWnnFPQuxhXb"
+    },
+    {
+      "step": 10,
+      "agent": "triage_director",
+      "role": "assistant",
+      "round": 1,
+      "content": null,
+      "tool_name": "check_pacing",
+      "tool_args": {},
+      "tool_call_id": "call_JP8XgGwDEqwaGxZTTz02tiGJ"
+    },
+    {
+      "step": 11,
+      "agent": "triage_director",
+      "role": "assistant",
+      "round": 1,
+      "content": null,
+      "tool_name": "check_safe_zone",
+      "tool_args": {},
+      "tool_call_id": "call_EpHfAD5Aup1s9DUftpvM1JRg"
+    },
+    {
+      "step": 12,
+      "agent": "triage_director",
+      "role": "assistant",
+      "round": 1,
+      "content": null,
+      "tool_name": "check_spike",
+      "tool_args": {},
+      "tool_call_id": "call_lB7tCO82EBgpfzE8CtoHNsLg"
+    },
+    {
+      "step": 13,
+      "agent": "triage_director",
+      "role": "tool",
+      "round": 1,
+      "content": "is_valid=True warnings=[] fatal_errors=[]",
+      "tool_name": "check_validity",
+      "tool_args": null,
+      "tool_call_id": "call_wcU4iiK3nUjojFZM541Yu6yp"
+    },
+    {
+      "step": 14,
+      "agent": "triage_director",
+      "role": "tool",
+      "round": 1,
+      "content": "difficulty_label='easy' difficulty_score=0.223 enemy_density=0.0022 hazard_density=0.0 longest_gap=0 solid_ratio=0.1429 collectible_density=0.0067",
+      "tool_name": "check_difficulty",
+      "tool_args": null,
+      "tool_call_id": "call_p2dKD0ZQIW8kyD7yK77dWGKM"
+    },
+    {
+      "step": 15,
+      "agent": "triage_director",
+      "role": "tool",
+      "round": 1,
+      "content": "nearest_neighbor_similarity=0.9861 novelty_label='low' warning='high similarity (0.986) to a known level; the candidate may be derivative'",
+      "tool_name": "check_novelty",
+      "tool_args": null,
+      "tool_call_id": "call_lr6t16FUlUXHDWnnFPQuxhXb"
+    },
+    {
+      "step": 16,
+      "agent": "triage_director",
+      "role": "tool",
+      "round": 1,
+      "content": "flag='balanced' opening_intensity=0 middle_intensity=1 final_intensity=0 detail='intensity opening 0, middle 1, final 0'",
+      "tool_name": "check_pacing",
+      "tool_args": null,
+      "tool_call_id": "call_JP8XgGwDEqwaGxZTTz02tiGJ"
+    },
+    {
+      "step": 17,
+      "agent": "triage_director",
+      "role": "tool",
+      "round": 1,
+      "content": "has_opening_safe_zone=True first_challenge_column=16 detail='first challenge at column 16'",
+      "tool_name": "check_safe_zone",
+      "tool_args": null,
+      "tool_call_id": "call_EpHfAD5Aup1s9DUftpvM1JRg"
+    },
+    {
+      "step": 18,
+      "agent": "triage_director",
+      "role": "tool",
+      "round": 1,
+      "content": "has_spike=False location_column=None detail='no local difficulty spike found'",
+      "tool_name": "check_spike",
+      "tool_args": null,
+      "tool_call_id": "call_lB7tCO82EBgpfzE8CtoHNsLg"
+    },
+    {
+      "step": 19,
+      "agent": "triage_director",
+      "role": "assistant",
+      "round": 1,
+      "content": null,
+      "tool_name": "final_result",
+      "tool_args": {
+        "action": "flag_as_derivative_draft",
+        "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style, but it is highly derivative (similarity 0.9861 to a known level). The difficulty is easier than the medium target, and the pacing is flat with only a brief mid-segment challenge. There are no structural or safety issues, but the segment is not suitable as a final due to its lack of originality.",
+        "tradeoff_reasoning": [
+          "The candidate is valid and safe, with no structural or pacing defects.",
+          "The brief requests low novelty and style consistency, so high similarity is not a disqualifier, but it does mean the segment should not ship as a final version.",
+          "Difficulty is below the medium target, but the main concern is its derivative nature."
+        ],
+        "playtest_readiness": "ready_for_playtest",
+        "playtest_questions": [
+          "Does the segment feel too familiar or repetitive compared to established levels?",
+          "Is the brief mid-segment challenge sufficient for a medium difficulty target, or does the segment feel too easy overall?"
+        ],
+        "confidence": "high"
+      },
+      "tool_call_id": "call_lxOn3zmuwCMPAloyJgKeOqDd"
+    },
+    {
+      "step": 20,
+      "agent": "triage_director",
+      "role": "tool",
+      "round": 1,
+      "content": "Final result processed.",
+      "tool_name": "final_result",
+      "tool_args": null,
+      "tool_call_id": "call_lxOn3zmuwCMPAloyJgKeOqDd"
+    },
+    {
+      "step": 21,
+      "agent": "triage_director",
+      "role": "assistant",
+      "round": 1,
+      "content": "Proposed flag_as_derivative_draft (readiness=ready_for_playtest, confidence=high). The candidate is structurally valid and matches the intent for low novelty and established style, but it is highly derivative (similarity 0.9861 to a known level). The difficulty is easier than the medium target, and the pacing is flat with only a brief mid-segment challenge. There are no structural or safety issues, but the segment is not suitable as a final due to its lack of originality.",
+      "tool_name": null,
+      "tool_args": null,
+      "tool_call_id": null
+    },
+    {
+      "step": 22,
+      "agent": "critic",
+      "role": "user",
+      "round": 1,
+      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"general\",\n  \"desired_feel\": [],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"low\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"match established style\"\n  ],\n  \"detected_conflicts\": []\n}\n\nGathered facts:\n{\n  \"validation\": {\n    \"is_valid\": true,\n    \"warnings\": [],\n    \"fatal_errors\": []\n  },\n  \"difficulty\": {\n    \"difficulty_label\": \"easy\",\n    \"difficulty_score\": 0.223,\n    \"enemy_density\": 0.0022,\n    \"hazard_density\": 0.0,\n    \"longest_gap\": 0,\n    \"solid_ratio\": 0.1429,\n    \"collectible_density\": 0.0067\n  },\n  \"novelty\": {\n    \"nearest_neighbor_similarity\": 0.9861,\n    \"novelty_label\": \"low\",\n    \"warning\": \"high similarity (0.986) to a known level; the candidate may be derivative\"\n  },\n  \"pacing\": {\n    \"flag\": \"balanced\",\n    \"opening_intensity\": 0,\n    \"middle_intensity\": 1,\n    \"final_intensity\": 0,\n    \"detail\": \"intensity opening 0, middle 1, final 0\"\n  },\n  \"safe_zone\": {\n    \"has_opening_safe_zone\": true,\n    \"first_challenge_column\": 16,\n    \"detail\": \"first challenge at column 16\"\n  },\n  \"spike\": {\n    \"has_spike\": false,\n    \"location_column\": null,\n    \"detail\": \"no local difficulty spike found\"\n  }\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------------------\n----------------------<>--------\n----------------E-----[]--------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nThe Triage Director's recommendation:\n{\n  \"action\": \"flag_as_derivative_draft\",\n  \"diagnosis\": \"The candidate is structurally valid and matches the intent for low novelty and established style, but it is highly derivative (similarity 0.9861 to a known level). The difficulty is easier than the medium target, and the pacing is flat with only a brief mid-segment challenge. There are no structural or safety issues, but the segment is not suitable as a final due to its lack of originality.\",\n  \"tradeoff_reasoning\": [\n    \"The candidate is valid and safe, with no structural or pacing defects.\",\n    \"The brief requests low novelty and style consistency, so high similarity is not a disqualifier, but it does mean the segment should not ship as a final version.\",\n    \"Difficulty is below the medium target, but the main concern is its derivative nature.\"\n  ],\n  \"prescription\": null,\n  \"playtest_readiness\": \"ready_for_playtest\",\n  \"playtest_questions\": [\n    \"Does the segment feel too familiar or repetitive compared to established levels?\",\n    \"Is the brief mid-segment challenge sufficient for a medium difficulty target, or does the segment feel too easy overall?\"\n  ],\n  \"confidence\": \"high\"\n}\n\nEvaluate the recommendation and return your verdict.",
+      "tool_name": null,
+      "tool_args": null,
+      "tool_call_id": null
+    },
+    {
+      "step": 23,
+      "agent": "critic",
+      "role": "assistant",
+      "round": 1,
+      "content": null,
+      "tool_name": "final_result",
+      "tool_args": {
+        "verdict": "approve",
+        "assessment": "The Director's recommendation is sound. The candidate is structurally valid, matches the intent for low novelty and established style, and contains no structural or pacing defects. The high similarity to a known level is not a disqualifier given the brief's preference for low novelty, but it is correctly flagged as a reason not to ship as a final. The difficulty is below the medium target, but this is noted for playtest feedback rather than as a hard constraint violation. The recommendation to flag as a derivative draft and proceed to playtest is appropriate.",
+        "confidence": "high"
+      },
+      "tool_call_id": "call_oGJDLa9Z8roIJhQd8LyQPXr4"
+    },
+    {
+      "step": 24,
+      "agent": "critic",
+      "role": "tool",
+      "round": 1,
+      "content": "Final result processed.",
+      "tool_name": "final_result",
+      "tool_args": null,
+      "tool_call_id": "call_oGJDLa9Z8roIJhQd8LyQPXr4"
+    },
+    {
+      "step": 25,
+      "agent": "critic",
+      "role": "assistant",
+      "round": 1,
+      "content": "Verdict approve. The Director's recommendation is sound. The candidate is structurally valid, matches the intent for low novelty and established style, and contains no structural or pacing defects. The high similarity to a known level is not a disqualifier given the brief's preference for low novelty, but it is correctly flagged as a reason not to ship as a final. The difficulty is below the medium target, but this is noted for playtest feedback rather than as a hard constraint violation. The recommendation to flag as a derivative draft and proceed to playtest is appropriate.",
+      "tool_name": null,
+      "tool_args": null,
+      "tool_call_id": null
+    },
+    {
+      "step": 26,
+      "agent": "workflow",
+      "role": "system",
+      "round": null,
+      "content": "Final decision: flag_as_derivative_draft.",
+      "tool_name": null,
+      "tool_args": null,
+      "tool_call_id": null
+    }
+  ],
   "token_usage": {
-    "input_tokens": 5307,
-    "output_tokens": 539,
-    "total_tokens": 5846,
+    "input_tokens": 5276,
+    "output_tokens": 501,
+    "total_tokens": 5777,
     "requests": 4
   }
 }
