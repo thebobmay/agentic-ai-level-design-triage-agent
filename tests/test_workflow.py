@@ -12,7 +12,7 @@ from pydantic_ai.models.test import TestModel
 from src.agents import critic_agent, intent_interpreter, triage_director
 from src.safety import MAX_ROUNDS
 from src.scenarios import build_triage_request, load_scenarios
-from src.workflow import save_audit_log, triage_candidate
+from src.workflow import run_scenario_suite, save_audit_log, triage_candidate
 
 BY_ID = {s.scenario_id: s for s in load_scenarios()}
 
@@ -101,3 +101,20 @@ def test_save_audit_log_writes_json(tmp_path):
     save_audit_log(state, path)
     assert path.exists()
     assert "brief_text" in path.read_text(encoding="utf-8")
+
+
+def test_scenario_suite_runs_all_and_writes_artifacts(tmp_path):
+    scenarios = load_scenarios()
+    with controlled():
+        results = run_scenario_suite(
+            scenarios,
+            [],
+            reports_dir=tmp_path / "reports",
+            logs_dir=tmp_path / "logs",
+            csv_path=tmp_path / "results.csv",
+        )
+    assert len(results) == len(scenarios)
+    assert (tmp_path / "results.csv").exists()
+    for scenario in scenarios:
+        assert (tmp_path / "reports" / f"{scenario.scenario_id}.md").exists()
+        assert (tmp_path / "logs" / f"{scenario.scenario_id}.json").exists()

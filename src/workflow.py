@@ -9,11 +9,19 @@ facts and escalation. State and the tool call log are recorded for transparency.
 
 from __future__ import annotations
 
+import csv
 from pathlib import Path
 
 from src.agents import run_critic, run_intent_interpreter, run_triage_director
-from src.models import TriageRequest, TriageSession
+from src.models import (
+    ScenarioDefinition,
+    ScenarioResult,
+    TriageRequest,
+    TriageSession,
+)
+from src.report import generate_report, save_report
 from src.safety import MAX_ROUNDS, apply_safety_floor
+from src.scenarios import build_triage_request
 from src.tools import ToolLog, gather_facts
 
 
@@ -80,3 +88,65 @@ def save_audit_log(session: TriageSession, path: str | Path) -> None:
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(session.model_dump_json(indent=2), encoding="utf-8")
+
+
+_CSV_FIELDS = [
+    "scenario_id",
+    "name",
+    "expected_action",
+    "actual_action",
+    "readiness",
+    "match_expected",
+    "rounds",
+    "key_reason",
+]
+
+
+def _key_reason(session: TriageSession) -> str:
+    """Pick the most meaningful driving reason for the scenario summary."""
+    if session.facts and session.facts.validation.fatal_errors:
+        return session.facts.validation.fatal_errors[0]
+    if session.intent and session.intent.detected_conflicts:
+        return session.intent.detected_conflicts[0]
+    return session.decision or "unknown"
+
+
+def _write_scenario_csv(results: list[ScenarioResult], csv_path: str | Path) -> None:
+    """Write the scenario results to a CSV file."""
+    path = Path(csv_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=_CSV_FIELDS)
+        writer.writeheader()
+        for result in results:
+            writer.writerow(result.model_dump())
+
+
+def run_scenario_suite(
+    scenarios: list[ScenarioDefinition],
+    reference_levels: list[str],
+    reports_dir: str | Path = "outputs/reports",
+    logs_dir: str | Path = "outputs/logs",
+    csv_path: str | Path = "outputs/scenario_results.csv",
+) -> list[ScenarioResult]:
+    """Run every scenario through the workflow, save reports, logs, and a results CSV."""
+    results: list[ScenarioResult] = []
+    for scenario in scenarios:
+        session = triage_candidate(build_triage_request(scenario), reference_levels)
+        save_report(generate_report(session), Path(reports_dir) / f"{scenario.scenario_id}.md")
+        save_audit_log(session, Path(logs_dir) / f"{scenario.scenario_id}.json")
+        rec = session.recommendation
+        results.append(
+            ScenarioResult(
+                scenario_id=scenario.scenario_id,
+                name=scenario.name,
+                expected_action=scenario.expected_action,
+                actual_action=session.decision or "request_human_review",
+                readiness=rec.playtest_readiness if rec else "not_ready",
+                match_expected=(session.decision == scenario.expected_action),
+                rounds=session.round_count,
+                key_reason=_key_reason(session),
+            )
+        )
+    _write_scenario_csv(results, csv_path)
+    return results
