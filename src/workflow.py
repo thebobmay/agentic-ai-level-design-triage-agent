@@ -12,13 +12,15 @@ from __future__ import annotations
 import csv
 from pathlib import Path
 
-from pydantic_ai.usage import RunUsage
+from pydantic_ai.exceptions import UsageLimitExceeded
+from pydantic_ai.usage import RunUsage, UsageLimits
 
 from src.agents import run_critic, run_intent_interpreter, run_triage_director
 from src.models import (
     ScenarioDefinition,
     ScenarioResult,
     TokenUsage,
+    TriageRecommendation,
     TriageRequest,
     TriageSession,
 )
@@ -30,10 +32,25 @@ from src.tools import ToolLog, gather_facts
 
 _DEFAULT_MODEL_SETTINGS = {"temperature": 0.0}
 
+# Per agent run request budget. A legitimate round is well under this; it bounds a
+# single runaway round (a weak model re-calling its tools) fast. Tokens are summed
+# per run, so this limit is per run, not cumulative across the pass.
+PER_RUN_REQUEST_LIMIT = 25
+
 
 def _critic_feedback(critique) -> list[str]:
     """Build the feedback list passed back to the Director for a revision round."""
     return critique.remaining_issues + critique.constraint_violations or [critique.assessment]
+
+
+def _token_usage(usage: RunUsage) -> TokenUsage:
+    """Snapshot the accumulated token usage for the session."""
+    return TokenUsage(
+        input_tokens=usage.input_tokens,
+        output_tokens=usage.output_tokens,
+        total_tokens=usage.total_tokens,
+        requests=usage.requests,
+    )
 
 
 def triage_candidate(
@@ -52,48 +69,72 @@ def triage_candidate(
     state = TriageSession(brief_text=request.brief_text, candidate_level=request.candidate_level)
     log = ToolLog()
     usage = RunUsage()
+    limits = UsageLimits(request_limit=PER_RUN_REQUEST_LIMIT)
 
-    # Agent 1: interpret the brief into structured intent.
-    state.intent = run_intent_interpreter(
-        request.brief_text, model=model, model_settings=model_settings, usage=usage
-    )
-
-    # Authoritative facts, independent of the Director's own tool calls, for the
-    # critic and the safety floor.
+    # Authoritative facts (deterministic, no API), for the critic and the safety floor.
     facts = gather_facts(request.candidate_level, reference_levels)
     state.facts = facts
 
-    # Evaluator-optimizer loop: Director proposes, Critic evaluates, up to the cap.
-    for round_num in range(1, max_rounds + 1):
-        state.round_count = round_num
-        recommendation = run_triage_director(
-            state.intent,
-            request.candidate_level,
-            reference_levels,
-            log,
-            prior_feedback=state.critic_feedback_history or None,
+    try:
+        # Agent 1: interpret the brief into structured intent.
+        state.intent = run_intent_interpreter(
+            request.brief_text,
             model=model,
             model_settings=model_settings,
             usage=usage,
+            usage_limits=limits,
         )
-        state.recommendation = recommendation
 
-        critique = run_critic(
-            state.intent,
-            request.candidate_level,
-            facts,
-            recommendation,
-            model=model,
-            model_settings=model_settings,
-            usage=usage,
-        )
-        state.critique = critique
+        # Evaluator-optimizer loop: Director proposes, Critic evaluates, up to the cap.
+        for round_num in range(1, max_rounds + 1):
+            state.round_count = round_num
+            recommendation = run_triage_director(
+                state.intent,
+                request.candidate_level,
+                reference_levels,
+                log,
+                prior_feedback=state.critic_feedback_history or None,
+                model=model,
+                model_settings=model_settings,
+                usage=usage,
+                usage_limits=limits,
+            )
+            state.recommendation = recommendation
 
-        if critique.verdict in ("approve", "escalate"):
-            break
-        if round_num >= max_rounds:
-            break
-        state.critic_feedback_history.extend(_critic_feedback(critique))
+            critique = run_critic(
+                state.intent,
+                request.candidate_level,
+                facts,
+                recommendation,
+                model=model,
+                model_settings=model_settings,
+                usage=usage,
+                usage_limits=limits,
+            )
+            state.critique = critique
+
+            if critique.verdict in ("approve", "escalate"):
+                break
+            if round_num >= max_rounds:
+                break
+            state.critic_feedback_history.extend(_critic_feedback(critique))
+    except UsageLimitExceeded:
+        # A model round ran away (re-calling tools past the per-run budget). Escalate
+        # safely and record it as a non-converging outcome rather than crashing.
+        if state.recommendation is None:
+            state.recommendation = TriageRecommendation(
+                action="request_human_review",
+                diagnosis="A model round exceeded the per-run request budget before producing a recommendation.",
+                playtest_readiness="not_ready",
+                confidence="low",
+            )
+        else:
+            state.recommendation.playtest_readiness = "not_ready"
+        state.decision = "request_human_review"
+        log.record("request_budget_exceeded", {"limit": PER_RUN_REQUEST_LIMIT}, {"requests": usage.requests})
+        state.tool_call_log = log.entries
+        state.token_usage = _token_usage(usage)
+        return state
 
     # Deterministic safety floor over the agents' result.
     outcome = apply_safety_floor(state.recommendation, facts, state.critique, state.round_count)
@@ -107,12 +148,7 @@ def triage_candidate(
         )
 
     state.tool_call_log = log.entries
-    state.token_usage = TokenUsage(
-        input_tokens=usage.input_tokens,
-        output_tokens=usage.output_tokens,
-        total_tokens=usage.total_tokens,
-        requests=usage.requests,
-    )
+    state.token_usage = _token_usage(usage)
     return state
 
 

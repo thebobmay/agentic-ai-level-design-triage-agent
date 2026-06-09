@@ -21,7 +21,7 @@ import os
 from dataclasses import dataclass
 
 from pydantic_ai import Agent, RunContext
-from pydantic_ai.usage import RunUsage
+from pydantic_ai.usage import RunUsage, UsageLimits
 
 from src.design_knowledge import get_design_guidance
 from src.models import (
@@ -74,12 +74,16 @@ def run_intent_interpreter(
     model: str | None = None,
     model_settings: dict | None = None,
     usage: RunUsage | None = None,
+    usage_limits: UsageLimits | None = None,
 ) -> DesignIntentProfile:
     """Interpret a design brief into a structured intent profile."""
     prompt = f"Design brief:\n{brief_text}\n\nInterpret this brief into a design intent profile."
-    return intent_interpreter.run_sync(
-        prompt, model=model, model_settings=model_settings, usage=usage
-    ).output
+    result = intent_interpreter.run_sync(
+        prompt, model=model, model_settings=model_settings, usage_limits=usage_limits
+    )
+    if usage is not None:
+        usage.incr(result.usage())
+    return result.output
 
 
 # Triage Director (optimizer) --------------------------------------------------
@@ -174,6 +178,7 @@ def run_triage_director(
     model: str | None = None,
     model_settings: dict | None = None,
     usage: RunUsage | None = None,
+    usage_limits: UsageLimits | None = None,
 ) -> TriageRecommendation:
     """Run the Triage Director over the candidate, optionally with prior critic feedback."""
     deps = DirectorDeps(
@@ -195,9 +200,16 @@ def run_triage_director(
             *[f"- {item}" for item in prior_feedback],
         ]
     lines += ["", "Gather facts with your tools, then choose one action and explain it."]
-    return triage_director.run_sync(
-        "\n".join(lines), deps=deps, model=model, model_settings=model_settings, usage=usage
-    ).output
+    result = triage_director.run_sync(
+        "\n".join(lines),
+        deps=deps,
+        model=model,
+        model_settings=model_settings,
+        usage_limits=usage_limits,
+    )
+    if usage is not None:
+        usage.incr(result.usage())
+    return result.output
 
 
 # Critic (evaluator) -----------------------------------------------------------
@@ -229,6 +241,7 @@ def run_critic(
     model: str | None = None,
     model_settings: dict | None = None,
     usage: RunUsage | None = None,
+    usage_limits: UsageLimits | None = None,
 ) -> Critique:
     """Run the Critic to independently evaluate the Director's recommendation."""
     lines = [
@@ -246,6 +259,12 @@ def run_critic(
         "",
         "Evaluate the recommendation and return your verdict.",
     ]
-    return critic_agent.run_sync(
-        "\n".join(lines), model=model, model_settings=model_settings, usage=usage
-    ).output
+    result = critic_agent.run_sync(
+        "\n".join(lines),
+        model=model,
+        model_settings=model_settings,
+        usage_limits=usage_limits,
+    )
+    if usage is not None:
+        usage.incr(result.usage())
+    return result.output
