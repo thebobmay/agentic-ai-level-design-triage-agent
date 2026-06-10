@@ -12,7 +12,7 @@
     "hard_constraints": [],
     "soft_preferences": [
       "quick difficulty ramp",
-      "fair challenge"
+      "fairness"
     ],
     "detected_conflicts": []
   },
@@ -56,28 +56,28 @@
   },
   "recommendation": {
     "action": "recommend_revision",
-    "diagnosis": "The candidate is structurally valid and safe, but it does not meet the intended medium difficulty or the desired punchy, fast-paced feel. The segment is extremely easy, with no meaningful hazards or enemies, and the pacing is flat throughout. This does not deliver the quick difficulty ramp or fair challenge expected for an intermediate audience.",
+    "diagnosis": "The candidate is structurally valid and safe, but it does not meet the intended medium difficulty or the punchy, fast-paced feel. The segment is extremely easy, with no meaningful hazards or enemies, and the pacing is flat throughout. This does not align with the brief's target of a quick difficulty ramp and a punchy, intermediate challenge.",
     "tradeoff_reasoning": [
-      "The level is structurally sound and safe for play, but the absence of hazards or enemies means it does not provide the intended challenge or pacing.",
-      "The segment's novelty is acceptable for a medium target, but the lack of gameplay elements makes it unengaging for the intended audience.",
-      "A quick difficulty ramp and punchy feel require the introduction of hazards or enemies early in the segment, which are currently missing."
+      "The level is structurally sound and safe for play, but the absence of hazards or enemies results in no challenge, which is below the intended medium difficulty for intermediate players.",
+      "The pacing is flat, with no ramp or intensity, which conflicts with the desired punchy, fast-paced feel and the soft preference for a quick difficulty ramp.",
+      "Novelty is within the acceptable range for the brief, so the main issue is the lack of challenge and dynamic pacing."
     ],
     "prescription": {
       "suggested_edits": [
         {
-          "description": "Add at least one enemy or hazard (such as a pit, spike, or moving enemy) within the first 8-12 columns to establish an early challenge and set a punchy tone.",
-          "reason": "This creates a quick difficulty ramp and aligns with the desired fast-paced, punchy feel for intermediate players."
+          "description": "Add hazards (such as enemies or pits) starting after a short safe opening, ramping up in frequency or complexity toward the end of the segment.",
+          "reason": "This will create a quick difficulty ramp and provide the punchy, fast-paced feel requested for intermediate players."
         },
         {
-          "description": "Introduce additional hazards or enemies in the middle and later parts of the segment, layering them to create a fair but engaging challenge.",
-          "reason": "This ensures the segment reaches a medium difficulty and maintains a dynamic, fast-paced rhythm."
+          "description": "Introduce at least one layered challenge (e.g., a gap with an enemy or a moving hazard) in the latter half of the segment, ensuring it remains fair and not overwhelming.",
+          "reason": "Layered hazards increase intensity and align with the medium difficulty target, while fairness is maintained by spacing and clear cues."
         },
         {
-          "description": "Consider placing coins or visual cues to guide the player through new hazards, ensuring the challenge remains fair and readable.",
-          "reason": "This supports fair challenge and helps intermediate players anticipate and react to threats."
+          "description": "Use coins or visual cues to guide the player through new hazards, especially where jumps or timing are required.",
+          "reason": "Guidance supports fairness and helps players read the intended path, especially as challenge increases."
         }
       ],
-      "playtest_question": "Does the revised segment deliver a punchy, fast-paced feel with a fair, medium-level challenge appropriate for intermediate players?"
+      "playtest_question": "Does the revised segment deliver a punchy, fast-paced experience with a clear difficulty ramp appropriate for intermediate players?"
     },
     "playtest_readiness": "revise_before_playtest",
     "playtest_questions": [],
@@ -87,7 +87,7 @@
     "verdict": "approve",
     "remaining_issues": [],
     "constraint_violations": [],
-    "assessment": "The Director's recommendation is sound. The candidate segment is structurally valid but does not meet the intended medium difficulty or the desired punchy, fast-paced feel for an intermediate audience. The diagnosis correctly identifies the lack of hazards, enemies, and challenge, as well as the flat pacing, which are inconsistent with the brief. The prescribed edits are appropriate and targeted, aiming to introduce early and layered challenges and improve pacing, while also suggesting guidance for fairness. No hard constraints are violated, and the recommendation does not overreach. The segment should be revised before playtest.",
+    "assessment": "The Director's recommendation is sound. The candidate level is structurally valid and safe, but it is far too easy and flat for the intended intermediate, punchy, and fast-paced segment. The diagnosis correctly identifies the lack of hazards, enemies, and dynamic pacing as the main issues, which directly conflict with the brief's target of medium difficulty and a quick difficulty ramp. The prescribed edits are appropriate and actionable, focusing on adding hazards, ramping challenge, and providing guidance, all while maintaining fairness. No hard constraints are violated, and the recommendation does not overreach or underreach. The level is not ready for playtest in its current form, and revision is warranted.",
     "confidence": "high"
   },
   "round_count": 1,
@@ -205,11 +205,11 @@
         "novelty_preference": "medium",
         "soft_preferences": [
           "quick difficulty ramp",
-          "fair challenge"
+          "fairness"
         ],
         "detected_conflicts": []
       },
-      "tool_call_id": "call_O9xJtnPaq5sbOns1obhyA4YU"
+      "tool_call_id": "call_d1gYen49RWN8ALR7OV1Mw4yZ"
     },
     {
       "step": 4,
@@ -219,7 +219,7 @@
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_O9xJtnPaq5sbOns1obhyA4YU"
+      "tool_call_id": "call_d1gYen49RWN8ALR7OV1Mw4yZ"
     },
     {
       "step": 5,
@@ -236,7 +236,7 @@
       "agent": "triage_director",
       "role": "user",
       "round": 1,
-      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"intermediate\",\n  \"desired_feel\": [\n    \"punchy\",\n    \"fast-paced\"\n  ],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"medium\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"quick difficulty ramp\",\n    \"fair challenge\"\n  ],\n  \"detected_conflicts\": []\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------<>----------\n--------------------[]----------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nGather facts with your tools, then choose one action and explain it.",
+      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"intermediate\",\n  \"desired_feel\": [\n    \"punchy\",\n    \"fast-paced\"\n  ],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"medium\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"quick difficulty ramp\",\n    \"fairness\"\n  ],\n  \"detected_conflicts\": []\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------<>----------\n--------------------[]----------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nGather facts with your tools, then choose one action and explain it.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -249,7 +249,7 @@
       "content": null,
       "tool_name": "check_validity",
       "tool_args": {},
-      "tool_call_id": "call_NOp7ofjfP0VMRSsCUsts8VqH"
+      "tool_call_id": "call_HSa3FWPXe6dPRANrYPtuu9oE"
     },
     {
       "step": 8,
@@ -259,7 +259,7 @@
       "content": null,
       "tool_name": "check_difficulty",
       "tool_args": {},
-      "tool_call_id": "call_qEfcigHrcthN5lUFLzbYP48X"
+      "tool_call_id": "call_EgyVFaKW0gKI2zy8QuKz4Ptc"
     },
     {
       "step": 9,
@@ -269,7 +269,7 @@
       "content": null,
       "tool_name": "check_novelty",
       "tool_args": {},
-      "tool_call_id": "call_F4M4DCEUnLemE4Etdu9Gc1is"
+      "tool_call_id": "call_MpyXTxUjjgNn5R3ImyE7Mlks"
     },
     {
       "step": 10,
@@ -279,7 +279,7 @@
       "content": null,
       "tool_name": "check_pacing",
       "tool_args": {},
-      "tool_call_id": "call_udX9Tyq1NHUY67sLpa3oYnzE"
+      "tool_call_id": "call_SR3L3INNrgoJq7Cx5PKFco3T"
     },
     {
       "step": 11,
@@ -289,7 +289,7 @@
       "content": null,
       "tool_name": "check_safe_zone",
       "tool_args": {},
-      "tool_call_id": "call_s7WesPAbcHysD6uHVdNmamZU"
+      "tool_call_id": "call_XY1Ni5K7tkf7iFJoE6cp7N48"
     },
     {
       "step": 12,
@@ -299,7 +299,7 @@
       "content": null,
       "tool_name": "check_spike",
       "tool_args": {},
-      "tool_call_id": "call_bOwZKTG0knYuHQI5Zr5pgwbM"
+      "tool_call_id": "call_br5u72V5bRWxEq5qSQprgXE0"
     },
     {
       "step": 13,
@@ -309,7 +309,7 @@
       "content": "is_valid=True warnings=[] fatal_errors=[]",
       "tool_name": "check_validity",
       "tool_args": null,
-      "tool_call_id": "call_NOp7ofjfP0VMRSsCUsts8VqH"
+      "tool_call_id": "call_HSa3FWPXe6dPRANrYPtuu9oE"
     },
     {
       "step": 14,
@@ -319,7 +319,7 @@
       "content": "difficulty_label='easy' difficulty_score=0.0 enemy_density=0.0 hazard_density=0.0 longest_gap=0 solid_ratio=0.1429 collectible_density=0.0067",
       "tool_name": "check_difficulty",
       "tool_args": null,
-      "tool_call_id": "call_qEfcigHrcthN5lUFLzbYP48X"
+      "tool_call_id": "call_EgyVFaKW0gKI2zy8QuKz4Ptc"
     },
     {
       "step": 15,
@@ -329,7 +329,7 @@
       "content": "nearest_neighbor_similarity=0.9167 novelty_label='medium' warning=None",
       "tool_name": "check_novelty",
       "tool_args": null,
-      "tool_call_id": "call_F4M4DCEUnLemE4Etdu9Gc1is"
+      "tool_call_id": "call_MpyXTxUjjgNn5R3ImyE7Mlks"
     },
     {
       "step": 16,
@@ -339,7 +339,7 @@
       "content": "flag='flat' opening_intensity=0 middle_intensity=0 final_intensity=0 detail='intensity opening 0, middle 0, final 0'",
       "tool_name": "check_pacing",
       "tool_args": null,
-      "tool_call_id": "call_udX9Tyq1NHUY67sLpa3oYnzE"
+      "tool_call_id": "call_SR3L3INNrgoJq7Cx5PKFco3T"
     },
     {
       "step": 17,
@@ -349,7 +349,7 @@
       "content": "has_opening_safe_zone=True first_challenge_column=32 detail='no challenge found in the segment'",
       "tool_name": "check_safe_zone",
       "tool_args": null,
-      "tool_call_id": "call_s7WesPAbcHysD6uHVdNmamZU"
+      "tool_call_id": "call_XY1Ni5K7tkf7iFJoE6cp7N48"
     },
     {
       "step": 18,
@@ -359,7 +359,7 @@
       "content": "has_spike=False location_column=None detail='no local difficulty spike found'",
       "tool_name": "check_spike",
       "tool_args": null,
-      "tool_call_id": "call_bOwZKTG0knYuHQI5Zr5pgwbM"
+      "tool_call_id": "call_br5u72V5bRWxEq5qSQprgXE0"
     },
     {
       "step": 19,
@@ -370,33 +370,33 @@
       "tool_name": "final_result",
       "tool_args": {
         "action": "recommend_revision",
-        "diagnosis": "The candidate is structurally valid and safe, but it does not meet the intended medium difficulty or the desired punchy, fast-paced feel. The segment is extremely easy, with no meaningful hazards or enemies, and the pacing is flat throughout. This does not deliver the quick difficulty ramp or fair challenge expected for an intermediate audience.",
+        "diagnosis": "The candidate is structurally valid and safe, but it does not meet the intended medium difficulty or the punchy, fast-paced feel. The segment is extremely easy, with no meaningful hazards or enemies, and the pacing is flat throughout. This does not align with the brief's target of a quick difficulty ramp and a punchy, intermediate challenge.",
         "tradeoff_reasoning": [
-          "The level is structurally sound and safe for play, but the absence of hazards or enemies means it does not provide the intended challenge or pacing.",
-          "The segment's novelty is acceptable for a medium target, but the lack of gameplay elements makes it unengaging for the intended audience.",
-          "A quick difficulty ramp and punchy feel require the introduction of hazards or enemies early in the segment, which are currently missing."
+          "The level is structurally sound and safe for play, but the absence of hazards or enemies results in no challenge, which is below the intended medium difficulty for intermediate players.",
+          "The pacing is flat, with no ramp or intensity, which conflicts with the desired punchy, fast-paced feel and the soft preference for a quick difficulty ramp.",
+          "Novelty is within the acceptable range for the brief, so the main issue is the lack of challenge and dynamic pacing."
         ],
         "prescription": {
           "suggested_edits": [
             {
-              "description": "Add at least one enemy or hazard (such as a pit, spike, or moving enemy) within the first 8-12 columns to establish an early challenge and set a punchy tone.",
-              "reason": "This creates a quick difficulty ramp and aligns with the desired fast-paced, punchy feel for intermediate players."
+              "description": "Add hazards (such as enemies or pits) starting after a short safe opening, ramping up in frequency or complexity toward the end of the segment.",
+              "reason": "This will create a quick difficulty ramp and provide the punchy, fast-paced feel requested for intermediate players."
             },
             {
-              "description": "Introduce additional hazards or enemies in the middle and later parts of the segment, layering them to create a fair but engaging challenge.",
-              "reason": "This ensures the segment reaches a medium difficulty and maintains a dynamic, fast-paced rhythm."
+              "description": "Introduce at least one layered challenge (e.g., a gap with an enemy or a moving hazard) in the latter half of the segment, ensuring it remains fair and not overwhelming.",
+              "reason": "Layered hazards increase intensity and align with the medium difficulty target, while fairness is maintained by spacing and clear cues."
             },
             {
-              "description": "Consider placing coins or visual cues to guide the player through new hazards, ensuring the challenge remains fair and readable.",
-              "reason": "This supports fair challenge and helps intermediate players anticipate and react to threats."
+              "description": "Use coins or visual cues to guide the player through new hazards, especially where jumps or timing are required.",
+              "reason": "Guidance supports fairness and helps players read the intended path, especially as challenge increases."
             }
           ],
-          "playtest_question": "Does the revised segment deliver a punchy, fast-paced feel with a fair, medium-level challenge appropriate for intermediate players?"
+          "playtest_question": "Does the revised segment deliver a punchy, fast-paced experience with a clear difficulty ramp appropriate for intermediate players?"
         },
         "playtest_readiness": "revise_before_playtest",
         "confidence": "high"
       },
-      "tool_call_id": "call_cO6tuRf0BaxiPyxVIP63MTRT"
+      "tool_call_id": "call_sBi06ug7psRMU812YetKG1QA"
     },
     {
       "step": 20,
@@ -406,14 +406,14 @@
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_cO6tuRf0BaxiPyxVIP63MTRT"
+      "tool_call_id": "call_sBi06ug7psRMU812YetKG1QA"
     },
     {
       "step": 21,
       "agent": "triage_director",
       "role": "assistant",
       "round": 1,
-      "content": "Proposed recommend_revision (readiness=revise_before_playtest, confidence=high). The candidate is structurally valid and safe, but it does not meet the intended medium difficulty or the desired punchy, fast-paced feel. The segment is extremely easy, with no meaningful hazards or enemies, and the pacing is flat throughout. This does not deliver the quick difficulty ramp or fair challenge expected for an intermediate audience.",
+      "content": "Proposed recommend_revision (readiness=revise_before_playtest, confidence=high). The candidate is structurally valid and safe, but it does not meet the intended medium difficulty or the punchy, fast-paced feel. The segment is extremely easy, with no meaningful hazards or enemies, and the pacing is flat throughout. This does not align with the brief's target of a quick difficulty ramp and a punchy, intermediate challenge.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -423,7 +423,7 @@
       "agent": "critic",
       "role": "user",
       "round": 1,
-      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"intermediate\",\n  \"desired_feel\": [\n    \"punchy\",\n    \"fast-paced\"\n  ],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"medium\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"quick difficulty ramp\",\n    \"fair challenge\"\n  ],\n  \"detected_conflicts\": []\n}\n\nGathered facts:\n{\n  \"validation\": {\n    \"is_valid\": true,\n    \"warnings\": [],\n    \"fatal_errors\": []\n  },\n  \"difficulty\": {\n    \"difficulty_label\": \"easy\",\n    \"difficulty_score\": 0.0,\n    \"enemy_density\": 0.0,\n    \"hazard_density\": 0.0,\n    \"longest_gap\": 0,\n    \"solid_ratio\": 0.1429,\n    \"collectible_density\": 0.0067\n  },\n  \"novelty\": {\n    \"nearest_neighbor_similarity\": 0.9167,\n    \"novelty_label\": \"medium\",\n    \"warning\": null\n  },\n  \"pacing\": {\n    \"flag\": \"flat\",\n    \"opening_intensity\": 0,\n    \"middle_intensity\": 0,\n    \"final_intensity\": 0,\n    \"detail\": \"intensity opening 0, middle 0, final 0\"\n  },\n  \"safe_zone\": {\n    \"has_opening_safe_zone\": true,\n    \"first_challenge_column\": 32,\n    \"detail\": \"no challenge found in the segment\"\n  },\n  \"spike\": {\n    \"has_spike\": false,\n    \"location_column\": null,\n    \"detail\": \"no local difficulty spike found\"\n  }\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------<>----------\n--------------------[]----------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nThe Triage Director's recommendation:\n{\n  \"action\": \"recommend_revision\",\n  \"diagnosis\": \"The candidate is structurally valid and safe, but it does not meet the intended medium difficulty or the desired punchy, fast-paced feel. The segment is extremely easy, with no meaningful hazards or enemies, and the pacing is flat throughout. This does not deliver the quick difficulty ramp or fair challenge expected for an intermediate audience.\",\n  \"tradeoff_reasoning\": [\n    \"The level is structurally sound and safe for play, but the absence of hazards or enemies means it does not provide the intended challenge or pacing.\",\n    \"The segment's novelty is acceptable for a medium target, but the lack of gameplay elements makes it unengaging for the intended audience.\",\n    \"A quick difficulty ramp and punchy feel require the introduction of hazards or enemies early in the segment, which are currently missing.\"\n  ],\n  \"prescription\": {\n    \"suggested_edits\": [\n      {\n        \"description\": \"Add at least one enemy or hazard (such as a pit, spike, or moving enemy) within the first 8-12 columns to establish an early challenge and set a punchy tone.\",\n        \"reason\": \"This creates a quick difficulty ramp and aligns with the desired fast-paced, punchy feel for intermediate players.\"\n      },\n      {\n        \"description\": \"Introduce additional hazards or enemies in the middle and later parts of the segment, layering them to create a fair but engaging challenge.\",\n        \"reason\": \"This ensures the segment reaches a medium difficulty and maintains a dynamic, fast-paced rhythm.\"\n      },\n      {\n        \"description\": \"Consider placing coins or visual cues to guide the player through new hazards, ensuring the challenge remains fair and readable.\",\n        \"reason\": \"This supports fair challenge and helps intermediate players anticipate and react to threats.\"\n      }\n    ],\n    \"playtest_question\": \"Does the revised segment deliver a punchy, fast-paced feel with a fair, medium-level challenge appropriate for intermediate players?\"\n  },\n  \"playtest_readiness\": \"revise_before_playtest\",\n  \"playtest_questions\": [],\n  \"confidence\": \"high\"\n}\n\nEvaluate the recommendation and return your verdict.",
+      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"intermediate\",\n  \"desired_feel\": [\n    \"punchy\",\n    \"fast-paced\"\n  ],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"medium\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"quick difficulty ramp\",\n    \"fairness\"\n  ],\n  \"detected_conflicts\": []\n}\n\nGathered facts:\n{\n  \"validation\": {\n    \"is_valid\": true,\n    \"warnings\": [],\n    \"fatal_errors\": []\n  },\n  \"difficulty\": {\n    \"difficulty_label\": \"easy\",\n    \"difficulty_score\": 0.0,\n    \"enemy_density\": 0.0,\n    \"hazard_density\": 0.0,\n    \"longest_gap\": 0,\n    \"solid_ratio\": 0.1429,\n    \"collectible_density\": 0.0067\n  },\n  \"novelty\": {\n    \"nearest_neighbor_similarity\": 0.9167,\n    \"novelty_label\": \"medium\",\n    \"warning\": null\n  },\n  \"pacing\": {\n    \"flag\": \"flat\",\n    \"opening_intensity\": 0,\n    \"middle_intensity\": 0,\n    \"final_intensity\": 0,\n    \"detail\": \"intensity opening 0, middle 0, final 0\"\n  },\n  \"safe_zone\": {\n    \"has_opening_safe_zone\": true,\n    \"first_challenge_column\": 32,\n    \"detail\": \"no challenge found in the segment\"\n  },\n  \"spike\": {\n    \"has_spike\": false,\n    \"location_column\": null,\n    \"detail\": \"no local difficulty spike found\"\n  }\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------<>----------\n--------------------[]----------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nThe Triage Director's recommendation:\n{\n  \"action\": \"recommend_revision\",\n  \"diagnosis\": \"The candidate is structurally valid and safe, but it does not meet the intended medium difficulty or the punchy, fast-paced feel. The segment is extremely easy, with no meaningful hazards or enemies, and the pacing is flat throughout. This does not align with the brief's target of a quick difficulty ramp and a punchy, intermediate challenge.\",\n  \"tradeoff_reasoning\": [\n    \"The level is structurally sound and safe for play, but the absence of hazards or enemies results in no challenge, which is below the intended medium difficulty for intermediate players.\",\n    \"The pacing is flat, with no ramp or intensity, which conflicts with the desired punchy, fast-paced feel and the soft preference for a quick difficulty ramp.\",\n    \"Novelty is within the acceptable range for the brief, so the main issue is the lack of challenge and dynamic pacing.\"\n  ],\n  \"prescription\": {\n    \"suggested_edits\": [\n      {\n        \"description\": \"Add hazards (such as enemies or pits) starting after a short safe opening, ramping up in frequency or complexity toward the end of the segment.\",\n        \"reason\": \"This will create a quick difficulty ramp and provide the punchy, fast-paced feel requested for intermediate players.\"\n      },\n      {\n        \"description\": \"Introduce at least one layered challenge (e.g., a gap with an enemy or a moving hazard) in the latter half of the segment, ensuring it remains fair and not overwhelming.\",\n        \"reason\": \"Layered hazards increase intensity and align with the medium difficulty target, while fairness is maintained by spacing and clear cues.\"\n      },\n      {\n        \"description\": \"Use coins or visual cues to guide the player through new hazards, especially where jumps or timing are required.\",\n        \"reason\": \"Guidance supports fairness and helps players read the intended path, especially as challenge increases.\"\n      }\n    ],\n    \"playtest_question\": \"Does the revised segment deliver a punchy, fast-paced experience with a clear difficulty ramp appropriate for intermediate players?\"\n  },\n  \"playtest_readiness\": \"revise_before_playtest\",\n  \"playtest_questions\": [],\n  \"confidence\": \"high\"\n}\n\nEvaluate the recommendation and return your verdict.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -437,10 +437,10 @@
       "tool_name": "final_result",
       "tool_args": {
         "verdict": "approve",
-        "assessment": "The Director's recommendation is sound. The candidate segment is structurally valid but does not meet the intended medium difficulty or the desired punchy, fast-paced feel for an intermediate audience. The diagnosis correctly identifies the lack of hazards, enemies, and challenge, as well as the flat pacing, which are inconsistent with the brief. The prescribed edits are appropriate and targeted, aiming to introduce early and layered challenges and improve pacing, while also suggesting guidance for fairness. No hard constraints are violated, and the recommendation does not overreach. The segment should be revised before playtest.",
+        "assessment": "The Director's recommendation is sound. The candidate level is structurally valid and safe, but it is far too easy and flat for the intended intermediate, punchy, and fast-paced segment. The diagnosis correctly identifies the lack of hazards, enemies, and dynamic pacing as the main issues, which directly conflict with the brief's target of medium difficulty and a quick difficulty ramp. The prescribed edits are appropriate and actionable, focusing on adding hazards, ramping challenge, and providing guidance, all while maintaining fairness. No hard constraints are violated, and the recommendation does not overreach or underreach. The level is not ready for playtest in its current form, and revision is warranted.",
         "confidence": "high"
       },
-      "tool_call_id": "call_YVC7QgbMHIMZFXUtvqsTxb4c"
+      "tool_call_id": "call_k3sLacVW0HJePn5F4mZsDf0m"
     },
     {
       "step": 24,
@@ -450,14 +450,14 @@
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_YVC7QgbMHIMZFXUtvqsTxb4c"
+      "tool_call_id": "call_k3sLacVW0HJePn5F4mZsDf0m"
     },
     {
       "step": 25,
       "agent": "critic",
       "role": "assistant",
       "round": 1,
-      "content": "Verdict approve. The Director's recommendation is sound. The candidate segment is structurally valid but does not meet the intended medium difficulty or the desired punchy, fast-paced feel for an intermediate audience. The diagnosis correctly identifies the lack of hazards, enemies, and challenge, as well as the flat pacing, which are inconsistent with the brief. The prescribed edits are appropriate and targeted, aiming to introduce early and layered challenges and improve pacing, while also suggesting guidance for fairness. No hard constraints are violated, and the recommendation does not overreach. The segment should be revised before playtest.",
+      "content": "Verdict approve. The Director's recommendation is sound. The candidate level is structurally valid and safe, but it is far too easy and flat for the intended intermediate, punchy, and fast-paced segment. The diagnosis correctly identifies the lack of hazards, enemies, and dynamic pacing as the main issues, which directly conflict with the brief's target of medium difficulty and a quick difficulty ramp. The prescribed edits are appropriate and actionable, focusing on adding hazards, ramping challenge, and providing guidance, all while maintaining fairness. No hard constraints are violated, and the recommendation does not overreach or underreach. The level is not ready for playtest in its current form, and revision is warranted.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -474,9 +474,9 @@
     }
   ],
   "token_usage": {
-    "input_tokens": 5469,
-    "output_tokens": 660,
-    "total_tokens": 6129,
+    "input_tokens": 5490,
+    "output_tokens": 703,
+    "total_tokens": 6193,
     "requests": 4
   }
 }

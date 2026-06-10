@@ -1,4 +1,4 @@
-# Project 6 v2 — AI Level Design Triage Agent (architecture for sign-off)
+# AI Level Design Triage Agent — Architecture
 
 A clean, advisory design. The system is a design direction layer: given a natural
 language design brief and one candidate level segment, it interprets the
@@ -15,14 +15,6 @@ Every component is held to one litmus test: if the agent were removed and only
 the tools remained, what would be lost? If the answer is only prose, the
 component is fake. Here the answer is intent interpretation, contextual tradeoff
 reasoning, conflict detection, triage decision, and human review escalation.
-
-## What changed from v1
-
-- No bounded edits. The agent advises; it does not mutate the level. The
-  deterministic editor and the keep or revert safeguard are gone.
-- The input is a messy natural language brief, not a pre structured request. The
-  agency lives in interpreting that messiness.
-- Fresh repository, no carryover of the v1 decision engine.
 
 ## Structural pattern: bounded evaluator-optimizer
 
@@ -154,7 +146,7 @@ flowchart TD
     CAND -. re-examines .-> CRIT
 
     CRIT -->|disputed: revise, up to 5 rounds| DREASON
-    CRIT -->|approved or rounds exhausted| FLOOR{"Safety floor (facts only): invalid level never ready; unresolved critic dispute escalates to human review"}
+    CRIT -->|approved or rounds exhausted| FLOOR{"Safety floor (facts only): invalid candidate forced to reject_structural and not_ready; request_clarification forced to not_ready; critic escalate or unresolved dispute at the round cap forced to human review"}
     FLOOR -->|final decision| REPORT["Assemble report (deterministic layout, generates no prose): Director narrative + Critic assessment + final decision + factual appendix (metrics, tool log, grid)"]
     TRIAGE -. narrative .-> REPORT
     CRIT -. assessment .-> REPORT
@@ -163,12 +155,12 @@ flowchart TD
     ACTIONS["Triage actions: accept for playtest / recommend revision / request clarification / flag as derivative draft / reject structural / request human review"]
     DDECIDE -. selects one .-> ACTIONS
 
-    STATE[("Working memory (carries the loop): brief, intent profile, current recommendation, critic feedback, round counter, decision")]
+    STATE[("Working memory (carries the loop): brief, intent profile, gathered facts, current recommendation, critic feedback, round counter, decision, tool call log, transcript, token usage")]
     A1 -. writes .-> STATE
     A2 -. writes and reads each round .-> STATE
     A3 -. writes .-> STATE
 
-    LOG[("Audit log to outputs/logs/: every tool call in and out, agent outputs, round by round critic verdicts, final decision")]
+    LOG[("Audit log to outputs/logs/: full session JSON (tool calls in and out, agent outputs, round by round critic verdicts, final decision, full transcript, token usage), plus a readable per pass transcript and a cross run running log")]
     STATE -. serialized to .-> LOG
     LOG -. tool log and metrics .-> REPORT
 ```
