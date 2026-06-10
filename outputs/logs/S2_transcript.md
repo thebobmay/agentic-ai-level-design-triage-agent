@@ -110,7 +110,7 @@ has_spike=False location_column=None detail='no local difficulty spike found'
 ```
 
 ## [19] assistant (triage_director r1)
-tool call: final_result({'action': 'flag_as_derivative_draft', 'diagnosis': 'The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.', 'tradeoff_reasoning': ['The brief requests low novelty and style consistency, so high similarity is not a defect, but it does mean the segment is only suitable as a draft, not as a final level.', 'Difficulty is below the medium target, but this is not a hard constraint and may be acceptable for a style-matching draft.', 'All structural and pacing checks pass, so the segment is ready for playtest as a draft.'], 'playtest_readiness': 'ready_for_playtest', 'playtest_questions': ['Does the segment feel too familiar or repetitive compared to established levels?', 'Is the challenge level appropriate for a medium segment, or does it feel too easy?'], 'confidence': 'high'})
+tool call: final_result({'action': 'flag_as_derivative_draft', 'diagnosis': 'The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No difficulty spikes are present.', 'tradeoff_reasoning': ['The candidate is structurally sound and safe for playtest.', "The low novelty matches the brief's preference for established style, but the similarity is so high that it should be flagged as derivative for tracking.", "Difficulty is easier than targeted, but not in conflict with the brief's soft preferences."], 'playtest_readiness': 'ready_for_playtest', 'playtest_questions': ['Does the segment feel too familiar or repetitive compared to existing levels?', 'Is the challenge level appropriate for a medium segment, or does it feel too easy?'], 'confidence': 'high'})
 
 ## [20] tool (triage_director r1)
 tool result: final_result
@@ -119,7 +119,7 @@ Final result processed.
 ```
 
 ## [21] assistant (triage_director r1)
-Proposed flag_as_derivative_draft (readiness=ready_for_playtest, confidence=high). The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.
+Proposed flag_as_derivative_draft (readiness=ready_for_playtest, confidence=high). The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No difficulty spikes are present.
 
 ## [22] user (critic r1)
 Interpreted design intent:
@@ -194,16 +194,16 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 The Triage Director's recommendation:
 {
   "action": "flag_as_derivative_draft",
-  "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.",
+  "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No difficulty spikes are present.",
   "tradeoff_reasoning": [
-    "The brief requests low novelty and style consistency, so high similarity is not a defect, but it does mean the segment is only suitable as a draft, not as a final level.",
-    "Difficulty is below the medium target, but this is not a hard constraint and may be acceptable for a style-matching draft.",
-    "All structural and pacing checks pass, so the segment is ready for playtest as a draft."
+    "The candidate is structurally sound and safe for playtest.",
+    "The low novelty matches the brief's preference for established style, but the similarity is so high that it should be flagged as derivative for tracking.",
+    "Difficulty is easier than targeted, but not in conflict with the brief's soft preferences."
   ],
   "prescription": null,
   "playtest_readiness": "ready_for_playtest",
   "playtest_questions": [
-    "Does the segment feel too familiar or repetitive compared to established levels?",
+    "Does the segment feel too familiar or repetitive compared to existing levels?",
     "Is the challenge level appropriate for a medium segment, or does it feel too easy?"
   ],
   "confidence": "high"
@@ -212,7 +212,7 @@ The Triage Director's recommendation:
 Evaluate the recommendation and return your verdict.
 
 ## [23] assistant (critic r1)
-tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is below the medium target, this is not a hard constraint and is acceptable for a draft, especially given the brief's emphasis on style consistency. The high similarity to a known level is appropriately flagged as a reason not to ship as final content, but it does not block playtesting. All other design checks (safe zone, pacing, structural integrity) are satisfied. The recommendation does not overreach or underreach and is appropriate for the stated intent.", 'confidence': 'high'})
+tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is easier than the medium target, this is not a hard constraint and is acceptable for a draft, especially since the brief does not require strict adherence to the difficulty target. The extremely high similarity to a known level is appropriately flagged as a derivative draft, which is the correct action given the brief's low novelty preference. There are no remaining issues that would prevent playtest.", 'confidence': 'high'})
 
 ## [24] tool (critic r1)
 tool result: final_result
@@ -221,7 +221,7 @@ Final result processed.
 ```
 
 ## [25] assistant (critic r1)
-Verdict approve. The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is below the medium target, this is not a hard constraint and is acceptable for a draft, especially given the brief's emphasis on style consistency. The high similarity to a known level is appropriately flagged as a reason not to ship as final content, but it does not block playtesting. All other design checks (safe zone, pacing, structural integrity) are satisfied. The recommendation does not overreach or underreach and is appropriate for the stated intent.
+Verdict approve. The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is easier than the medium target, this is not a hard constraint and is acceptable for a draft, especially since the brief does not require strict adherence to the difficulty target. The extremely high similarity to a known level is appropriately flagged as a derivative draft, which is the correct action given the brief's low novelty preference. There are no remaining issues that would prevent playtest.
 
 ## [26] system (workflow)
 Final decision: flag_as_derivative_draft.

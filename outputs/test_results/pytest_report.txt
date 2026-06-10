@@ -1,14 +1,13 @@
-Run: 2026-06-10 15:48:21 UTC
-Command: C:\Python313\python.exe -m pytest -ra --tb=short --junitxml=C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\outputs\test_results\pytest_results.xml
+Run: 2026-06-10 17:05:27 UTC
+Command: C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\.venv\Scripts\python.exe -m pytest -ra --tb=short --junitxml=C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\outputs\test_results\pytest_results.xml
 Exit code: 0
 ======================================================================
 ........................................................................ [ 82%]
 ...............                                                          [100%]
 ============================== warnings summary ===============================
 tests/test_agents.py::test_intent_interpreter_returns_profile
-  C:\Users\bjm20\AppData\Roaming\Python\Python313\site-packages\pydantic_ai\_utils.py:970: DeprecationWarning: There is no current event loop
+  C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\.venv\Lib\site-packages\pydantic_ai\_utils.py:970: DeprecationWarning: There is no current event loop
     event_loop = asyncio.get_event_loop()
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-- generated xml file: C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\outputs\test_results\pytest_results.xml -
-87 passed, 1 warning in 4.39s
+87 passed, 1 warning in 4.61s

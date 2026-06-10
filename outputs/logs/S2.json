@@ -52,16 +52,16 @@
   },
   "recommendation": {
     "action": "flag_as_derivative_draft",
-    "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.",
+    "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No difficulty spikes are present.",
     "tradeoff_reasoning": [
-      "The brief requests low novelty and style consistency, so high similarity is not a defect, but it does mean the segment is only suitable as a draft, not as a final level.",
-      "Difficulty is below the medium target, but this is not a hard constraint and may be acceptable for a style-matching draft.",
-      "All structural and pacing checks pass, so the segment is ready for playtest as a draft."
+      "The candidate is structurally sound and safe for playtest.",
+      "The low novelty matches the brief's preference for established style, but the similarity is so high that it should be flagged as derivative for tracking.",
+      "Difficulty is easier than targeted, but not in conflict with the brief's soft preferences."
     ],
     "prescription": null,
     "playtest_readiness": "ready_for_playtest",
     "playtest_questions": [
-      "Does the segment feel too familiar or repetitive compared to established levels?",
+      "Does the segment feel too familiar or repetitive compared to existing levels?",
       "Is the challenge level appropriate for a medium segment, or does it feel too easy?"
     ],
     "confidence": "high"
@@ -70,7 +70,7 @@
     "verdict": "approve",
     "remaining_issues": [],
     "constraint_violations": [],
-    "assessment": "The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is below the medium target, this is not a hard constraint and is acceptable for a draft, especially given the brief's emphasis on style consistency. The high similarity to a known level is appropriately flagged as a reason not to ship as final content, but it does not block playtesting. All other design checks (safe zone, pacing, structural integrity) are satisfied. The recommendation does not overreach or underreach and is appropriate for the stated intent.",
+    "assessment": "The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is easier than the medium target, this is not a hard constraint and is acceptable for a draft, especially since the brief does not require strict adherence to the difficulty target. The extremely high similarity to a known level is appropriately flagged as a derivative draft, which is the correct action given the brief's low novelty preference. There are no remaining issues that would prevent playtest.",
     "confidence": "high"
   },
   "round_count": 1,
@@ -189,7 +189,7 @@
         ],
         "detected_conflicts": []
       },
-      "tool_call_id": "call_HauC6MvGCv3MVsVydUbsMTxr"
+      "tool_call_id": "call_m1HzSDipfnAun40IE7DrUeAU"
     },
     {
       "step": 4,
@@ -199,7 +199,7 @@
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_HauC6MvGCv3MVsVydUbsMTxr"
+      "tool_call_id": "call_m1HzSDipfnAun40IE7DrUeAU"
     },
     {
       "step": 5,
@@ -229,7 +229,7 @@
       "content": null,
       "tool_name": "check_validity",
       "tool_args": {},
-      "tool_call_id": "call_N91xE2ZUyMSv23f3Ah0UDnAi"
+      "tool_call_id": "call_3cRjPDhQjTXCllxwX7nMb6gc"
     },
     {
       "step": 8,
@@ -239,7 +239,7 @@
       "content": null,
       "tool_name": "check_difficulty",
       "tool_args": {},
-      "tool_call_id": "call_GVlkwGhP5Dug6ntcXbiromIL"
+      "tool_call_id": "call_kXnnfnwHDeySahZixNKydM77"
     },
     {
       "step": 9,
@@ -249,7 +249,7 @@
       "content": null,
       "tool_name": "check_novelty",
       "tool_args": {},
-      "tool_call_id": "call_d41L6CxWffmnxRxXcIStxhwZ"
+      "tool_call_id": "call_2uIj54sff8sXTe6odXWpxSqe"
     },
     {
       "step": 10,
@@ -259,7 +259,7 @@
       "content": null,
       "tool_name": "check_pacing",
       "tool_args": {},
-      "tool_call_id": "call_W7rCIGZuVAQ4TwoeTin5VYSq"
+      "tool_call_id": "call_efp1c1SDvtNfrNisDeyZ2b1g"
     },
     {
       "step": 11,
@@ -269,7 +269,7 @@
       "content": null,
       "tool_name": "check_safe_zone",
       "tool_args": {},
-      "tool_call_id": "call_zq5mREcLYElCADq2umFHC3DH"
+      "tool_call_id": "call_mFpPLsaO6tvCaiANF3pVPVAj"
     },
     {
       "step": 12,
@@ -279,7 +279,7 @@
       "content": null,
       "tool_name": "check_spike",
       "tool_args": {},
-      "tool_call_id": "call_Puwp1i3iXCADuBtsqdm1jYTU"
+      "tool_call_id": "call_Z8EUcdcoV0C9G4EqA4BDoNDU"
     },
     {
       "step": 13,
@@ -289,7 +289,7 @@
       "content": "is_valid=True warnings=[] fatal_errors=[]",
       "tool_name": "check_validity",
       "tool_args": null,
-      "tool_call_id": "call_N91xE2ZUyMSv23f3Ah0UDnAi"
+      "tool_call_id": "call_3cRjPDhQjTXCllxwX7nMb6gc"
     },
     {
       "step": 14,
@@ -299,7 +299,7 @@
       "content": "difficulty_label='easy' difficulty_score=0.223 enemy_density=0.0022 hazard_density=0.0 longest_gap=0 solid_ratio=0.1429 collectible_density=0.0067",
       "tool_name": "check_difficulty",
       "tool_args": null,
-      "tool_call_id": "call_GVlkwGhP5Dug6ntcXbiromIL"
+      "tool_call_id": "call_kXnnfnwHDeySahZixNKydM77"
     },
     {
       "step": 15,
@@ -309,7 +309,7 @@
       "content": "nearest_neighbor_similarity=0.9861 novelty_label='low' warning='high similarity (0.986) to a known level; the candidate may be derivative'",
       "tool_name": "check_novelty",
       "tool_args": null,
-      "tool_call_id": "call_d41L6CxWffmnxRxXcIStxhwZ"
+      "tool_call_id": "call_2uIj54sff8sXTe6odXWpxSqe"
     },
     {
       "step": 16,
@@ -319,7 +319,7 @@
       "content": "flag='balanced' opening_intensity=0 middle_intensity=1 final_intensity=0 detail='intensity opening 0, middle 1, final 0'",
       "tool_name": "check_pacing",
       "tool_args": null,
-      "tool_call_id": "call_W7rCIGZuVAQ4TwoeTin5VYSq"
+      "tool_call_id": "call_efp1c1SDvtNfrNisDeyZ2b1g"
     },
     {
       "step": 17,
@@ -329,7 +329,7 @@
       "content": "has_opening_safe_zone=True first_challenge_column=16 detail='first challenge at column 16'",
       "tool_name": "check_safe_zone",
       "tool_args": null,
-      "tool_call_id": "call_zq5mREcLYElCADq2umFHC3DH"
+      "tool_call_id": "call_mFpPLsaO6tvCaiANF3pVPVAj"
     },
     {
       "step": 18,
@@ -339,7 +339,7 @@
       "content": "has_spike=False location_column=None detail='no local difficulty spike found'",
       "tool_name": "check_spike",
       "tool_args": null,
-      "tool_call_id": "call_Puwp1i3iXCADuBtsqdm1jYTU"
+      "tool_call_id": "call_Z8EUcdcoV0C9G4EqA4BDoNDU"
     },
     {
       "step": 19,
@@ -350,20 +350,20 @@
       "tool_name": "final_result",
       "tool_args": {
         "action": "flag_as_derivative_draft",
-        "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.",
+        "diagnosis": "The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No difficulty spikes are present.",
         "tradeoff_reasoning": [
-          "The brief requests low novelty and style consistency, so high similarity is not a defect, but it does mean the segment is only suitable as a draft, not as a final level.",
-          "Difficulty is below the medium target, but this is not a hard constraint and may be acceptable for a style-matching draft.",
-          "All structural and pacing checks pass, so the segment is ready for playtest as a draft."
+          "The candidate is structurally sound and safe for playtest.",
+          "The low novelty matches the brief's preference for established style, but the similarity is so high that it should be flagged as derivative for tracking.",
+          "Difficulty is easier than targeted, but not in conflict with the brief's soft preferences."
         ],
         "playtest_readiness": "ready_for_playtest",
         "playtest_questions": [
-          "Does the segment feel too familiar or repetitive compared to established levels?",
+          "Does the segment feel too familiar or repetitive compared to existing levels?",
           "Is the challenge level appropriate for a medium segment, or does it feel too easy?"
         ],
         "confidence": "high"
       },
-      "tool_call_id": "call_Spd3AyvyqndsoySVLdXybhTs"
+      "tool_call_id": "call_3oLFN2UeVswJ8VFF4Fws1M7v"
     },
     {
       "step": 20,
@@ -373,14 +373,14 @@
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_Spd3AyvyqndsoySVLdXybhTs"
+      "tool_call_id": "call_3oLFN2UeVswJ8VFF4Fws1M7v"
     },
     {
       "step": 21,
       "agent": "triage_director",
       "role": "assistant",
       "round": 1,
-      "content": "Proposed flag_as_derivative_draft (readiness=ready_for_playtest, confidence=high). The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.",
+      "content": "Proposed flag_as_derivative_draft (readiness=ready_for_playtest, confidence=high). The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No difficulty spikes are present.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -390,7 +390,7 @@
       "agent": "critic",
       "role": "user",
       "round": 1,
-      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"general\",\n  \"desired_feel\": [],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"low\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"match established style\"\n  ],\n  \"detected_conflicts\": []\n}\n\nGathered facts:\n{\n  \"validation\": {\n    \"is_valid\": true,\n    \"warnings\": [],\n    \"fatal_errors\": []\n  },\n  \"difficulty\": {\n    \"difficulty_label\": \"easy\",\n    \"difficulty_score\": 0.223,\n    \"enemy_density\": 0.0022,\n    \"hazard_density\": 0.0,\n    \"longest_gap\": 0,\n    \"solid_ratio\": 0.1429,\n    \"collectible_density\": 0.0067\n  },\n  \"novelty\": {\n    \"nearest_neighbor_similarity\": 0.9861,\n    \"novelty_label\": \"low\",\n    \"warning\": \"high similarity (0.986) to a known level; the candidate may be derivative\"\n  },\n  \"pacing\": {\n    \"flag\": \"balanced\",\n    \"opening_intensity\": 0,\n    \"middle_intensity\": 1,\n    \"final_intensity\": 0,\n    \"detail\": \"intensity opening 0, middle 1, final 0\"\n  },\n  \"safe_zone\": {\n    \"has_opening_safe_zone\": true,\n    \"first_challenge_column\": 16,\n    \"detail\": \"first challenge at column 16\"\n  },\n  \"spike\": {\n    \"has_spike\": false,\n    \"location_column\": null,\n    \"detail\": \"no local difficulty spike found\"\n  }\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------------------\n----------------------<>--------\n----------------E-----[]--------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nThe Triage Director's recommendation:\n{\n  \"action\": \"flag_as_derivative_draft\",\n  \"diagnosis\": \"The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No structural or design issues block playtesting, but the segment should not ship as final content without further variation.\",\n  \"tradeoff_reasoning\": [\n    \"The brief requests low novelty and style consistency, so high similarity is not a defect, but it does mean the segment is only suitable as a draft, not as a final level.\",\n    \"Difficulty is below the medium target, but this is not a hard constraint and may be acceptable for a style-matching draft.\",\n    \"All structural and pacing checks pass, so the segment is ready for playtest as a draft.\"\n  ],\n  \"prescription\": null,\n  \"playtest_readiness\": \"ready_for_playtest\",\n  \"playtest_questions\": [\n    \"Does the segment feel too familiar or repetitive compared to established levels?\",\n    \"Is the challenge level appropriate for a medium segment, or does it feel too easy?\"\n  ],\n  \"confidence\": \"high\"\n}\n\nEvaluate the recommendation and return your verdict.",
+      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"general\",\n  \"desired_feel\": [],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"low\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"match established style\"\n  ],\n  \"detected_conflicts\": []\n}\n\nGathered facts:\n{\n  \"validation\": {\n    \"is_valid\": true,\n    \"warnings\": [],\n    \"fatal_errors\": []\n  },\n  \"difficulty\": {\n    \"difficulty_label\": \"easy\",\n    \"difficulty_score\": 0.223,\n    \"enemy_density\": 0.0022,\n    \"hazard_density\": 0.0,\n    \"longest_gap\": 0,\n    \"solid_ratio\": 0.1429,\n    \"collectible_density\": 0.0067\n  },\n  \"novelty\": {\n    \"nearest_neighbor_similarity\": 0.9861,\n    \"novelty_label\": \"low\",\n    \"warning\": \"high similarity (0.986) to a known level; the candidate may be derivative\"\n  },\n  \"pacing\": {\n    \"flag\": \"balanced\",\n    \"opening_intensity\": 0,\n    \"middle_intensity\": 1,\n    \"final_intensity\": 0,\n    \"detail\": \"intensity opening 0, middle 1, final 0\"\n  },\n  \"safe_zone\": {\n    \"has_opening_safe_zone\": true,\n    \"first_challenge_column\": 16,\n    \"detail\": \"first challenge at column 16\"\n  },\n  \"spike\": {\n    \"has_spike\": false,\n    \"location_column\": null,\n    \"detail\": \"no local difficulty spike found\"\n  }\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n------ooo-----------------------\n--------------------------------\n----------------------<>--------\n----------------E-----[]--------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nThe Triage Director's recommendation:\n{\n  \"action\": \"flag_as_derivative_draft\",\n  \"diagnosis\": \"The candidate is structurally valid and matches the intent for low novelty and established style. However, the measured novelty is extremely low (0.986 similarity to a known level), indicating it is highly derivative. The difficulty is easier than the medium target, but this is not a hard constraint and may be acceptable for a draft. Pacing is balanced, and there is a proper safe zone. No difficulty spikes are present.\",\n  \"tradeoff_reasoning\": [\n    \"The candidate is structurally sound and safe for playtest.\",\n    \"The low novelty matches the brief's preference for established style, but the similarity is so high that it should be flagged as derivative for tracking.\",\n    \"Difficulty is easier than targeted, but not in conflict with the brief's soft preferences.\"\n  ],\n  \"prescription\": null,\n  \"playtest_readiness\": \"ready_for_playtest\",\n  \"playtest_questions\": [\n    \"Does the segment feel too familiar or repetitive compared to existing levels?\",\n    \"Is the challenge level appropriate for a medium segment, or does it feel too easy?\"\n  ],\n  \"confidence\": \"high\"\n}\n\nEvaluate the recommendation and return your verdict.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -404,10 +404,10 @@
       "tool_name": "final_result",
       "tool_args": {
         "verdict": "approve",
-        "assessment": "The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is below the medium target, this is not a hard constraint and is acceptable for a draft, especially given the brief's emphasis on style consistency. The high similarity to a known level is appropriately flagged as a reason not to ship as final content, but it does not block playtesting. All other design checks (safe zone, pacing, structural integrity) are satisfied. The recommendation does not overreach or underreach and is appropriate for the stated intent.",
+        "assessment": "The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is easier than the medium target, this is not a hard constraint and is acceptable for a draft, especially since the brief does not require strict adherence to the difficulty target. The extremely high similarity to a known level is appropriately flagged as a derivative draft, which is the correct action given the brief's low novelty preference. There are no remaining issues that would prevent playtest.",
         "confidence": "high"
       },
-      "tool_call_id": "call_H460xuiq4aLvutNhWMG5gFEk"
+      "tool_call_id": "call_Tb8RtjMuUnnAWOiJIOV7Iedz"
     },
     {
       "step": 24,
@@ -417,14 +417,14 @@
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_H460xuiq4aLvutNhWMG5gFEk"
+      "tool_call_id": "call_Tb8RtjMuUnnAWOiJIOV7Iedz"
     },
     {
       "step": 25,
       "agent": "critic",
       "role": "assistant",
       "round": 1,
-      "content": "Verdict approve. The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is below the medium target, this is not a hard constraint and is acceptable for a draft, especially given the brief's emphasis on style consistency. The high similarity to a known level is appropriately flagged as a reason not to ship as final content, but it does not block playtesting. All other design checks (safe zone, pacing, structural integrity) are satisfied. The recommendation does not overreach or underreach and is appropriate for the stated intent.",
+      "content": "Verdict approve. The Director's recommendation is sound. The candidate level is structurally valid, matches the intent for low novelty and established style, and contains no hard constraint violations. While the difficulty is easier than the medium target, this is not a hard constraint and is acceptable for a draft, especially since the brief does not require strict adherence to the difficulty target. The extremely high similarity to a known level is appropriately flagged as a derivative draft, which is the correct action given the brief's low novelty preference. There are no remaining issues that would prevent playtest.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -441,9 +441,9 @@
     }
   ],
   "token_usage": {
-    "input_tokens": 5305,
-    "output_tokens": 546,
-    "total_tokens": 5851,
+    "input_tokens": 5266,
+    "output_tokens": 491,
+    "total_tokens": 5757,
     "requests": 4
   }
 }

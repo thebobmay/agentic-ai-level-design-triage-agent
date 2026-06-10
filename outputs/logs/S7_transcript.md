@@ -65,7 +65,7 @@ is_valid=True warnings=[] fatal_errors=[]
 ```
 
 ## [9] assistant (triage_director r1)
-tool call: final_result({'action': 'request_clarification', 'diagnosis': 'The interpreted intent contains detected conflicts: the brief is vague and does not specify the target audience, difficulty, or desired feel. Without clear intent, it is not possible to confidently judge whether the candidate level meets the design goals.', 'tradeoff_reasoning': ['The candidate is structurally valid, but the brief lacks essential information such as target audience, difficulty, and desired feel.', 'Without a clear brief, any evaluation of difficulty, novelty, or pacing cannot be meaningfully weighed against the intended experience.'], 'playtest_readiness': 'not_ready', 'confidence': 'high'})
+tool call: final_result({'action': 'request_clarification', 'diagnosis': 'The interpreted intent contains detected conflicts: the brief is vague and does not specify a clear target audience, difficulty, or desired feel. Without a clear brief, it is not possible to confidently judge whether the candidate level meets the intended goals.', 'tradeoff_reasoning': ['The candidate is structurally valid, but the brief is ambiguous and lacks key information about the intended audience, difficulty, and desired feel.', 'Without a clear understanding of the design goals, any evaluation of pacing, difficulty, or novelty would be speculative.'], 'playtest_readiness': 'not_ready', 'confidence': 'high'})
 
 ## [10] tool (triage_director r1)
 tool result: final_result
@@ -74,7 +74,7 @@ Final result processed.
 ```
 
 ## [11] assistant (triage_director r1)
-Proposed request_clarification (readiness=not_ready, confidence=high). The interpreted intent contains detected conflicts: the brief is vague and does not specify the target audience, difficulty, or desired feel. Without clear intent, it is not possible to confidently judge whether the candidate level meets the design goals.
+Proposed request_clarification (readiness=not_ready, confidence=high). The interpreted intent contains detected conflicts: the brief is vague and does not specify a clear target audience, difficulty, or desired feel. Without a clear brief, it is not possible to confidently judge whether the candidate level meets the intended goals.
 
 ## [12] user (critic r1)
 Interpreted design intent:
@@ -149,10 +149,10 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 The Triage Director's recommendation:
 {
   "action": "request_clarification",
-  "diagnosis": "The interpreted intent contains detected conflicts: the brief is vague and does not specify the target audience, difficulty, or desired feel. Without clear intent, it is not possible to confidently judge whether the candidate level meets the design goals.",
+  "diagnosis": "The interpreted intent contains detected conflicts: the brief is vague and does not specify a clear target audience, difficulty, or desired feel. Without a clear brief, it is not possible to confidently judge whether the candidate level meets the intended goals.",
   "tradeoff_reasoning": [
-    "The candidate is structurally valid, but the brief lacks essential information such as target audience, difficulty, and desired feel.",
-    "Without a clear brief, any evaluation of difficulty, novelty, or pacing cannot be meaningfully weighed against the intended experience."
+    "The candidate is structurally valid, but the brief is ambiguous and lacks key information about the intended audience, difficulty, and desired feel.",
+    "Without a clear understanding of the design goals, any evaluation of pacing, difficulty, or novelty would be speculative."
   ],
   "prescription": null,
   "playtest_readiness": "not_ready",
@@ -163,7 +163,7 @@ The Triage Director's recommendation:
 Evaluate the recommendation and return your verdict.
 
 ## [13] assistant (critic r1)
-tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation to request clarification is sound. The brief is too vague to judge the candidate level against any specific intent, especially regarding difficulty, target audience, or desired feel. While the level is structurally valid and easy, the lack of clear design goals means it cannot be meaningfully evaluated for readiness or suitability. No hard constraints are violated, and the Director's diagnosis is consistent with the facts and the situation.", 'confidence': 'high'})
+tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation to request clarification is sound. The brief is too vague to determine if the candidate level meets the intended goals, especially regarding difficulty and target audience. The candidate is structurally valid and easy, but without a clear brief, it is not possible to judge if this is appropriate. The Director correctly refrains from prescribing edits or approving for playtest in the absence of clear intent.", 'confidence': 'high'})
 
 ## [14] tool (critic r1)
 tool result: final_result
@@ -172,7 +172,7 @@ Final result processed.
 ```
 
 ## [15] assistant (critic r1)
-Verdict approve. The Director's recommendation to request clarification is sound. The brief is too vague to judge the candidate level against any specific intent, especially regarding difficulty, target audience, or desired feel. While the level is structurally valid and easy, the lack of clear design goals means it cannot be meaningfully evaluated for readiness or suitability. No hard constraints are violated, and the Director's diagnosis is consistent with the facts and the situation.
+Verdict approve. The Director's recommendation to request clarification is sound. The brief is too vague to determine if the candidate level meets the intended goals, especially regarding difficulty and target audience. The candidate is structurally valid and easy, but without a clear brief, it is not possible to judge if this is appropriate. The Director correctly refrains from prescribing edits or approving for playtest in the absence of clear intent.
 
 ## [16] system (workflow)
 Final decision: request_clarification.
