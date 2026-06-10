@@ -178,6 +178,12 @@ flowchart TD
 - Solid arrows: the control flow of one bounded advisory pass.
 - The Director loop: it calls a deterministic tool, reads the fact, and repeats
   until it decides. The agents decide; the tools only measure.
+- Persona: each agent's persona, meaning its role, decision rules, and behavioral
+  boundaries, is defined by a prompt template in prompt_templates/tuned/ and
+  injected as the agent's instructions.
+- Reasoning loop: the Director loop above (the ReAct cycle) wrapped in the
+  evaluator-optimizer loop between the Director and the Critic is the system's
+  reasoning loop, which produces and then refines the recommendation.
 - Dotted grounding arrows: the design knowledge is injected into the reasoning
   agents so they judge with curated principles.
 - The evaluator-optimizer loop: the Critic can return the recommendation to the

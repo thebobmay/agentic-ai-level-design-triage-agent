@@ -51,6 +51,7 @@ class ActionAndReadinessValid(Evaluator):
     """Action and readiness are in their allowed sets and mutually consistent."""
 
     def evaluate(self, ctx: EvaluatorContext) -> dict[str, bool]:
+        """Check the action and readiness are in their allowed sets and consistent."""
         session: TriageSession = ctx.output
         rec = session.recommendation
         checks = {
@@ -70,6 +71,7 @@ class SafetyInvariants(Evaluator):
     """The hard safety invariants hold over the agents' result."""
 
     def evaluate(self, ctx: EvaluatorContext) -> dict[str, bool]:
+        """Check the hard safety invariants over the agents' result hold."""
         session: TriageSession = ctx.output
         checks: dict[str, bool] = {}
         if not _is_valid(session):
@@ -88,6 +90,7 @@ class RecommendationComplete(Evaluator):
     """The recommendation is present and carries a non-empty diagnosis."""
 
     def evaluate(self, ctx: EvaluatorContext) -> dict[str, bool]:
+        """Check the recommendation is present and carries a non-empty diagnosis."""
         rec = ctx.output.recommendation
         if rec is None:
             return {"recommendation_present": False}
@@ -102,6 +105,7 @@ class ExpectedActionMatch(Evaluator):
     """Record whether the action matched the scenario expectation, as a score."""
 
     def evaluate(self, ctx: EvaluatorContext) -> float:
+        """Score 1.0 when the action matches the scenario expectation, else 0.0."""
         return 1.0 if ctx.output.decision == ctx.expected_output else 0.0
 
 

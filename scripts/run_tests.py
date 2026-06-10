@@ -26,7 +26,7 @@ def main() -> int:
     xml_path = RESULTS_DIR / "pytest_results.xml"
     report_path = RESULTS_DIR / "pytest_report.txt"
 
-    command = [sys.executable, "-m", "pytest", "-q", f"--junitxml={xml_path}"]
+    command = [sys.executable, "-m", "pytest", "-ra", "--tb=short", f"--junitxml={xml_path}"]
     completed = subprocess.run(command, cwd=ROOT, capture_output=True, text=True)
     output = completed.stdout + completed.stderr
 

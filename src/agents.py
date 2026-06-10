@@ -11,7 +11,7 @@ Three agents do the judgment:
   is sound and constraint respecting, and can approve, send it back, or escalate.
 
 The agents are grounded in the curated design knowledge. The model is set by
-TRIAGE_MODEL (default openai-chat:gpt-4o-mini) at temperature 0. defer_model_check
+TRIAGE_MODEL (default openai-chat:gpt-4.1) at temperature 0. defer_model_check
 lets the module import without credentials; tests override the model with TestModel.
 """
 

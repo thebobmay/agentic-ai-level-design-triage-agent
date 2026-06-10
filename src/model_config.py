@@ -31,6 +31,8 @@ GPT_4O_MINI = ModelConfig("gpt-4o-mini", "openai-chat:gpt-4o-mini", {"temperatur
 GPT_4_1 = ModelConfig("gpt-4.1", "openai-chat:gpt-4.1", {"temperature": 0.0}, 2.00, 8.00)
 GPT_5_1 = ModelConfig("gpt-5.1", "openai-responses:gpt-5.1", None, 1.25, 10.00)
 
+# The experiment's cheapest baseline, used only as a default reference in this module.
+# The deployed triage model is gpt-4.1, set by TRIAGE_MODEL in src/agents.py.
 DEFAULT_MODEL_CONFIG = GPT_4O_MINI
 
 # The three models compared in the model selection experiment.
