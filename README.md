@@ -2,7 +2,7 @@
 
 **Student:** Robert Mayfield
 
-An advisory, human in the loop agentic system that triages a single 2D platformer level candidate against a designer's natural language brief. Given a brief and one candidate level, the system interprets the designer's intent, gathers facts with deterministic tools, reasons about the tradeoffs in context, and recommends the next design action. It never edits the level. The designer makes every change.
+An advisory, multi agent workflow that triages a single 2D platformer level candidate against a designer's natural language brief. Given a brief and one candidate level, the system interprets the designer's intent, gathers facts with deterministic tools, reasons about the tradeoffs in context, and recommends the next design action. It never edits the level. The designer makes every change.
 
 The governing principle keeps the agent honest: deterministic code owns facts and safety, and the language model owns judgment, decision, and explanation. Every component is held to one test. If the agent were removed and only the tools remained, what is lost? Here the answer is intent interpretation, contextual tradeoff reasoning, conflict detection, the triage decision, the revision prescription, and human review escalation.
 

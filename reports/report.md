@@ -9,7 +9,7 @@
 
 # Overview
 
-The AI Level Design Triage Agent is an advisory agentic AI workflow for evaluating a single 2D platformer level candidate against a designer's natural language brief. Given a brief and one candidate level, the system interprets the designer's intent, gathers factual evidence with deterministic analysis tools, reasons about the design tradeoffs, and recommends the next design action. The agent does **not** generate levels, edit levels, or claim that a level is objectively fun. Its job is to support a human designer's next decision.
+The AI Level Design Triage Agent is an advisory multi agent AI workflow for evaluating a single 2D platformer level candidate against a designer's natural language brief. Given a brief and one candidate level, the system interprets the designer's intent, gathers factual evidence with deterministic analysis tools, reasons about the design tradeoffs, and recommends the next design action. The agent does **not** generate levels, edit levels, or claim that a level is objectively fun. Its job is to support a human designer's next decision.
 
 The use case is level design triage: deciding whether a candidate should be accepted for playtest, revised, clarified, flagged as derivative, rejected for structural reasons, or escalated to human review. This framing is intentionally narrower than an autonomous level designer. The system is designed for an academic agentic workflow where reasoning, tool use, memory, safeguards, and observable behavior are the primary goals.
 
@@ -281,7 +281,7 @@ Guzdial, M., Liao, N., & Riedl, M. (2018). *Co-creative level design via machine
 
 Khalifa, A., de Mesentier Silva, F., & Togelius, J. (2019). Level design patterns in 2D games. *2019 IEEE Conference on Games (CoG)*, 1–8. [https://doi.org/10.1109/CIG.2019.8847953](https://doi.org/10.1109/CIG.2019.8847953)
 
-Liapis, A., Smith, G., & Shaker, N. (2016). Mixed-initiative content creation. In N. Shaker, J. Togelius, & M. J. Nelson (Eds.), *Procedural content generation in games.* Springer. [https://doi.org/10.1007/978-3-319-42716-4_11](https://doi.org/10.1007/978-3-319-42716-4_11)
+Liapis, A., Smith, G., & Shaker, N. (2016). Mixed-initiative content creation. In N. Shaker, J. Togelius, & M. J. Nelson (Eds.), *Procedural content generation in games.* Springer. [https://doi.org/10.1007/978-3-319-42716-4_11](https://doi.org/10.1007/978-3-319-42716-4_11) Free PDF: [https://www.pcgbook.com/chapter11.pdf](https://www.pcgbook.com/chapter11.pdf)
 
 Mitchell, M., Wu, S., Zaldivar, A., Barnes, P., Vasserman, L., Hutchinson, B., Spitzer, E., Raji, I. D., & Gebru, T. (2019). Model cards for model reporting. *Proceedings of the Conference on Fairness, Accountability, and Transparency.* [https://doi.org/10.1145/3287560.3287596](https://doi.org/10.1145/3287560.3287596)
 
@@ -293,7 +293,7 @@ Smith, G., Cha, M., & Whitehead, J. (2008). A framework for analysis of 2D platf
 
 Smith, G., Whitehead, J., & Mateas, M. (2010). Tanagra: A mixed-initiative level design tool. *Proceedings of the Fifth International Conference on the Foundations of Digital Games.* [https://doi.org/10.1145/1822348.1822376](https://doi.org/10.1145/1822348.1822376)
 
-Summerville, A., Snodgrass, S., Guzdial, M., Holmgård, C., Hoover, A. K., Isaksen, A., Nealen, A., & Togelius, J. (2018). Procedural content generation via machine learning (PCGML). *IEEE Transactions on Games, 10*(3), 257–270. [https://doi.org/10.1109/TG.2018.2846639](https://doi.org/10.1109/TG.2018.2846639)
+Summerville, A., Snodgrass, S., Guzdial, M., Holmgård, C., Hoover, A. K., Isaksen, A., Nealen, A., & Togelius, J. (2018). Procedural content generation via machine learning (PCGML). *IEEE Transactions on Games, 10*(3), 257–270. [https://doi.org/10.1109/TG.2018.2846639](https://doi.org/10.1109/TG.2018.2846639) Free preprint: [https://arxiv.org/abs/1702.00539](https://arxiv.org/abs/1702.00539)
 
 Summerville, A., Snodgrass, S., Mateas, M., & Ontañón, S. (2016). The VGLC: The video game level corpus. *Proceedings of the 7th Workshop on Procedural Content Generation.* arXiv:1606.07487. [https://arxiv.org/abs/1606.07487](https://arxiv.org/abs/1606.07487)
 
