@@ -108,7 +108,7 @@ has_spike=False location_column=None detail='no local difficulty spike found'
 ```
 
 ## [19] assistant (triage_director r1)
-tool call: final_result({'action': 'accept_for_playtest', 'diagnosis': "The candidate is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or spikes. The pacing is flat and calm, which is appropriate for a beginner segment. Novelty is measured as medium, which is consistent with the brief's preference. There are no detected conflicts or issues that require revision.", 'tradeoff_reasoning': ['The absence of hazards and a flat pacing are appropriate for a beginner/easy segment, as it allows new players to orient and build confidence.', "Medium novelty is sufficient given the brief's preference, and the segment is not flagged as derivative."], 'playtest_readiness': 'ready_for_playtest', 'playtest_questions': ['Does the lack of any challenge or hazard make the segment feel too empty or unengaging for beginners?', 'Do the coin placements provide enough guidance or incentive for exploration?'], 'confidence': 'high'})
+tool call: final_result({'action': 'accept_for_playtest', 'diagnosis': "The candidate is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or enemies. The pacing is flat and calm, which is appropriate for a beginner segment. Novelty is measured as medium, which aligns with the brief's preference. There are no detected spikes or layered hazards, and the segment is sound for playtest.", 'tradeoff_reasoning': ['The absence of hazards and a flat pacing are appropriate for a beginner, easy segment, ensuring accessibility and a gentle introduction.', "Medium novelty is sufficient given the brief's preference, so the segment is not overly derivative nor too experimental."], 'playtest_readiness': 'ready_for_playtest', 'playtest_questions': ['Does the lack of any challenge or hazard make the segment feel too empty or unengaging for beginners?', 'Do the coin and block placements provide enough interest or guidance for new players?'], 'confidence': 'high'})
 
 ## [20] tool (triage_director r1)
 tool result: final_result
@@ -117,7 +117,7 @@ Final result processed.
 ```
 
 ## [21] assistant (triage_director r1)
-Proposed accept_for_playtest (readiness=ready_for_playtest, confidence=high). The candidate is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or spikes. The pacing is flat and calm, which is appropriate for a beginner segment. Novelty is measured as medium, which is consistent with the brief's preference. There are no detected conflicts or issues that require revision.
+Proposed accept_for_playtest (readiness=ready_for_playtest, confidence=high). The candidate is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or enemies. The pacing is flat and calm, which is appropriate for a beginner segment. Novelty is measured as medium, which aligns with the brief's preference. There are no detected spikes or layered hazards, and the segment is sound for playtest.
 
 ## [22] user (critic r1)
 Interpreted design intent:
@@ -190,16 +190,16 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 The Triage Director's recommendation:
 {
   "action": "accept_for_playtest",
-  "diagnosis": "The candidate is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or spikes. The pacing is flat and calm, which is appropriate for a beginner segment. Novelty is measured as medium, which is consistent with the brief's preference. There are no detected conflicts or issues that require revision.",
+  "diagnosis": "The candidate is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or enemies. The pacing is flat and calm, which is appropriate for a beginner segment. Novelty is measured as medium, which aligns with the brief's preference. There are no detected spikes or layered hazards, and the segment is sound for playtest.",
   "tradeoff_reasoning": [
-    "The absence of hazards and a flat pacing are appropriate for a beginner/easy segment, as it allows new players to orient and build confidence.",
-    "Medium novelty is sufficient given the brief's preference, and the segment is not flagged as derivative."
+    "The absence of hazards and a flat pacing are appropriate for a beginner, easy segment, ensuring accessibility and a gentle introduction.",
+    "Medium novelty is sufficient given the brief's preference, so the segment is not overly derivative nor too experimental."
   ],
   "prescription": null,
   "playtest_readiness": "ready_for_playtest",
   "playtest_questions": [
     "Does the lack of any challenge or hazard make the segment feel too empty or unengaging for beginners?",
-    "Do the coin placements provide enough guidance or incentive for exploration?"
+    "Do the coin and block placements provide enough interest or guidance for new players?"
   ],
   "confidence": "high"
 }
@@ -207,7 +207,7 @@ The Triage Director's recommendation:
 Evaluate the recommendation and return your verdict.
 
 ## [23] assistant (critic r1)
-tool call: final_result({'verdict': 'approve', 'assessment': "The candidate level is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or spikes. The flat pacing and absence of hazards are appropriate for the intended audience and difficulty. Medium novelty is consistent with the brief's preference. There are no hard constraints violated, and no issues that require revision. The Director's recommendation is sound and the segment is ready for playtest.", 'confidence': 'high'})
+tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation is sound. The segment is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or enemies. The flat pacing and absence of challenge are appropriate for a beginner segment, and the medium novelty aligns with the brief. There are no hard constraints violated, and no issues remain that would prevent playtesting. The Director's playtest questions are appropriate for further evaluation.", 'confidence': 'high'})
 
 ## [24] tool (critic r1)
 tool result: final_result
@@ -216,7 +216,7 @@ Final result processed.
 ```
 
 ## [25] assistant (critic r1)
-Verdict approve. The candidate level is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or spikes. The flat pacing and absence of hazards are appropriate for the intended audience and difficulty. Medium novelty is consistent with the brief's preference. There are no hard constraints violated, and no issues that require revision. The Director's recommendation is sound and the segment is ready for playtest.
+Verdict approve. The Director's recommendation is sound. The segment is structurally valid, matches the easy difficulty target for beginners, and provides a safe opening with no hazards or enemies. The flat pacing and absence of challenge are appropriate for a beginner segment, and the medium novelty aligns with the brief. There are no hard constraints violated, and no issues remain that would prevent playtesting. The Director's playtest questions are appropriate for further evaluation.
 
 ## [26] system (workflow)
 Final decision: accept_for_playtest.

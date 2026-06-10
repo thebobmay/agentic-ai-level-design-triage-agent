@@ -7,9 +7,12 @@
     "difficulty_target": "medium",
     "novelty_preference": "medium",
     "hard_constraints": [],
-    "soft_preferences": [],
+    "soft_preferences": [
+      "suitable for early level",
+      "ready for playtest"
+    ],
     "detected_conflicts": [
-      "Brief is vague: no specific audience, feel, or preferences stated."
+      "Vague brief: target audience and difficulty not explicitly stated."
     ]
   },
   "facts": {
@@ -56,8 +59,8 @@
     "action": "reject_structural",
     "diagnosis": "The candidate level contains a structural error: a pipe top is present without a corresponding pipe body or ground support. This is a fatal integrity issue that prevents playtesting.",
     "tradeoff_reasoning": [
-      "Structural integrity is a hard constraint: a pipe top without a body or ground support is a broken element, not a design choice.",
-      "Regardless of the brief's vagueness or other design facts, a structurally invalid level cannot be playtested or meaningfully evaluated for difficulty, pacing, or novelty."
+      "Structural integrity is a hard constraint: a broken pipe cannot be playtested or meaningfully evaluated for design intent.",
+      "Regardless of the brief or other design qualities, structural errors must be fixed before any further evaluation."
     ],
     "prescription": null,
     "playtest_readiness": "not_ready",
@@ -68,7 +71,7 @@
     "verdict": "approve",
     "remaining_issues": [],
     "constraint_violations": [],
-    "assessment": "The Director correctly identified a fatal structural integrity issue: a pipe top without a body or ground support. This violates a hard constraint and makes the level unplayable, regardless of other design factors. The recommendation to reject for structural reasons is sound and consistent with the facts and intent. No further evaluation of pacing, difficulty, or novelty is relevant until the structural defect is fixed.",
+    "assessment": "The Director correctly identified a fatal structural error: a pipe top without a body or ground support. Structural integrity is a non-negotiable hard constraint, and such defects must be resolved before playtesting or further design evaluation. The recommendation to reject for structural reasons is appropriate and does not overreach or underreach. No further design critique is warranted until the integrity issue is fixed.",
     "confidence": "high"
   },
   "round_count": 1,
@@ -86,67 +89,6 @@
         "fatal_errors": [
           "pipe top without a body or ground support"
         ]
-      }
-    },
-    {
-      "tool_name": "estimate_candidate_difficulty",
-      "inputs": {
-        "level": "candidate"
-      },
-      "outputs": {
-        "difficulty_label": "easy",
-        "difficulty_score": 0.0,
-        "enemy_density": 0.0,
-        "hazard_density": 0.0,
-        "longest_gap": 0,
-        "solid_ratio": 0.1429,
-        "collectible_density": 0.0
-      }
-    },
-    {
-      "tool_name": "measure_candidate_novelty",
-      "inputs": {
-        "level": "candidate"
-      },
-      "outputs": {
-        "nearest_neighbor_similarity": 0.9014,
-        "novelty_label": "medium",
-        "warning": null
-      }
-    },
-    {
-      "tool_name": "analyze_candidate_pacing",
-      "inputs": {
-        "level": "candidate"
-      },
-      "outputs": {
-        "flag": "flat",
-        "opening_intensity": 0,
-        "middle_intensity": 0,
-        "final_intensity": 0,
-        "detail": "intensity opening 0, middle 0, final 0"
-      }
-    },
-    {
-      "tool_name": "detect_candidate_safe_zone",
-      "inputs": {
-        "level": "candidate"
-      },
-      "outputs": {
-        "has_opening_safe_zone": true,
-        "first_challenge_column": 32,
-        "detail": "no challenge found in the segment"
-      }
-    },
-    {
-      "tool_name": "detect_candidate_spike",
-      "inputs": {
-        "level": "candidate"
-      },
-      "outputs": {
-        "has_spike": false,
-        "location_column": null,
-        "detail": "no local difficulty spike found"
       }
     }
   ],
@@ -180,14 +122,18 @@
       "tool_name": "final_result",
       "tool_args": {
         "target_audience": "general",
-        "desired_feel": [],
         "difficulty_target": "medium",
         "novelty_preference": "medium",
+        "hard_constraints": [],
+        "soft_preferences": [
+          "suitable for early level",
+          "ready for playtest"
+        ],
         "detected_conflicts": [
-          "Brief is vague: no specific audience, feel, or preferences stated."
+          "Vague brief: target audience and difficulty not explicitly stated."
         ]
       },
-      "tool_call_id": "call_X0y5iZJljezi5ltPrHo0RsZ3"
+      "tool_call_id": "call_VVWF97FRdYiaUj92Q7JHz8IK"
     },
     {
       "step": 4,
@@ -197,14 +143,14 @@
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_X0y5iZJljezi5ltPrHo0RsZ3"
+      "tool_call_id": "call_VVWF97FRdYiaUj92Q7JHz8IK"
     },
     {
       "step": 5,
       "agent": "intent_interpreter",
       "role": "assistant",
       "round": null,
-      "content": "Interpreted intent: audience=general, difficulty_target=medium, detected_conflicts=['Brief is vague: no specific audience, feel, or preferences stated.'].",
+      "content": "Interpreted intent: audience=general, difficulty_target=medium, detected_conflicts=['Vague brief: target audience and difficulty not explicitly stated.'].",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -214,7 +160,7 @@
       "agent": "triage_director",
       "role": "user",
       "round": 1,
-      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"general\",\n  \"desired_feel\": [],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"medium\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [],\n  \"detected_conflicts\": [\n    \"Brief is vague: no specific audience, feel, or preferences stated.\"\n  ]\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------<>----------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nGather facts with your tools, then choose one action and explain it.",
+      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"general\",\n  \"desired_feel\": [],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"medium\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"suitable for early level\",\n    \"ready for playtest\"\n  ],\n  \"detected_conflicts\": [\n    \"Vague brief: target audience and difficulty not explicitly stated.\"\n  ]\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------<>----------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nGather facts with your tools, then choose one action and explain it.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
@@ -227,120 +173,20 @@
       "content": null,
       "tool_name": "check_validity",
       "tool_args": {},
-      "tool_call_id": "call_vwqrmdweP7LB0NHGQdMfa6DB"
+      "tool_call_id": "call_03k3ToCXYZzOekDEAlJLmdpo"
     },
     {
       "step": 8,
-      "agent": "triage_director",
-      "role": "assistant",
-      "round": 1,
-      "content": null,
-      "tool_name": "check_difficulty",
-      "tool_args": {},
-      "tool_call_id": "call_n1nmUqolRm4FOYqG6XI3xgtq"
-    },
-    {
-      "step": 9,
-      "agent": "triage_director",
-      "role": "assistant",
-      "round": 1,
-      "content": null,
-      "tool_name": "check_novelty",
-      "tool_args": {},
-      "tool_call_id": "call_zXPUETEWJx65nbAAxDbndT2f"
-    },
-    {
-      "step": 10,
-      "agent": "triage_director",
-      "role": "assistant",
-      "round": 1,
-      "content": null,
-      "tool_name": "check_pacing",
-      "tool_args": {},
-      "tool_call_id": "call_POUoZk3Cu4bl0uDgoOleCQyE"
-    },
-    {
-      "step": 11,
-      "agent": "triage_director",
-      "role": "assistant",
-      "round": 1,
-      "content": null,
-      "tool_name": "check_safe_zone",
-      "tool_args": {},
-      "tool_call_id": "call_D4zxYGO8aME6yW9Nrzzh2Hob"
-    },
-    {
-      "step": 12,
-      "agent": "triage_director",
-      "role": "assistant",
-      "round": 1,
-      "content": null,
-      "tool_name": "check_spike",
-      "tool_args": {},
-      "tool_call_id": "call_2FgCZi7xgTi65BEtLfy6ehAv"
-    },
-    {
-      "step": 13,
       "agent": "triage_director",
       "role": "tool",
       "round": 1,
       "content": "is_valid=False warnings=[] fatal_errors=['pipe top without a body or ground support']",
       "tool_name": "check_validity",
       "tool_args": null,
-      "tool_call_id": "call_vwqrmdweP7LB0NHGQdMfa6DB"
+      "tool_call_id": "call_03k3ToCXYZzOekDEAlJLmdpo"
     },
     {
-      "step": 14,
-      "agent": "triage_director",
-      "role": "tool",
-      "round": 1,
-      "content": "difficulty_label='easy' difficulty_score=0.0 enemy_density=0.0 hazard_density=0.0 longest_gap=0 solid_ratio=0.1429 collectible_density=0.0",
-      "tool_name": "check_difficulty",
-      "tool_args": null,
-      "tool_call_id": "call_n1nmUqolRm4FOYqG6XI3xgtq"
-    },
-    {
-      "step": 15,
-      "agent": "triage_director",
-      "role": "tool",
-      "round": 1,
-      "content": "nearest_neighbor_similarity=0.9014 novelty_label='medium' warning=None",
-      "tool_name": "check_novelty",
-      "tool_args": null,
-      "tool_call_id": "call_zXPUETEWJx65nbAAxDbndT2f"
-    },
-    {
-      "step": 16,
-      "agent": "triage_director",
-      "role": "tool",
-      "round": 1,
-      "content": "flag='flat' opening_intensity=0 middle_intensity=0 final_intensity=0 detail='intensity opening 0, middle 0, final 0'",
-      "tool_name": "check_pacing",
-      "tool_args": null,
-      "tool_call_id": "call_POUoZk3Cu4bl0uDgoOleCQyE"
-    },
-    {
-      "step": 17,
-      "agent": "triage_director",
-      "role": "tool",
-      "round": 1,
-      "content": "has_opening_safe_zone=True first_challenge_column=32 detail='no challenge found in the segment'",
-      "tool_name": "check_safe_zone",
-      "tool_args": null,
-      "tool_call_id": "call_D4zxYGO8aME6yW9Nrzzh2Hob"
-    },
-    {
-      "step": 18,
-      "agent": "triage_director",
-      "role": "tool",
-      "round": 1,
-      "content": "has_spike=False location_column=None detail='no local difficulty spike found'",
-      "tool_name": "check_spike",
-      "tool_args": null,
-      "tool_call_id": "call_2FgCZi7xgTi65BEtLfy6ehAv"
-    },
-    {
-      "step": 19,
+      "step": 9,
       "agent": "triage_director",
       "role": "assistant",
       "round": 1,
@@ -350,26 +196,26 @@
         "action": "reject_structural",
         "diagnosis": "The candidate level contains a structural error: a pipe top is present without a corresponding pipe body or ground support. This is a fatal integrity issue that prevents playtesting.",
         "tradeoff_reasoning": [
-          "Structural integrity is a hard constraint: a pipe top without a body or ground support is a broken element, not a design choice.",
-          "Regardless of the brief's vagueness or other design facts, a structurally invalid level cannot be playtested or meaningfully evaluated for difficulty, pacing, or novelty."
+          "Structural integrity is a hard constraint: a broken pipe cannot be playtested or meaningfully evaluated for design intent.",
+          "Regardless of the brief or other design qualities, structural errors must be fixed before any further evaluation."
         ],
         "playtest_readiness": "not_ready",
         "confidence": "high"
       },
-      "tool_call_id": "call_HWcL2RRyXjm834uqRnkAPn3B"
+      "tool_call_id": "call_96YVHaan7AgV61oGyT9Dyt58"
     },
     {
-      "step": 20,
+      "step": 10,
       "agent": "triage_director",
       "role": "tool",
       "round": 1,
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_HWcL2RRyXjm834uqRnkAPn3B"
+      "tool_call_id": "call_96YVHaan7AgV61oGyT9Dyt58"
     },
     {
-      "step": 21,
+      "step": 11,
       "agent": "triage_director",
       "role": "assistant",
       "round": 1,
@@ -379,17 +225,17 @@
       "tool_call_id": null
     },
     {
-      "step": 22,
+      "step": 12,
       "agent": "critic",
       "role": "user",
       "round": 1,
-      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"general\",\n  \"desired_feel\": [],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"medium\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [],\n  \"detected_conflicts\": [\n    \"Brief is vague: no specific audience, feel, or preferences stated.\"\n  ]\n}\n\nGathered facts:\n{\n  \"validation\": {\n    \"is_valid\": false,\n    \"warnings\": [],\n    \"fatal_errors\": [\n      \"pipe top without a body or ground support\"\n    ]\n  },\n  \"difficulty\": {\n    \"difficulty_label\": \"easy\",\n    \"difficulty_score\": 0.0,\n    \"enemy_density\": 0.0,\n    \"hazard_density\": 0.0,\n    \"longest_gap\": 0,\n    \"solid_ratio\": 0.1429,\n    \"collectible_density\": 0.0\n  },\n  \"novelty\": {\n    \"nearest_neighbor_similarity\": 0.9014,\n    \"novelty_label\": \"medium\",\n    \"warning\": null\n  },\n  \"pacing\": {\n    \"flag\": \"flat\",\n    \"opening_intensity\": 0,\n    \"middle_intensity\": 0,\n    \"final_intensity\": 0,\n    \"detail\": \"intensity opening 0, middle 0, final 0\"\n  },\n  \"safe_zone\": {\n    \"has_opening_safe_zone\": true,\n    \"first_challenge_column\": 32,\n    \"detail\": \"no challenge found in the segment\"\n  },\n  \"spike\": {\n    \"has_spike\": false,\n    \"location_column\": null,\n    \"detail\": \"no local difficulty spike found\"\n  }\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------<>----------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nThe Triage Director's recommendation:\n{\n  \"action\": \"reject_structural\",\n  \"diagnosis\": \"The candidate level contains a structural error: a pipe top is present without a corresponding pipe body or ground support. This is a fatal integrity issue that prevents playtesting.\",\n  \"tradeoff_reasoning\": [\n    \"Structural integrity is a hard constraint: a pipe top without a body or ground support is a broken element, not a design choice.\",\n    \"Regardless of the brief's vagueness or other design facts, a structurally invalid level cannot be playtested or meaningfully evaluated for difficulty, pacing, or novelty.\"\n  ],\n  \"prescription\": null,\n  \"playtest_readiness\": \"not_ready\",\n  \"playtest_questions\": [],\n  \"confidence\": \"high\"\n}\n\nEvaluate the recommendation and return your verdict.",
+      "content": "Interpreted design intent:\n{\n  \"target_audience\": \"general\",\n  \"desired_feel\": [],\n  \"difficulty_target\": \"medium\",\n  \"novelty_preference\": \"medium\",\n  \"hard_constraints\": [],\n  \"soft_preferences\": [\n    \"suitable for early level\",\n    \"ready for playtest\"\n  ],\n  \"detected_conflicts\": [\n    \"Vague brief: target audience and difficulty not explicitly stated.\"\n  ]\n}\n\nGathered facts:\n{\n  \"validation\": {\n    \"is_valid\": false,\n    \"warnings\": [],\n    \"fatal_errors\": [\n      \"pipe top without a body or ground support\"\n    ]\n  },\n  \"difficulty\": {\n    \"difficulty_label\": \"easy\",\n    \"difficulty_score\": 0.0,\n    \"enemy_density\": 0.0,\n    \"hazard_density\": 0.0,\n    \"longest_gap\": 0,\n    \"solid_ratio\": 0.1429,\n    \"collectible_density\": 0.0\n  },\n  \"novelty\": {\n    \"nearest_neighbor_similarity\": 0.9014,\n    \"novelty_label\": \"medium\",\n    \"warning\": null\n  },\n  \"pacing\": {\n    \"flag\": \"flat\",\n    \"opening_intensity\": 0,\n    \"middle_intensity\": 0,\n    \"final_intensity\": 0,\n    \"detail\": \"intensity opening 0, middle 0, final 0\"\n  },\n  \"safe_zone\": {\n    \"has_opening_safe_zone\": true,\n    \"first_challenge_column\": 32,\n    \"detail\": \"no challenge found in the segment\"\n  },\n  \"spike\": {\n    \"has_spike\": false,\n    \"location_column\": null,\n    \"detail\": \"no local difficulty spike found\"\n  }\n}\n\nCandidate level (14 rows by 32 columns):\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------<>----------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\n--------------------------------\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\nThe Triage Director's recommendation:\n{\n  \"action\": \"reject_structural\",\n  \"diagnosis\": \"The candidate level contains a structural error: a pipe top is present without a corresponding pipe body or ground support. This is a fatal integrity issue that prevents playtesting.\",\n  \"tradeoff_reasoning\": [\n    \"Structural integrity is a hard constraint: a broken pipe cannot be playtested or meaningfully evaluated for design intent.\",\n    \"Regardless of the brief or other design qualities, structural errors must be fixed before any further evaluation.\"\n  ],\n  \"prescription\": null,\n  \"playtest_readiness\": \"not_ready\",\n  \"playtest_questions\": [],\n  \"confidence\": \"high\"\n}\n\nEvaluate the recommendation and return your verdict.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
     },
     {
-      "step": 23,
+      "step": 13,
       "agent": "critic",
       "role": "assistant",
       "round": 1,
@@ -397,33 +243,33 @@
       "tool_name": "final_result",
       "tool_args": {
         "verdict": "approve",
-        "assessment": "The Director correctly identified a fatal structural integrity issue: a pipe top without a body or ground support. This violates a hard constraint and makes the level unplayable, regardless of other design factors. The recommendation to reject for structural reasons is sound and consistent with the facts and intent. No further evaluation of pacing, difficulty, or novelty is relevant until the structural defect is fixed.",
+        "assessment": "The Director correctly identified a fatal structural error: a pipe top without a body or ground support. Structural integrity is a non-negotiable hard constraint, and such defects must be resolved before playtesting or further design evaluation. The recommendation to reject for structural reasons is appropriate and does not overreach or underreach. No further design critique is warranted until the integrity issue is fixed.",
         "confidence": "high"
       },
-      "tool_call_id": "call_0xHzxZzsLHPBQ1mo6gdBRyHJ"
+      "tool_call_id": "call_gEgiS1eYvnNwnioJ6oSUaPCv"
     },
     {
-      "step": 24,
+      "step": 14,
       "agent": "critic",
       "role": "tool",
       "round": 1,
       "content": "Final result processed.",
       "tool_name": "final_result",
       "tool_args": null,
-      "tool_call_id": "call_0xHzxZzsLHPBQ1mo6gdBRyHJ"
+      "tool_call_id": "call_gEgiS1eYvnNwnioJ6oSUaPCv"
     },
     {
-      "step": 25,
+      "step": 15,
       "agent": "critic",
       "role": "assistant",
       "round": 1,
-      "content": "Verdict approve. The Director correctly identified a fatal structural integrity issue: a pipe top without a body or ground support. This violates a hard constraint and makes the level unplayable, regardless of other design factors. The recommendation to reject for structural reasons is sound and consistent with the facts and intent. No further evaluation of pacing, difficulty, or novelty is relevant until the structural defect is fixed.",
+      "content": "Verdict approve. The Director correctly identified a fatal structural error: a pipe top without a body or ground support. Structural integrity is a non-negotiable hard constraint, and such defects must be resolved before playtesting or further design evaluation. The recommendation to reject for structural reasons is appropriate and does not overreach or underreach. No further design critique is warranted until the integrity issue is fixed.",
       "tool_name": null,
       "tool_args": null,
       "tool_call_id": null
     },
     {
-      "step": 26,
+      "step": 16,
       "agent": "workflow",
       "role": "system",
       "round": null,
@@ -434,9 +280,9 @@
     }
   ],
   "token_usage": {
-    "input_tokens": 5166,
-    "output_tokens": 371,
-    "total_tokens": 5537,
+    "input_tokens": 4919,
+    "output_tokens": 285,
+    "total_tokens": 5204,
     "requests": 4
   }
 }

@@ -1,8 +1,8 @@
 scenario_id,name,expected_action,actual_action,readiness,match_expected,rounds,key_reason
 S1,Beginner excitement tradeoff,recommend_revision,recommend_revision,revise_before_playtest,True,1,recommend_revision
 S2,Style consistency vs originality,flag_as_derivative_draft,flag_as_derivative_draft,ready_for_playtest,True,1,flag_as_derivative_draft
-S3,Conflicting brief,request_clarification,request_clarification,not_ready,True,1,"Beginner accessibility and easy difficulty conflict with the request for lots of enemies, big gaps, and an intense, hardcore feel."
+S3,Conflicting brief,request_clarification,request_clarification,not_ready,True,1,"easy and welcoming for beginners conflicts with lots of enemies and big gaps for an intense, hardcore feel"
 S4,Playtest readiness,accept_for_playtest,accept_for_playtest,ready_for_playtest,True,1,accept_for_playtest
 S5,Structural defect,reject_structural,reject_structural,not_ready,True,1,pipe top without a body or ground support
 S6,"Preserve layout, reduce frustration",recommend_revision,recommend_revision,revise_before_playtest,True,1,recommend_revision
-S7,Ambiguous brief,request_clarification,request_clarification,not_ready,True,1,"Brief is vague and does not specify target audience, difficulty, or desired feel. Designer is unsure what they want."
+S7,Ambiguous brief,request_clarification,request_clarification,not_ready,True,1,"Brief is vague and does not specify target audience, difficulty, or desired feel."

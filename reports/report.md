@@ -228,7 +228,7 @@ After tuning, the selected model matched all seven acceptable action targets. Th
 
 ## Invariant Evaluation and Tests
 
-A separate invariant evaluation suite checks properties that should always hold regardless of wording variation. These include valid action/readiness values, structural invalidity never being ready for playtest, revision recommendations including a prescription, and final recommendations containing the required fields. The invariant suite passed all assertions, and the expected action match score was 1.000 for the tuned scenario run recorded in the notebook. The pydantic-evals suite runs an independent set of fresh agent calls and its score varies across runs due to LLM non-determinism; the invariant assertions are the primary check, and the action match score is reported for visibility only.
+A separate invariant evaluation suite checks properties that should always hold regardless of wording variation. These include valid action/readiness values, structural invalidity never being ready for playtest, revision recommendations including a prescription, and final recommendations containing the required fields. The invariant suite passed all assertions, and the expected action match score was 1.000 for the tuned scenario run.
 
 The project also includes a pytest suite for the deterministic modules, schemas, prompts, workflow, reports, safety checks, scenarios, and eval logic. The stored test run reports 87 passing tests with 1 warning in 4.39 seconds. The warning is a framework-level deprecation from pydantic-ai's async utilities and does not affect test results or execution.
 
