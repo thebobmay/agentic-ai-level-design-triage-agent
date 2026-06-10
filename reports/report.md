@@ -153,7 +153,7 @@ The system uses revision prescriptions rather than automatic edits. When the Dir
 
 # Safeguards for Reliability, Transparency, and Control
 
-The main reliability safeguard is the safety floor. It does not replace the agent's judgment, but it prevents unsafe outcomes. The safety floor enforces that a structurally invalid candidate is never accepted or marked ready for playtest. It also escalates unresolved critic disputes to human review and validates that final actions and readiness statuses are schema consistent.
+The main reliability safeguard is the safety floor. It does not replace the agent's judgment, but it prevents unsafe outcomes. The safety floor enforces that a structurally invalid candidate is never accepted or marked ready for playtest. It also forces a not_ready status whenever the action is request_clarification, since revision cannot be prescribed before the designer's intent is known. It escalates unresolved critic disputes to human review and validates that final actions and readiness statuses are schema consistent.
 
 The second safeguard is the independent Critic. The Director does not simply produce a recommendation and stop. The Critic checks whether the recommendation is grounded in the facts, respects the intent, and avoids overreach. If the Critic is not satisfied, the Director receives the feedback and must revise within the bounded loop. This supports reliability without creating an unbounded multi agent debate.
 
@@ -200,7 +200,7 @@ The tuned system reached the acceptable action on all seven scenarios, each in o
 | S4 Playtest readiness | Accept for playtest | accept_for_playtest | ready_for_playtest | Yes |
 | S5 Structural defect | Reject structural defect | reject_structural | not_ready | Yes |
 | S6 Preserve layout, reduce frustration | Recommend revision | recommend_revision | revise_before_playtest | Yes |
-| S7 Ambiguous brief | Request clarification | request_clarification | revise_before_playtest | Yes |
+| S7 Ambiguous brief | Request clarification | request_clarification | not_ready | Yes |
 
 
 The scenario results show that the tuned agent handles several different decision types: accepting a clean candidate, prescribing revision, asking for clarification, rejecting a structural defect, and flagging a derivative draft.
@@ -216,8 +216,9 @@ Before tuning, three models were evaluated on identical baseline prompts. Each m
 | gpt-4.1 | 0.57 | 1.0 | $0.304 |
 | gpt-5.1 | 0.52 | 1.0 | $0.363 |
 
+Match rates and average rounds are rounded to two decimal places; full precision values are in `outputs/eval_results/model_comparison.csv`.
 
-`gpt-4.1` was selected because it had the highest baseline match rate, converged in a single round on average, and cost less than `gpt-5.1` in the comparison. `gpt-4o-mini` was not selected even though it was cheaper, because it tended to escalate too many cases to human review and failed to converge within the loop. That behavior can produce deceptively acceptable scores in escalation scenarios while still being poor design triage.
+`gpt-4.1` was selected because it had the highest baseline match rate, converged in a single round on average, and cost less than `gpt-5.1` in the comparison. `gpt-4o-mini` was not selected even though it was cheaper, because it tended to escalate too many cases to human review and failed to converge within the loop. That behavior can produce deceptively acceptable scores in escalation scenarios while still being poor design triage. The 3.7 average rounds figure also understates the escalation tendency: several gpt-4o-mini runs hit the per-run request budget and terminated in one round without converging, which pulls the average down.
 
 ## Prompt Tuning
 
@@ -229,7 +230,7 @@ After tuning, the selected model matched all seven acceptable action targets. Th
 
 A separate invariant evaluation suite checks properties that should always hold regardless of wording variation. These include valid action/readiness values, structural invalidity never being ready for playtest, revision recommendations including a prescription, and final recommendations containing the required fields. The invariant suite passed all assertions, and the expected action match score was 1.000 for the tuned scenario run.
 
-The project also includes a pytest suite for the deterministic modules, schemas, prompts, workflow, reports, safety checks, scenarios, and eval logic. The stored test run reports 87 passing tests with 4 deprecation warnings in 11.18 seconds. The warnings relate to framework deprecations and do not prevent execution.
+The project also includes a pytest suite for the deterministic modules, schemas, prompts, workflow, reports, safety checks, scenarios, and eval logic. The stored test run reports 87 passing tests with 1 warning in 4.39 seconds. The warning is a framework-level deprecation from pydantic-ai's async utilities and does not affect test results or execution.
 
 # Strengths and Failure Cases
 

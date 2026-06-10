@@ -4,10 +4,12 @@ The agents make the decision. This floor only enforces hard facts and escalation
 over their result, and it can only move the outcome toward the safe side. It never
 re decides the happy path and never computes readiness from a metric.
 
-Three rules:
+Four rules:
 1. A structurally invalid candidate is never accepted or called ready.
 2. An explicit critic escalation forces human review.
 3. An unresolved critic dispute at the round cap escalates to human review.
+4. A clarification request forces not_ready: revision cannot be prescribed before
+   the designer's intent is known.
 """
 
 from __future__ import annotations
@@ -70,6 +72,12 @@ def apply_safety_floor(
         interventions.append(
             "escalated to human review: unresolved critic dispute at the round cap"
         )
+
+    # Rule 4: clarification means the intent is unknown, so revision cannot be
+    # prescribed yet. Force not_ready regardless of what the agent chose.
+    if action == "request_clarification" and readiness != "not_ready":
+        interventions.append("forced not_ready: action is request_clarification, intent unknown")
+        readiness = "not_ready"
 
     # Keep readiness consistent with a human review outcome.
     if action == "request_human_review" and readiness == "ready_for_playtest":

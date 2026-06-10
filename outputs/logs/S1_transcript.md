@@ -116,7 +116,7 @@ has_spike=False location_column=None detail='no local difficulty spike found'
 ```
 
 ## [19] assistant (triage_director r1)
-tool call: final_result({'action': 'recommend_revision', 'diagnosis': 'The level is structurally valid and matches the easy difficulty target, but it lacks an opening safe zone: the first enemy appears at column 3, which is too soon for a beginner-friendly, approachable first level. This conflicts with the hard constraint to keep the opening approachable for brand new players. Pacing is otherwise balanced, and novelty is within the desired medium range.', 'tradeoff_reasoning': ['The level is valid and easy, with no difficulty spikes, which fits the brief for a beginner-friendly first level.', 'However, the absence of a safe opening stretch means new players encounter a challenge almost immediately, which can feel abrupt and unwelcoming for the intended audience.', 'Adding a short safe zone at the start will better serve the intent without compromising the rest of the design.'], 'prescription': {'suggested_edits': [{'description': 'Move the first enemy further right so that the first 5 columns are free of hazards or enemies.', 'reason': 'This creates a safe opening stretch, giving new players time to orient before facing a challenge, which aligns with the approachable, beginner-friendly intent.'}], 'playtest_question': 'Does the new opening feel welcoming and give players enough time to get comfortable before the first challenge?'}, 'playtest_readiness': 'revise_before_playtest', 'confidence': 'high'})
+tool call: final_result({'action': 'recommend_revision', 'diagnosis': 'The level is structurally valid and matches the easy difficulty target, but it lacks an opening safe zone: the first enemy appears at column 3, which is too soon for a beginner-friendly, approachable first level. This conflicts with the hard constraint to keep the opening approachable for brand new players. Pacing is otherwise balanced, and novelty is within the desired medium range.', 'tradeoff_reasoning': ['The absence of an opening safe zone is a significant issue for a beginner audience, as it does not give new players time to orient before encountering a challenge.', 'The rest of the level is simple and approachable, and the overall difficulty is appropriate for the target audience.', 'Novelty is within the desired range, so no changes are needed there.'], 'prescription': {'suggested_edits': [{'description': 'Move the first enemy further right, so that the first 5-6 columns are free of hazards or enemies.', 'reason': 'This creates a safe opening stretch, giving new players time to orient and making the level more approachable as a first experience.'}, {'description': 'Optionally, add a visual cue such as a coin in the opening columns to guide the player forward.', 'reason': 'This enhances approachability and provides gentle guidance for beginners.'}], 'playtest_question': 'After revision, do new players feel comfortable and oriented before encountering the first challenge?'}, 'playtest_readiness': 'revise_before_playtest', 'confidence': 'high'})
 
 ## [20] tool (triage_director r1)
 tool result: final_result
@@ -208,18 +208,22 @@ The Triage Director's recommendation:
   "action": "recommend_revision",
   "diagnosis": "The level is structurally valid and matches the easy difficulty target, but it lacks an opening safe zone: the first enemy appears at column 3, which is too soon for a beginner-friendly, approachable first level. This conflicts with the hard constraint to keep the opening approachable for brand new players. Pacing is otherwise balanced, and novelty is within the desired medium range.",
   "tradeoff_reasoning": [
-    "The level is valid and easy, with no difficulty spikes, which fits the brief for a beginner-friendly first level.",
-    "However, the absence of a safe opening stretch means new players encounter a challenge almost immediately, which can feel abrupt and unwelcoming for the intended audience.",
-    "Adding a short safe zone at the start will better serve the intent without compromising the rest of the design."
+    "The absence of an opening safe zone is a significant issue for a beginner audience, as it does not give new players time to orient before encountering a challenge.",
+    "The rest of the level is simple and approachable, and the overall difficulty is appropriate for the target audience.",
+    "Novelty is within the desired range, so no changes are needed there."
   ],
   "prescription": {
     "suggested_edits": [
       {
-        "description": "Move the first enemy further right so that the first 5 columns are free of hazards or enemies.",
-        "reason": "This creates a safe opening stretch, giving new players time to orient before facing a challenge, which aligns with the approachable, beginner-friendly intent."
+        "description": "Move the first enemy further right, so that the first 5-6 columns are free of hazards or enemies.",
+        "reason": "This creates a safe opening stretch, giving new players time to orient and making the level more approachable as a first experience."
+      },
+      {
+        "description": "Optionally, add a visual cue such as a coin in the opening columns to guide the player forward.",
+        "reason": "This enhances approachability and provides gentle guidance for beginners."
       }
     ],
-    "playtest_question": "Does the new opening feel welcoming and give players enough time to get comfortable before the first challenge?"
+    "playtest_question": "After revision, do new players feel comfortable and oriented before encountering the first challenge?"
   },
   "playtest_readiness": "revise_before_playtest",
   "playtest_questions": [],
@@ -229,7 +233,7 @@ The Triage Director's recommendation:
 Evaluate the recommendation and return your verdict.
 
 ## [23] assistant (critic r1)
-tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation is sound. The diagnosis correctly identifies that the absence of a safe opening zone conflicts with the hard constraint for a beginner-friendly, approachable first level. The prescription to move the first enemy further right to create a safe stretch is appropriate and directly addresses the issue without overreaching. All other aspects of the level (difficulty, novelty, pacing, structural validity) are consistent with the intent and constraints. No additional issues or constraint violations are present.", 'confidence': 'high'})
+tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation is sound. The diagnosis correctly identifies that the absence of an opening safe zone conflicts with the hard constraint for a beginner-friendly, approachable level. The prescription to move the first enemy further right and optionally add a guiding coin is appropriate and directly addresses the issue. All other aspects (difficulty, novelty, pacing, structural validity) are consistent with the intent and constraints. No overreach or underreach is present; the recommendation is targeted and justified.", 'confidence': 'high'})
 
 ## [24] tool (critic r1)
 tool result: final_result
@@ -238,7 +242,7 @@ Final result processed.
 ```
 
 ## [25] assistant (critic r1)
-Verdict approve. The Director's recommendation is sound. The diagnosis correctly identifies that the absence of a safe opening zone conflicts with the hard constraint for a beginner-friendly, approachable first level. The prescription to move the first enemy further right to create a safe stretch is appropriate and directly addresses the issue without overreaching. All other aspects of the level (difficulty, novelty, pacing, structural validity) are consistent with the intent and constraints. No additional issues or constraint violations are present.
+Verdict approve. The Director's recommendation is sound. The diagnosis correctly identifies that the absence of an opening safe zone conflicts with the hard constraint for a beginner-friendly, approachable level. The prescription to move the first enemy further right and optionally add a guiding coin is appropriate and directly addresses the issue. All other aspects (difficulty, novelty, pacing, structural validity) are consistent with the intent and constraints. No overreach or underreach is present; the recommendation is targeted and justified.
 
 ## [26] system (workflow)
 Final decision: recommend_revision.

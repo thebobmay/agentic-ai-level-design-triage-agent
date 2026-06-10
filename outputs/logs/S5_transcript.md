@@ -12,7 +12,7 @@ Get this segment ready for playtest as a normal early level.
 Interpret this brief into a design intent profile.
 
 ## [3] assistant (intent_interpreter)
-tool call: final_result({'target_audience': 'general', 'difficulty_target': 'medium', 'novelty_preference': 'medium', 'hard_constraints': [], 'soft_preferences': ['suitable for early level', 'ready for playtest'], 'detected_conflicts': ['Vague brief: target audience and difficulty not explicitly stated. Assumed defaults.']})
+tool call: final_result({'target_audience': 'general', 'desired_feel': [], 'difficulty_target': 'medium', 'novelty_preference': 'medium', 'detected_conflicts': ['Brief is vague: no specific audience, feel, or preferences stated.']})
 
 ## [4] tool (intent_interpreter)
 tool result: final_result
@@ -21,7 +21,7 @@ Final result processed.
 ```
 
 ## [5] assistant (intent_interpreter)
-Interpreted intent: audience=general, difficulty_target=medium, detected_conflicts=['Vague brief: target audience and difficulty not explicitly stated. Assumed defaults.'].
+Interpreted intent: audience=general, difficulty_target=medium, detected_conflicts=['Brief is vague: no specific audience, feel, or preferences stated.'].
 
 ## [6] user (triage_director r1)
 Interpreted design intent:
@@ -31,12 +31,9 @@ Interpreted design intent:
   "difficulty_target": "medium",
   "novelty_preference": "medium",
   "hard_constraints": [],
-  "soft_preferences": [
-    "suitable for early level",
-    "ready for playtest"
-  ],
+  "soft_preferences": [],
   "detected_conflicts": [
-    "Vague brief: target audience and difficulty not explicitly stated. Assumed defaults."
+    "Brief is vague: no specific audience, feel, or preferences stated."
   ]
 }
 
@@ -113,7 +110,7 @@ has_spike=False location_column=None detail='no local difficulty spike found'
 ```
 
 ## [19] assistant (triage_director r1)
-tool call: final_result({'action': 'reject_structural', 'diagnosis': 'The candidate level contains a structural error: a pipe top is present without a supporting body or ground, which is a fatal integrity issue. This prevents the level from being playtested.', 'tradeoff_reasoning': ['Structural integrity is a hard constraint: a pipe top without a body or ground support is a defect that cannot be playtested, regardless of other design factors.', 'Even though the level is otherwise valid and easy, structural errors must be addressed before any playtest or further design evaluation.'], 'playtest_readiness': 'not_ready', 'confidence': 'high'})
+tool call: final_result({'action': 'reject_structural', 'diagnosis': 'The candidate level contains a structural error: a pipe top is present without a corresponding pipe body or ground support. This is a fatal integrity issue that prevents playtesting.', 'tradeoff_reasoning': ['Structural integrity is a hard constraint: a pipe top without a body or ground support is a broken element, not a design choice.', "Regardless of the brief's vagueness or other design facts, a structurally invalid level cannot be playtested or meaningfully evaluated for difficulty, pacing, or novelty."], 'playtest_readiness': 'not_ready', 'confidence': 'high'})
 
 ## [20] tool (triage_director r1)
 tool result: final_result
@@ -122,7 +119,7 @@ Final result processed.
 ```
 
 ## [21] assistant (triage_director r1)
-Proposed reject_structural (readiness=not_ready, confidence=high). The candidate level contains a structural error: a pipe top is present without a supporting body or ground, which is a fatal integrity issue. This prevents the level from being playtested.
+Proposed reject_structural (readiness=not_ready, confidence=high). The candidate level contains a structural error: a pipe top is present without a corresponding pipe body or ground support. This is a fatal integrity issue that prevents playtesting.
 
 ## [22] user (critic r1)
 Interpreted design intent:
@@ -132,12 +129,9 @@ Interpreted design intent:
   "difficulty_target": "medium",
   "novelty_preference": "medium",
   "hard_constraints": [],
-  "soft_preferences": [
-    "suitable for early level",
-    "ready for playtest"
-  ],
+  "soft_preferences": [],
   "detected_conflicts": [
-    "Vague brief: target audience and difficulty not explicitly stated. Assumed defaults."
+    "Brief is vague: no specific audience, feel, or preferences stated."
   ]
 }
 
@@ -202,10 +196,10 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 The Triage Director's recommendation:
 {
   "action": "reject_structural",
-  "diagnosis": "The candidate level contains a structural error: a pipe top is present without a supporting body or ground, which is a fatal integrity issue. This prevents the level from being playtested.",
+  "diagnosis": "The candidate level contains a structural error: a pipe top is present without a corresponding pipe body or ground support. This is a fatal integrity issue that prevents playtesting.",
   "tradeoff_reasoning": [
-    "Structural integrity is a hard constraint: a pipe top without a body or ground support is a defect that cannot be playtested, regardless of other design factors.",
-    "Even though the level is otherwise valid and easy, structural errors must be addressed before any playtest or further design evaluation."
+    "Structural integrity is a hard constraint: a pipe top without a body or ground support is a broken element, not a design choice.",
+    "Regardless of the brief's vagueness or other design facts, a structurally invalid level cannot be playtested or meaningfully evaluated for difficulty, pacing, or novelty."
   ],
   "prescription": null,
   "playtest_readiness": "not_ready",
@@ -216,7 +210,7 @@ The Triage Director's recommendation:
 Evaluate the recommendation and return your verdict.
 
 ## [23] assistant (critic r1)
-tool call: final_result({'verdict': 'approve', 'assessment': 'The Director correctly identified a fatal structural integrity issue: a pipe top without a supporting body or ground. This is a hard constraint violation that must be fixed before playtesting, regardless of other design aspects. The recommendation to reject for structural reasons is sound and does not overreach or underreach. No further issues need to be addressed until the structural defect is resolved.', 'confidence': 'high'})
+tool call: final_result({'verdict': 'approve', 'assessment': 'The Director correctly identified a fatal structural integrity issue: a pipe top without a body or ground support. This violates a hard constraint and makes the level unplayable, regardless of other design factors. The recommendation to reject for structural reasons is sound and consistent with the facts and intent. No further evaluation of pacing, difficulty, or novelty is relevant until the structural defect is fixed.', 'confidence': 'high'})
 
 ## [24] tool (critic r1)
 tool result: final_result
@@ -225,7 +219,7 @@ Final result processed.
 ```
 
 ## [25] assistant (critic r1)
-Verdict approve. The Director correctly identified a fatal structural integrity issue: a pipe top without a supporting body or ground. This is a hard constraint violation that must be fixed before playtesting, regardless of other design aspects. The recommendation to reject for structural reasons is sound and does not overreach or underreach. No further issues need to be addressed until the structural defect is resolved.
+Verdict approve. The Director correctly identified a fatal structural integrity issue: a pipe top without a body or ground support. This violates a hard constraint and makes the level unplayable, regardless of other design factors. The recommendation to reject for structural reasons is sound and consistent with the facts and intent. No further evaluation of pacing, difficulty, or novelty is relevant until the structural defect is fixed.
 
 ## [26] system (workflow)
 Final decision: reject_structural.

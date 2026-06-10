@@ -110,7 +110,7 @@ has_spike=False location_column=None detail='no local difficulty spike found'
 ```
 
 ## [19] assistant (triage_director r1)
-tool call: final_result({'action': 'request_clarification', 'diagnosis': "The brief is vague and does not specify a clear target audience, difficulty, or desired feel. Without a defined intent, it is not possible to judge whether the level's easy difficulty and flat pacing are appropriate or problematic. All structural and pacing facts are sound, but the lack of a clear brief prevents confident triage.", 'tradeoff_reasoning': ['The candidate is structurally valid and contains no fatal errors.', 'Difficulty is estimated as easy, but the brief does not specify if this is appropriate.', 'Pacing is flat, with no challenge present, but the brief does not clarify if a calm or challenge-free segment is desired.', 'Novelty is medium, which is generally acceptable, but again, the brief does not clarify if more or less novelty is needed.'], 'playtest_readiness': 'revise_before_playtest', 'confidence': 'high'})
+tool call: final_result({'action': 'request_clarification', 'diagnosis': "The brief is vague and contains detected conflicts: it does not specify a clear target audience, difficulty, or desired feel, and the designer is unsure what they want. Without a clear intent, it is not possible to judge whether the candidate's easy, flat, and low-challenge structure is appropriate or not.", 'tradeoff_reasoning': ['The candidate is structurally valid and contains no fatal errors.', 'Difficulty is estimated as easy, with almost no hazards or enemies, and a flat pacing profile.', 'Novelty is medium, so it is not highly derivative.', 'There is an opening safe zone, but no actual challenge in the segment.', "Because the brief is ambiguous and contains detected conflicts, it is not possible to determine if this segment meets the designer's goals."], 'playtest_readiness': 'not_ready', 'confidence': 'high'})
 
 ## [20] tool (triage_director r1)
 tool result: final_result
@@ -119,7 +119,7 @@ Final result processed.
 ```
 
 ## [21] assistant (triage_director r1)
-Proposed request_clarification (readiness=revise_before_playtest, confidence=high). The brief is vague and does not specify a clear target audience, difficulty, or desired feel. Without a defined intent, it is not possible to judge whether the level's easy difficulty and flat pacing are appropriate or problematic. All structural and pacing facts are sound, but the lack of a clear brief prevents confident triage.
+Proposed request_clarification (readiness=not_ready, confidence=high). The brief is vague and contains detected conflicts: it does not specify a clear target audience, difficulty, or desired feel, and the designer is unsure what they want. Without a clear intent, it is not possible to judge whether the candidate's easy, flat, and low-challenge structure is appropriate or not.
 
 ## [22] user (critic r1)
 Interpreted design intent:
@@ -194,15 +194,16 @@ XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 The Triage Director's recommendation:
 {
   "action": "request_clarification",
-  "diagnosis": "The brief is vague and does not specify a clear target audience, difficulty, or desired feel. Without a defined intent, it is not possible to judge whether the level's easy difficulty and flat pacing are appropriate or problematic. All structural and pacing facts are sound, but the lack of a clear brief prevents confident triage.",
+  "diagnosis": "The brief is vague and contains detected conflicts: it does not specify a clear target audience, difficulty, or desired feel, and the designer is unsure what they want. Without a clear intent, it is not possible to judge whether the candidate's easy, flat, and low-challenge structure is appropriate or not.",
   "tradeoff_reasoning": [
     "The candidate is structurally valid and contains no fatal errors.",
-    "Difficulty is estimated as easy, but the brief does not specify if this is appropriate.",
-    "Pacing is flat, with no challenge present, but the brief does not clarify if a calm or challenge-free segment is desired.",
-    "Novelty is medium, which is generally acceptable, but again, the brief does not clarify if more or less novelty is needed."
+    "Difficulty is estimated as easy, with almost no hazards or enemies, and a flat pacing profile.",
+    "Novelty is medium, so it is not highly derivative.",
+    "There is an opening safe zone, but no actual challenge in the segment.",
+    "Because the brief is ambiguous and contains detected conflicts, it is not possible to determine if this segment meets the designer's goals."
   ],
   "prescription": null,
-  "playtest_readiness": "revise_before_playtest",
+  "playtest_readiness": "not_ready",
   "playtest_questions": [],
   "confidence": "high"
 }
@@ -210,7 +211,7 @@ The Triage Director's recommendation:
 Evaluate the recommendation and return your verdict.
 
 ## [23] assistant (critic r1)
-tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation to request clarification is sound. The brief is too vague to determine whether the easy difficulty and flat pacing are appropriate, and there are no structural or pacing issues that would independently warrant revision. Without a clear target audience or desired feel, it is not possible to judge the suitability of the segment. The Director correctly refrains from prescribing changes or approving for playtest, and instead requests clarification from the designer. This is the correct course of action given the lack of defined intent.", 'confidence': 'high'})
+tool call: final_result({'verdict': 'approve', 'assessment': "The Director's recommendation to request clarification is sound. The brief is ambiguous, lacking a clear target audience, difficulty, or desired feel, and the designer is unsure of their goals. The candidate segment is structurally valid but extremely easy, with no hazards or challenge, and flat pacing. Without a clear intent, it is not possible to judge appropriateness or prescribe meaningful edits. The Director correctly refrains from overreaching and does not send the segment to playtest. No hard constraints are violated, and the diagnosis is consistent with the facts and the intent. Approve.", 'confidence': 'high'})
 
 ## [24] tool (critic r1)
 tool result: final_result
@@ -219,7 +220,7 @@ Final result processed.
 ```
 
 ## [25] assistant (critic r1)
-Verdict approve. The Director's recommendation to request clarification is sound. The brief is too vague to determine whether the easy difficulty and flat pacing are appropriate, and there are no structural or pacing issues that would independently warrant revision. Without a clear target audience or desired feel, it is not possible to judge the suitability of the segment. The Director correctly refrains from prescribing changes or approving for playtest, and instead requests clarification from the designer. This is the correct course of action given the lack of defined intent.
+Verdict approve. The Director's recommendation to request clarification is sound. The brief is ambiguous, lacking a clear target audience, difficulty, or desired feel, and the designer is unsure of their goals. The candidate segment is structurally valid but extremely easy, with no hazards or challenge, and flat pacing. Without a clear intent, it is not possible to judge appropriateness or prescribe meaningful edits. The Director correctly refrains from overreaching and does not send the segment to playtest. No hard constraints are violated, and the diagnosis is consistent with the facts and the intent. Approve.
 
 ## [26] system (workflow)
 Final decision: request_clarification.

@@ -1,26 +1,14 @@
-Run: 2026-06-09 19:51:26 UTC
+Run: 2026-06-10 15:48:21 UTC
 Command: C:\Python313\python.exe -m pytest -ra --tb=short --junitxml=C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\outputs\test_results\pytest_results.xml
 Exit code: 0
 ======================================================================
 ........................................................................ [ 82%]
 ...............                                                          [100%]
 ============================== warnings summary ===============================
-src\agents.py:56
-  C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\src\agents.py:56: DeprecationWarning: `retries` is deprecated and will be removed in v2. Use `tool_retries` instead. Note: in v2, `retries` will no longer also set `output_retries` as a fallback — pass `output_retries` explicitly if you rely on the cascade.
-    intent_interpreter = Agent(
-
-src\agents.py:96
-  C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\src\agents.py:96: DeprecationWarning: `retries` is deprecated and will be removed in v2. Use `tool_retries` instead. Note: in v2, `retries` will no longer also set `output_retries` as a fallback — pass `output_retries` explicitly if you rely on the cascade.
-    triage_director = Agent(
-
-src\agents.py:203
-  C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\src\agents.py:203: DeprecationWarning: `retries` is deprecated and will be removed in v2. Use `tool_retries` instead. Note: in v2, `retries` will no longer also set `output_retries` as a fallback — pass `output_retries` explicitly if you rely on the cascade.
-    critic_agent = Agent(
-
 tests/test_agents.py::test_intent_interpreter_returns_profile
   C:\Users\bjm20\AppData\Roaming\Python\Python313\site-packages\pydantic_ai\_utils.py:970: DeprecationWarning: There is no current event loop
     event_loop = asyncio.get_event_loop()
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
 - generated xml file: C:\Users\bjm20\Documents\Udacity AI MBA\Capstone\agentic-ai-level-design-triage-agent\outputs\test_results\pytest_results.xml -
-87 passed, 4 warnings in 11.18s
+87 passed, 1 warning in 4.39s
